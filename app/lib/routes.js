@@ -5,8 +5,8 @@ Router.configure({
 });
 
 
-Router.route('/', {
-  name: 'home',
+Router.route('Home', {
+  name: 'Home',
   controller: 'HomeController',
-  where: 'client'
+  path: '/'
 });
