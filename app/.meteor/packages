@@ -22,3 +22,5 @@ iron:router
 aldeed:autoform
 aldeed:collection2
 twbs:bootstrap
+accounts-ui
+accounts-password
