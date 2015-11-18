@@ -3,6 +3,6 @@
  */
 UserRecords = new Mongo.Collection('userrecords');
 
-UserRecords.before.insert(function(userId,doc){
+/*UserRecords.before.insert(function(userId,doc){
     doc.createdAt = moment().toDate();
-});
+});*/
