@@ -1,0 +1,50 @@
+<template name="Trees">
+    This is the Trees template (starting from slide 12/15).
+    {{#each Pencil}}
+        {{this}}
+    {{/each}}
+
+    {{#if Pen}}
+        text
+        {{else}}
+        different text
+    {{/if}}
+
+    {{Pen}}
+
+    <h4> My Tree </h4>
+    <div class="row">
+        <div class="col-md-6">
+            <form id="Treedata" class="form-inline">
+                <input type="text" name="Species" value="Species name" id="Species"/>
+                <input type="text" name="Location" value="Location name"/>
+                <input type="number" name="Latitude"/>
+                <input type="number" name="Longitude"/>
+                <input type="date" name="Planted"/>
+                <input type="number" name="Diameter"/>
+            </form>
+            Tree data form
+        </div>
+        <div class="col-md-6">
+            Map
+        </div>
+    </div>
+    <div class="row">
+        Upload Photo
+        ***add me(bootstrap)***
+        {{> upload_bootstrap}}
+        ***fix me(dropzone.css (app/public))***
+        {{> dropzone }}
+    </div>
+    <div class="row">
+        Buttons
+        <div class="btn-group btn-group-justified">
+            <a href="/Trees2" class="btn default" id="Save">
+                Save
+            </a>
+            <a href="/Trees2" class="btn default">
+                Cancel
+            </a>
+        </div>
+    </div>
+</template>
