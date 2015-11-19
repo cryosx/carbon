@@ -92,8 +92,11 @@ srp@1.0.4
 standard-minifiers@1.0.2
 templating@1.1.5
 templating-tools@1.0.0
+<<<<<<< HEAD
 tomi:upload-jquery@2.2.1
 tomi:upload-server@1.3.3
+=======
+>>>>>>> parent of 06af7f3... Collections Initialized
 tracker@1.0.9
 twbs:bootstrap@3.3.5
 twitter@1.1.5
