@@ -53,5 +53,3 @@ HomeController = AppController.extend({
   onStop: function () {
   }
 });
-
-
