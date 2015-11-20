@@ -3,3 +3,21 @@
 /*****************************************************************************/
 .main {
 }
+
+.nopadding {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.thumbnail > img.nav_image {
+    height: 100px;
+
+}
+
+a.thumbnail {
+    color: black;
+}
+
+a.nav_active {
+    border: solid black 3px;
+}

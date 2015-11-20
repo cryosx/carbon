@@ -11,6 +11,33 @@ Router.route('Home', {
   path: '/'
 });
 
+
+Router.route('transportation', {
+  name: 'transportation',
+  controller: 'HomeController',
+  path: '/transportation'
+});
+
+Router.route('housing', {
+  name: 'housing',
+  controller: 'HomeController',
+  path: '/housing'
+});
+
+
+Router.route('food', {
+  name: 'food',
+  controller: 'HomeController',
+  path: '/food'
+});
+
+
+Router.route('shopping', {
+  name: 'shopping',
+  controller: 'HomeController',
+  path: '/shopping'
+});
+
 Router.route('Trees', {
   name: 'Trees',
   controller: 'TreeController',
