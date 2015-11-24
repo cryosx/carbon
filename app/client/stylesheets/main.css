@@ -34,8 +34,17 @@ header {
 
 }
 
-.emission-forms {
+.rounded-border {
     border: solid;
-    width: 35%;
-    margin: 0 auto;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+
+.row {
+    margin-bottom: 10px;
+}
+
+.padding-left {
+    padding-left: 30px;
 }
