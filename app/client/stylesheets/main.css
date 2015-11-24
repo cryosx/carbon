@@ -25,11 +25,17 @@ a.nav_active {
 .main-content {
     position: relative;
     padding-top: 100px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
 
 }
 
 header {
 
+}
+
+.emission-forms {
+    border: solid;
+    width: 35%;
+    margin: 0 auto;
 }

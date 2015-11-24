@@ -1,8 +1,85 @@
 <template name="transportation">
     {{#if currentUser}}
         {{> carbonNav active="transportation"}}
-        <div>
+        <div class="emission-forms">
 
+
+            <div class="row">
+
+            </div>
+            
+
+            <div>
+                <h2>How much do you travel per year?</h2>
+                <form>
+                    <select>
+                        <option value="kilometers">Kilometers</option>
+                        <option value="Miles">Miles</option>
+                    </select>
+                </form>
+            </div>
+            <div class="row">
+                <p>Car</p>
+
+                <form id="car">
+                    <ul style="list-style-type: none">
+                        <li>
+                            <input type="number" name="carDistanceTraveled" placeholder="e.g. 2000"> Miles
+                        </li>
+                        <li>
+                            <p>Fuel type of your car?</p>
+                            <select name="fuelType">
+                                <option value="gasoline">Gasoline</option>
+                                <option value="Diesel">Diesel</option>
+                            </select>
+                        </li>
+                        <li>
+                            <p>Fuel efficiency of your car?</p>
+                            <input type="number" name="fuelEfficiency" placeholder="e.g. 40">
+                        </li>
+                    </ul>
+                </form>
+
+                <br>
+                <p>Train</p>
+                <form id="train">
+                    <ul style="list-style-type: none">
+                        <li>
+                            <input type="number" name="carDistanceTraveled" placeholder="e.g. 2000"> Miles
+                        </li>
+                    </ul>
+                </form>
+
+                <br>
+
+                <form id="flying">
+                    <ul style="list-style-type: none">
+                        <li>
+                            <input type="number" name="carDistanceTraveled" placeholder="e.g. 2000"> Miles
+                        </li>
+                    </ul>
+                </form>
+
+                <br>
+
+                <form id="motorcycle">
+                    <ul style="list-style-type: none">
+                        <li>
+                            <input type="number" name="carDistanceTraveled" placeholder="e.g. 2000"> Miles
+                        </li>
+                    </ul>
+                </form>
+
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="row">
+
+            </div>
+            <div class="row">
+
+            </div>
         </div>
     {{else}}
         {{> notLoggedIn}}
