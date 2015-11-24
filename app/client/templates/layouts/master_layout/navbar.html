@@ -1,13 +1,21 @@
 <template name="navbar">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <h5 class="navbar-brand">MoraLab</h5>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
+                    <span class="sr-only">
+                        <!--{{ mf '_header-navbarToggle' 'Toggle navigation' }}-->
+                    </span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{pathFor 'home'}}">MoraLabs</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="collapse navbar-collapse" id="main-nav">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="http://www.soc.hawaii.edu/mora/">Home</a></li>
                     <li><a href="http://www.soc.hawaii.edu/mora/Team.html">Team</a></li>
