@@ -21,3 +21,15 @@ a.thumbnail {
 a.nav_active {
     border: solid black 3px;
 }
+
+.main-content {
+    position: relative;
+    padding-top: 100px;
+    padding-left: 100px;
+    padding-right: 100px;
+
+}
+
+header {
+
+}
