@@ -1,0 +1,297 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* common css */
+body { 
+    font-family: "Arial",Helvetica,sans-serif
+}
+html, body{
+  height:100%;
+}
+.container{
+    max-width:1000px;
+}
+.selectWidth {
+    width: 100%;
+
+}
+
+/*header css start*/
+.navbar-header .navbar-brand h1 {
+    font-size: 36px;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    line-height: 20px;
+}
+.navbar-header .navbar-brand h1 span {
+    color: #78bbe6;
+}
+.titleOfCom {
+    font-size: 10px;
+    color: #fff;
+    font-style: italic;
+}
+header {
+    background: #000;
+    height: 60px;  
+    margin-bottom: 0;
+}
+header.navbar {
+    margin-bottom: 0;
+}
+.navbar-nav > li > a {
+    color: #dbdcfd;
+    font-size: 13px;
+    background: url("../images/menu-bg.png") repeat-x center center;
+    padding: 6px 15px;
+    border-radius: 7px;
+}
+.navbar-nav > li {
+    margin: 0 2px;
+}
+.nav.navbar-nav.navbar-right {
+    margin-top: 14px;
+}
+.navbar-nav > li > a:hover {
+    background: url("../images/menu-bg-hover.png") repeat-x center center;
+}
+.navbar-brand {
+    padding: 9px 15px 15px;
+}
+
+.navbar-toggle.collapsed {
+    background: url("../images/menuList.png") repeat-x center center;
+    padding: 9px 9px;
+}
+
+.smallBanner {
+    background: url("../images/banner-bg.png") repeat-x center center;
+    min-height: 162px;
+    margin-bottom: 25px;
+}
+.smallBanner .container {
+    background: url("../images/bannar-gradient.png") repeat-x center center;
+    min-height: 162px;
+}
+.smallBanner img {
+    margin-top: 17px;
+}
+.smallBanner h3 {
+    color: #fff;
+    font-size: 14px;
+    font-style: italic;
+    letter-spacing: 0;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.smallBanner .col-xs-12.col-sm-12.col-md-12.col-lg-12 {
+    padding-right: 0;
+}
+/*header css end*/
+
+
+/*form css start*/
+
+.formWrapper {
+    max-width: 70%;
+    /*background: #ddd;*/
+    margin: 0 auto;
+    box-shadow: 12px 14px 20px rgba(0, 0, 0, 0.3);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+}
+.formWrapper form {
+    padding: 20px;     
+}
+.formWrapper h3 {
+    text-align: center;
+    margin: 0;
+    background: #1c9fda;
+    padding: 10px 0;
+    color: #fff;
+    border-radius: 4px 4px 0px 0px;
+}
+.formWrapper .input-group {
+    margin-bottom: 15px;
+}
+.formWrapper .input-group input, .formWrapper .input-group span {
+    border-radius: 0;
+}
+.mainContent {
+    margin-bottom: 50px;
+}
+.mainContent .formTitle {
+    text-align: center;
+    font-weight: lighter;
+    color: #1c9fda;
+    margin: 30px 0;
+}
+.formWrapper strong {
+    margin-bottom: 10px;
+    display: block;
+}
+
+.formRightPart {
+    background: #1c9fda none repeat scroll 0 0;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    box-shadow: 3px 16px 10px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    height: 160px;
+    padding-top: 32px;
+    text-align: center;
+    width: 160px;
+    margin-top: 35px;
+    margin: 34px auto 0;
+}
+.formRightPart:hover {
+    background: #0b74a4;
+}
+.formRightPart .totalTravel  {
+    font-size: 18px;
+}
+.formRightPart span {
+    display: block;
+}
+.formRightPart .amount {
+    font-size: 35px;
+}
+.formRightPart .unit {
+    font-size: 15px;
+}
+.formWrapper .btnWrap {
+    text-align: center;
+    margin-top: 65px;
+}
+
+.formWrapper .btnWrap input {
+    border-radius: 0;
+    background: #1c9fda none repeat scroll 0 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 6px 18px;
+}
+.formWrapper .btnWrap input:hover {
+    background: #0b74a4 none repeat scroll 0 0;
+}
+.form-control.selectWidth {
+    width: 160px;
+    -moz-appearance: normal;
+}
+/*from css end*/
+
+/*css for home page start*/
+.joinUsSection {
+    text-align: right;
+}
+.titleViolet {
+    font-size: 30px;
+    color: #006;
+    text-align: center;
+}
+.subTitle {
+    font-size: 20px;
+    text-align: center;
+    font-weight: lighter;
+    font-style: italic;
+    font-family: "Verdana",Geneva,sans-serif;
+    margin-bottom: 40px;
+}
+.joinUsSection button {
+    background: #1e557a none repeat scroll 0 0;
+    border: medium none;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    height: 35px;
+    padding: 0;
+    text-transform: uppercase;
+    width: 80px;
+    margin-left: 10px;
+}
+.joinUsSection button:hover {
+    background: #4C8AB4;
+    color: #fff;
+}
+.leftSectionList {
+    list-style: none;
+    text-align: center;
+    padding-left: 0;
+        
+}
+.leftSectionList li {
+    text-align: center;
+    display: block;
+}
+.leftSectionList li span {
+    display: block;
+    text-align: center;
+    margin-bottom: 8px;
+}
+.leftSectionList li span.numberCount {
+    display: inline-block; 
+   width: 80px;
+    height: 80px;
+    border-radius: 50%;
+ background: -moz-linear-gradient(top, rgba(255,203,0,1) 0%, rgba(255,203,0,0.74) 46%, rgba(255,203,0,1) 94%, rgba(255,203,0,1) 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,203,0,1)), color-stop(46%,rgba(255,203,0,0.74)), color-stop(94%,rgba(255,203,0,1)), color-stop(100%,rgba(255,203,0,1))); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top, rgba(255,203,0,1) 0%,rgba(255,203,0,0.74) 46%,rgba(255,203,0,1) 94%,rgba(255,203,0,1) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top, rgba(255,203,0,1) 0%,rgba(255,203,0,0.74) 46%,rgba(255,203,0,1) 94%,rgba(255,203,0,1) 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top, rgba(255,203,0,1) 0%,rgba(255,203,0,0.74) 46%,rgba(255,203,0,1) 94%,rgba(255,203,0,1) 100%); /* IE10+ */
+background: linear-gradient(to bottom, rgba(255,203,0,1) 0%,rgba(255,203,0,0.74) 46%,rgba(255,203,0,1) 94%,rgba(255,203,0,1) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffcb00', endColorstr='#ffcb00',GradientType=0 ); /* IE6-9 */
+
+-webkit-box-shadow: 2px 8px 8px -5px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 8px 8px -5px rgba(0,0,0,0.75);
+box-shadow: 2px 8px 8px -5px rgba(0,0,0,0.75);
+font-size: 20px;
+color: #000;
+ font-family: "Verdana",Geneva,sans-serif;
+ padding-top: 26px;
+ text-align: center;
+ letter-spacing: -1px;
+
+}
+.rightContnent h3 {
+    margin-top: 0;
+    font-size: 22px;
+    font-weight: normal;
+    text-align: center;
+}
+/*css for home page End*/
+
+/*css for footer*/
+footer {
+    background: url("../images/footer-bg.png") repeat-x center center; 
+    min-height: 100px;
+    padding: 55px 0 20px;
+}
+footer .university, footer .camilo, footer .update {
+    text-align: left;
+    color: #9a9a9a;
+    line-height: normal;
+    margin: 0;
+    padding: 4px 0;
+    font-size: 12px;
+}
+footer .university a, footer .update span {
+    color: #5e67c1;
+    text-decoration: none;
+}
+footer .camilo {
+    text-align: center;
+}
+.textAlign img {
+    display: inline;
+}
+.textAlign {
+    text-align: center;
+}
+footer .update {
+    text-align: right;
+}
+/*css for footer*/
