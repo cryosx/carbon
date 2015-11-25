@@ -3,9 +3,9 @@ Template.trees3.helpers({
 });
 
 Template.trees3.events({
-    'click #Save2':function(event,template){
+/*    'click #Save2':function(event,template){
         console.log('Back button pressed');
-    }
+    }*/
 });
 
 Template.trees3.onCreated(function () {

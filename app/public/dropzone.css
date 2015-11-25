@@ -15,11 +15,11 @@
 .jqDropZone.hover {
     background: lawngreen;
 }
-/*.jqDropZone.fade {
+.jqDropZone.fade {
     -webkit-transition: all 0.3s ease-out;
     -moz-transition: all 0.3s ease-out;
     -ms-transition: all 0.3s ease-out;
     -o-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
     opacity: 1;
-}*/
+}

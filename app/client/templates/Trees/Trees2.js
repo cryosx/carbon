@@ -3,9 +3,9 @@ Template.trees2.helpers({
 });
 
 Template.trees2.events({
-    'click #Save2':function(event,template){
+/*    'click #Save2':function(event,template){
         console.log('Save2 button pressed');
-    }
+    }*/
 });
 
 Template.trees2.onCreated(function () {

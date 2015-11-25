@@ -38,20 +38,20 @@ Router.route('shopping', {
   path: '/shopping'
 });
 
-Router.route('Trees', {
-  name: 'Trees',
+Router.route('trees', {
+  name: 'trees',
   controller: 'TreeController',
-  path: '/Trees'
+  path: '/trees'
 });
 
-Router.route('Trees2', {
-  name: 'Trees2',
+Router.route('trees2', {
+  name: 'trees2',
   controller: 'TreeController',
-  path: '/Trees2'
+  path: '/trees2'
 });
 
-Router.route('Trees3', {
-  name: 'Trees3',
+Router.route('trees3', {
+  name: 'trees3',
   controller: 'TreeController',
-  path: '/Trees3'
+  path: '/trees3'
 });
