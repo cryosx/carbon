@@ -1,0 +1,28 @@
+<template name="header">
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="{{pathFor 'home'}}" class="brand-logo">MoraLabs</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="http://www.soc.hawaii.edu/mora/">Home</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/Team.html">Team</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/Publications.html">Publications</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/Courses.html">Courses</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/PressRoom.html">Press</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/del.html">CO2 Neutrality</a></li>
+                <li>{{> loginButtons}}</li>
+            </ul>
+
+            <ul id="nav-mobile" class="right side-nav">
+                <li><a href="http://www.soc.hawaii.edu/mora/">Home</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/Team.html">Team</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/Publications.html">Publications</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/Courses.html">Courses</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/PressRoom.html">Press</a></li>
+                <li><a href="http://www.soc.hawaii.edu/mora/del.html">CO2 Neutrality</a></li>
+                <li>{{> atNavButton}}</li>
+
+            </ul>
+            <a class="button-collapse" href="#" data-activates="nav-mobile"><i class="mdi-navigation-menu"></i></a>
+        </div>
+    </nav>
+</template>

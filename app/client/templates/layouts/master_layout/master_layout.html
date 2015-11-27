@@ -1,7 +1,8 @@
 <template name="MasterLayout">
-    {{> navbar}}
+    {{> header}}
     {{#if currentUser}}
         <div class="container">
+            <!--{{> dashboard}}-->
             {{> yield}}
         </div>
     {{else}}
