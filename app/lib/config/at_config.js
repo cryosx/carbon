@@ -34,7 +34,7 @@ AccountsTemplates.configure({
     //termsUrl: 'terms-of-use',
 
     // Redirects
-    homeRoutePath: '/home',
+    homeRoutePath: '/',
     redirectTimeout: 4000,
 
     // Hooks

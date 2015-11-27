@@ -9,26 +9,15 @@
         </div>
         <nav>
 
-            <div class="nav-wrapper">
-                <div class=col m12>
-                    <a href="/transportation" class="breadcrumb">Transportation</a>
-                    <a href="/housing" class="breadcrumb">Housing</a>
-                    <a href="/food" class="breadcrumb">Food</a>
-                    <a href="/shopping" class="breadcrumb">Shopping</a>
-
+            <div class="row">
+                <div class="col m12">
+                    <ul class="tabs z-depth-1">
+                        <li class="tab col m3"><a href="{{pathFor 'transportation'}}" class="active"><i class="fa fa-plane"></i> Transportation</a></li>
+                        <li class="tab col m3"><a href="{{pathFor 'housing'}}"><i class="fa fa-home"></i> Housing</a></li>
+                        <li class="tab col m3"><a href="{{pathFor 'food'}}"><i class="fa fa-cutlery"></i> Food</a></li>
+                        <li class="tab col m3"><a href="{{pathFor 'shopping'}}"><i class="fa fa-shopping-cart"></i> Shopping</a></li>
+                    </ul>
                 </div>
-                <!--<div class="col m3">-->
-                <!--<a href="/transportation" class="thumbnail {{isTransportation active}}"><img src="/plane5.png" class="nav_image"><h4 style="text-align: center">Transportation</h4></a>-->
-                <!--</div>-->
-                <!--<div class="col md">-->
-                <!--<a href="/housing" class="thumbnail {{isHousing active}}"><img src="/home168.png" class="nav_image"><h4 style="text-align: center;">Housing</h4></a>-->
-                <!--</div>-->
-                <!--<div class="col m3">-->
-                <!--<a href="/food" class="thumbnail {{isFood active}}"><img src="/cutlery23.png" class="nav_image"><h4 style="text-align: center">Food</h4></a>-->
-                <!--</div>-->
-                <!--<div class="col m3">-->
-                <!--<a href="/shopping" class="thumbnail {{isShopping active}}"><img src="/marker20.png" class="nav_image"><h4 style="text-align: center">Shopping</h4></a>-->
-                <!--</div>-->
             </div>
         </nav>
     </div>

@@ -1,25 +1,36 @@
 <template name="home">
-    <div class="main-content">
-        <div><h1>The <strong class="light-green-text">Carbon Neutrality</strong> Project</h1></div>
+    <div class="section">
+        <div class="row col m12 padding">
+            <h1>The <strong class="light-green-text">Carbon Neutrality</strong> Project</h1></div>
         <div class="row">
             <div class="parallax-container"><div class="parallax"><img src="/background1.jpg" style="display: block; transform: translate3d(-50%, 385px, 0px);"></div></div>
         </div>
         <br>
-        <div class="row">
-            <div class="col m9">
+
+        {{#if currentUser}}
+        <div class="row padding">
+            <div class="col m12">
                 {{> carbonInfo}}
             </div>
-            <div class="col m3 z-depth-1">
-                {{> atForm}}
-            </div>
         </div>
+        {{else}}
+            <div class="row padding">
+                <div class="col m9">
+                    {{> carbonInfo}}
+                </div>
+                <div class="col m3 z-depth-1">
+                    {{> atForm}}
+                </div>
+            </div>
+        {{/if}}
         <br>
         <div class="row">
             <div class="parallax-container"><div class="parallax"><img src="/background2.jpg" style="display: block; transform: translate3d(-50%, 385px, 0px);"></div></div>
 
         </div>
+        <div class="section padding">
+            <div id="disqus_thread"></div>
+        </div>
 
-
-        <div id="disqus_thread"></div>
     </div>
 </template>

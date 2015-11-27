@@ -1,9 +1,7 @@
 <template name="MasterLayout">
     {{> header}}
     {{#if currentUser}}
-        <div class="container">
-            {{> yield}}
-        </div>
+        {{> yield}}
     {{else}}
         {{> home}}
     {{/if}}

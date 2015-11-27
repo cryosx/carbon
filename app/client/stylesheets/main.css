@@ -22,17 +22,7 @@ a.nav_active {
     border: solid black 3px;
 }
 
-.main-content {
-    position: relative;
-    padding-top: 100px;
-    padding-left: 50px;
-    padding-right: 50px;
 
-}
-
-header {
-
-}
 
 .rounded-border {
     border: solid;

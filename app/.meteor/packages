@@ -36,4 +36,3 @@ reload
 useraccounts:iron-routing
 service-configuration
 webtempest:disqus
-twbs:bootstrap
