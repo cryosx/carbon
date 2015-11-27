@@ -1,14 +1,9 @@
 <template name="transportation">
     {{#if currentUser}}
         {{> carbonNav active="transportation"}}
-        <div class="emission-forms">
-
-
+        <div class="emission-forms padding">
             <div class="row">
-                <div class="col-md-3">
-
-                </div>
-                <div class="col-md-6">
+                <div class="col m6 offset-m3">
                     <label for="units">Select Units</label>
                     <form id="units">
                         <select>
@@ -17,20 +12,14 @@
                         </select>
                     </form>
                 </div>
-                <div class="col-md-3">
-
-                </div>
-
             </div>
 
             <div class="row">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-5">
+                <div class="col m5 offset-m1">
                     <div class="rounded-border">
                         <div class="padding-left"><h4>Car</h4></div>
                         <div class="row padding-left">
-                            <div class="col-md-10">
+                            <div class="col m10">
                                 <form id="car">
                                     <div class="form-group">
                                         <label for="carDistanceTraveled">Annual Travel</label>
@@ -49,17 +38,17 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col m2">
                                 <img>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col m5">
                     <div class="rounded-border">
                         <div class="padding-left"><h4>Train</h4></div>
                         <div class="row padding-left">
-                            <div class="col-md-10">
+                            <div class="col m10">
                                 <form id="train">
                                     <div class="form-group">
                                         <label for="trainDistanceTraveled">Annual Travel</label>
@@ -67,25 +56,21 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col mm2">
                                 <img>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-1">
-                </div>
             </div>
 
             <div class="row">
-                <div class="col-md-1">
-                </div>
 
-                <div class="col-md-5">
+                <div class="col m5 offset-m1">
                     <div class="rounded-border">
                         <div class="padding-left"><h4>Plane</h4></div>
                         <div class="row padding-left">
-                            <div class="col-md-10">
+                            <div class="col m10">
                                 <form id="plane">
                                     <div class="form-group">
                                         <label for="planeDistanceTraveled">Annual Travel</label>
@@ -93,13 +78,13 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col m2">
                                 <img>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col m5">
                     <div class="rounded-border">
                         <div class="padding-left"><h4>Motorcycle</h4></div>
                         <div class="row padding-left">
@@ -111,7 +96,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col m2">
                                 <img>
                             </div>
                         </div>
@@ -119,31 +104,22 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
+                <div class="col m4 offset-m4">
                     <div class="rounded-border">
                         <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">Total Transport</label>
                         <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">STUFF</label>
                         <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">tons CO<sub>2</sub>/year</label>
-
                     </div>
                 </div>
-                <div class="col-md-4"></div>
             </div>
 
             <div class="row">
-                <!--<div class="col-md-4">-->
-                    <!--<button class="btn btn-default" id="saveContinue">Save and Continue later</button>-->
-                <!--</div>-->
-                <div class="col-md-5"></div>
-
-                <div class="col-md-2">
-                    <div class="btn-group btn-group-lg">
-                        <button type="button" class="btn btn-default" id="cancel">Cancel</button>
-                        <button type="button" class="btn btn-default" id="next">Next</button>
+                <div class="com m12 center">
+                    <div class="btn-block">
+                        <button type="button" class="btn" id="cancel">Cancel</button>
+                        <button type="button" class="btn" id="next">Next</button>
                     </div>
                 </div>
-                <div class="col-md-5"></div>
             </div>
         </div>
     {{else}}
