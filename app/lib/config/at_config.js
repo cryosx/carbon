@@ -1,6 +1,9 @@
 // Go to this site for more information on setting the login template
 // https://github.com/meteor-useraccounts/core/blob/master/Guide.md#features
 // Settings are default, taken directly from the page above
+
+
+
 AccountsTemplates.configure({
     // Behavior
     confirmPassword: true,

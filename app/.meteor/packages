@@ -32,7 +32,8 @@ tomi:upload-server
 fortawesome:fontawesome
 materialize:materialize
 useraccounts:materialize
-twbs:bootstrap
 reload
 useraccounts:iron-routing
 service-configuration
+webtempest:disqus
+twbs:bootstrap
