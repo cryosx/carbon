@@ -31,8 +31,10 @@ tomi:upload-jquery
 tomi:upload-server
 fortawesome:fontawesome
 materialize:materialize
-useraccounts:materialize
 reload
 useraccounts:iron-routing
 service-configuration
 webtempest:disqus
+useraccounts:core
+spacebars
+mrt:materialize
