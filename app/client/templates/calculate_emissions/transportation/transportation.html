@@ -2,23 +2,25 @@
     {{#if currentUser}}
         {{> carbonNav active="transportation"}}
 
-        <div class="padding">
-            <div class="row">
-                <div class="col s12">
-                    <label for="units">Select Units</label>
-                    <form id="units">
-                        <select>
-                            <option value="kilometers">Kilometers</option>
-                            <option value="miles">Miles</option>
-                        </select>
-                    </form>
-                </div>
+        <div class="row center">
+            <h5>How much do you travel per year?</h5>
+        </div>
+
+        <div class="row padding">
+            <div class="input-field col s12">
+                <label for="units">Select Units</label>
+                <br>
+                <br>
+                <form id="units">
+                    <select>
+                        <option value="miles">Miles</option>
+                        <option value="kilometers">Kilometers</option>
+                    </select>
+                </form>
             </div>
         </div>
 
-        <div class="divider">
-
-        </div>
+        <div class="divider"></div>
 
         <div class="row">
             <div class="col l3">

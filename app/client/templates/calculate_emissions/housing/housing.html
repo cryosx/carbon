@@ -2,119 +2,88 @@
     {{#if currentUser}}
         {{> carbonNav active="housing"}}
 
-        <div class="padding">
-            <div class="row">
-                <div class="col s12">
-                    <label for="units">Select Units</label>
-                    <form id="units">
-                        <select>
-                            <option value="kilometers">Kilometers</option>
-                            <option value="miles">Miles</option>
-                        </select>
-                    </form>
-                </div>
-            </div>
+        <div class="row center">
+            <h5>How much do you use per year?</h5>
         </div>
 
-        <div class="divider">
-
-        </div>
+        <div class="divider"></div>
 
         <div class="row">
             <div class="col l3">
                 <div class="card">
                     <div class="card-image">
-                        <img src="images/transportation/car3.png">
-                        <span class="card-title"><h3>Car</h3></span>
+                        <img src="images/housing/electricity1.jpg">
+                        <span class="card-title"><h3>Electricity</h3></span>
                     </div>
                     <div class="card-content">
-                        <form id="car" class="col s12">
+                        <form id="electricity" class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input type="number" name="carDistanceTraveled" id="carDistanceTraveled" class="validate">
-                                    <label for="carDistanceTraveled">Annual Distance Traveled</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <select>
-                                        <option value="gasoline">Gasoline</option>
-                                        <option value="diesel">Diesel</option>
-                                    </select>
-                                    <label>What is the Fuel Type of Your Car?</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <input type="number" name="fuelEfficiency" id="fuelEfficiency" class="validate">
-                                    <label for="fuelEfficiency">Fuel efficiency of your car?</label>
+                                    <input type="number" name="electrictyUsed" id="electricityUsed" class="validate">
+                                    <label for="electricityUsed">Kilowatts Used In A Year</label>
                                 </div>
                             </div>
                         </form>
                         <div class="row">
-                            Miles
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col l3">
-                <div class="card large">
+                <div class="card medium">
                     <div class="card-image">
-                        <img src="images/transportation/train1.png">
-                        <span class="card-title"><h3>Train</h3></span>
+                        <img src="images/housing/fuel3.jpg">
+                        <span class="card-title"><h3>Fuel</h3></span>
                     </div>
                     <div class="card-content">
-                        <form id="train" class="col s12">
+                        <form id="fuel" class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <label for="trainDistanceTraveled">Annual Distance Traveled </label>
-                                    <input type="number" name="trainDistanceTraveled" id="trainDistanceTraveled">
+                                    <label for="fuelUsed">Gallons Used</label>
+                                    <input type="number" name="fuelUsed" id="fuelUsed">
                                 </div>
                             </div>
                         </form>
                         <div class="row">
-                            Miles
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col l3">
-                <div class="card large">
+                <div class="card medium">
                     <div class="card-image">
-                        <img src="images/transportation/airplane1.png">
-                        <span class="card-title"><h3>Plane</h3></span>
+                        <img src="images/housing/gas1.jpg">
+                        <span class="card-title"><h3>Gas</h3></span>
                     </div>
                     <div class="card-content">
-                        <form id="plane" class="col s12">
+                        <form id="gas" class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <label for="planeDistanceTraveled">Annual Distance Traveled</label>
-                                    <input type="number" name="planeDistanceTraveled" id="planeDistanceTraveled">
+                                    <label for="gasUsed">Amount Used</label>
+                                    <input type="number" name="gasUsed" id="gasUsed">
                                 </div>
                             </div>
                         </form>
                         <div class="row">
-                            Miles
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col l3">
-                <div class="card large">
+                <div class="card medium">
                     <div class="card-image">
-                        <img src="images/transportation/motorcycle1.png">
-                        <span class="card-title"><h3>Motorcycle</h3></span>
+                        <img src="images/housing/water1.jpg">
+                        <span class="card-title"><h3>Water</h3></span>
                     </div>
                     <div class="card-content">
-                        <form id="motorcycle" class="col s12">
+                        <form id="water" class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <label for="motorcycleDistanceTraveled">Annual Distance Traveled</label>
-                                    <input type="number" name="motorcycleDistanceTraveled" id="motorcycleDistanceTraveled">
+                                    <label for="waterUsed">Gallons Used</label>
+                                    <input type="number" name="waterUsed" id="waterUsed">
                                 </div>
                             </div>
                             <div class="row">
-                                Miles
                             </div>
                         </form>
                     </div>
@@ -127,13 +96,13 @@
                 <div class="col s4 offset-s4">
                     <div class="card-panel">
                         <div class="row">
-                            <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">Total Transport</label>
+                            <label id="totalHousingEmissions" style="text-align: center; width: 100%; margin: auto;">Total Housing</label>
                         </div>
                         <div class="row">
-                            <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">STUFF</label>
+                            <label id="totalHousingEmissions" style="text-align: center; width: 100%; margin: auto;">STUFF</label>
                         </div>
                         <div class="row">
-                            <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">tons CO<sub>2</sub>/year</label>
+                            <label id="totalHousingEmissions" style="text-align: center; width: 100%; margin: auto;">tons CO<sub>2</sub>/year</label>
                         </div>
                     </div>
                 </div>
