@@ -3,7 +3,17 @@ Template.housing.helpers({
 });
 
 Template.housing.events({
-    //add your events here
+    "click #cancel": function() {
+        var url = "/";
+        $(location).attr('href',url);
+    },
+    "click #next": function() {
+        event.preventDefault();
+        $("ul.tabs").tabs("select_tab", "food");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+
+    }
 });
 
 Template.housing.onCreated(function () {

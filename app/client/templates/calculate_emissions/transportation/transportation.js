@@ -3,7 +3,17 @@ Template.transportation.helpers({
 });
 
 Template.transportation.events({
-    //add your events here
+    "click #cancel": function() {
+        var url = "/";
+        window.location.replace(url);
+    },
+    "click #next": function() {
+        event.preventDefault();
+        $("ul.tabs").tabs("select_tab", "housing");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+
+    }
 });
 
 Template.transportation.onCreated(function () {

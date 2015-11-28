@@ -3,7 +3,17 @@ Template.food.helpers({
 });
 
 Template.food.events({
-    //add your events here
+    "click #cancel": function() {
+        var url = "/";
+        $(location).attr('href',url);
+    },
+    "click #next": function() {
+        event.preventDefault();
+        $("ul.tabs").tabs("select_tab", "shopping");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
+
+    }
 });
 
 Template.food.onCreated(function () {

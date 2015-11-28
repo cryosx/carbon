@@ -1,8 +1,16 @@
-Template.home.events({
-});
-
 Template.home.helpers({
 });
+
+
+Template.home.events({
+    "click #emissionsLink": function() {
+        event.preventDefault();
+        setTimeout(goToEmissions, 500);
+        //setTimeout(scrollToTop, 2000);
+    }
+});
+
+
 
 Template.home.onCreated(function () {
     $('.parallax').parallax();
@@ -20,3 +28,11 @@ Template.home.onRendered(function () {
 Template.home.onDestroyed(function () {
 });
 
+function scrollToTop() {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+}
+
+function goToEmissions() {
+    var url = "/emissions";
+    window.location.replace(url);
+}
