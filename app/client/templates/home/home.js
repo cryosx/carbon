@@ -4,17 +4,17 @@ Template.home.helpers({
 
 Template.home.events({
     "click #emissionsLink": function() {
-        event.preventDefault();
-        setTimeout(goToEmissions, 500);
-        //setTimeout(scrollToTop, 2000);
+        //event.preventDefault();
+        //goToEmissions();
+        setTimeout(scrollToTop, 2000);
     }
 });
 
 
 
 Template.home.onCreated(function () {
-    $('.parallax').parallax();
-    window.disqus = new Disqus('cryosx-carbon');
+    //$('.parallax').parallax();
+    //window.disqus = new Disqus('cryosx-carbon');
 
 });
 
