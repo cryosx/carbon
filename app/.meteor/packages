@@ -36,7 +36,6 @@ service-configuration
 webtempest:disqus
 useraccounts:core
 spacebars
-twbs:bootstrap
 richsilv:owl-carousel
 materialize:materialize
 mrt:materialize

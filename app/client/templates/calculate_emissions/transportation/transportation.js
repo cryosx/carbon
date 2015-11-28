@@ -11,7 +11,7 @@ Template.transportation.onCreated(function () {
 });
 
 Template.transportation.onRendered(function () {
-    //add your statement here
+    $('select').material_select();
 });
 
 Template.transportation.onDestroyed(function () {

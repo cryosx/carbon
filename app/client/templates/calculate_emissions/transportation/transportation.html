@@ -1,124 +1,151 @@
 <template name="transportation">
     {{#if currentUser}}
         {{> carbonNav active="transportation"}}
-        <div class="emission-forms padding">
+
+        <div class="padding">
             <div class="row">
-                <div class="col m6 offset-m3">
+                <div class="col s12">
                     <label for="units">Select Units</label>
                     <form id="units">
                         <select>
                             <option value="kilometers">Kilometers</option>
-                            <option value="Miles">Miles</option>
+                            <option value="miles">Miles</option>
                         </select>
                     </form>
                 </div>
             </div>
+        </div>
 
-            <div class="row">
-                <div class="col m5 offset-m1">
-                    <div class="rounded-border">
-                        <div class="padding-left"><h4>Car</h4></div>
-                        <div class="row padding-left">
-                            <div class="col m10">
-                                <form id="car">
-                                    <div class="form-group">
-                                        <label for="carDistanceTraveled">Annual Travel</label>
-                                        <input type="number" name="carDistanceTraveled" placeholder="e.g. 2000" id="carDistanceTraveled"> Miles
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fuelType">Fuel type of your car?</label>
-                                        <select name="fuelType" id="fuelType">
-                                            <option value="gasoline">Gasoline</option>
-                                            <option value="Diesel">Diesel</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fuelEfficiency">Fuel efficiency of your car?</label>
-                                        <input type="number" name="fuelEfficiency" placeholder="e.g. 40" id="fuelEfficiency">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col m2">
-                                <img>
-                            </div>
-                        </div>
+        <div class="divider">
+
+        </div>
+
+        <div class="row">
+            <div class="col l3">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="images/transportation/car3.png">
+                        <span class="card-title"><h3>Car</h3></span>
                     </div>
-                </div>
-                <div class="col m5">
-                    <div class="rounded-border">
-                        <div class="padding-left"><h4>Train</h4></div>
-                        <div class="row padding-left">
-                            <div class="col m10">
-                                <form id="train">
-                                    <div class="form-group">
-                                        <label for="trainDistanceTraveled">Annual Travel</label>
-                                        <input type="number" name="trainDistanceTraveled" placeholder="e.g. 2000" id="trainDistanceTraveled"> Miles
-                                    </div>
-                                </form>
+                    <div class="card-content">
+                        <form id="car" class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="number" name="carDistanceTraveled" id="carDistanceTraveled" class="validate">
+                                    <label for="carDistanceTraveled">Annual Distance Traveled</label>
+                                </div>
                             </div>
-                            <div class="col mm2">
-                                <img>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <select>
+                                        <option value="gasoline">Gasoline</option>
+                                        <option value="diesel">Diesel</option>
+                                    </select>
+                                    <label>What is the Fuel Type of Your Car?</label>
+                                </div>
                             </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <input type="number" name="fuelEfficiency" id="fuelEfficiency" class="validate">
+                                    <label for="fuelEfficiency">Fuel efficiency of your car?</label>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            Miles
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-
-                <div class="col m5 offset-m1">
-                    <div class="rounded-border">
-                        <div class="padding-left"><h4>Plane</h4></div>
-                        <div class="row padding-left">
-                            <div class="col m10">
-                                <form id="plane">
-                                    <div class="form-group">
-                                        <label for="planeDistanceTraveled">Annual Travel</label>
-                                        <input type="number" name="planeDistanceTraveled" placeholder="e.g. 2000" id="planeDistanceTraveled"> Miles
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col m2">
-                                <img>
-                            </div>
-                        </div>
+            <div class="col l3">
+                <div class="card large">
+                    <div class="card-image">
+                        <img src="images/transportation/train1.png">
+                        <span class="card-title"><h3>Train</h3></span>
                     </div>
-                </div>
-                <div class="col m5">
-                    <div class="rounded-border">
-                        <div class="padding-left"><h4>Motorcycle</h4></div>
-                        <div class="row padding-left">
-                            <div class="col-md-10">
-                                <form id="motorcycle">
-                                    <div class="form-group">
-                                        <label for="motorcycleDistanceTraveled">Annual Travel</label>
-                                        <input type="number" name="motorcycleDistanceTraveled" placeholder="e.g. 2000" id="motorcycleDistanceTraveled"> Miles
-                                    </div>
-                                </form>
+                    <div class="card-content">
+                        <form id="train" class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label for="trainDistanceTraveled">Annual Distance Traveled </label>
+                                    <input type="number" name="trainDistanceTraveled" id="trainDistanceTraveled">
+                                </div>
                             </div>
-                            <div class="col m2">
-                                <img>
-                            </div>
+                        </form>
+                        <div class="row">
+                            Miles
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col m4 offset-m4">
-                    <div class="rounded-border">
-                        <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">Total Transport</label>
-                        <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">STUFF</label>
-                        <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">tons CO<sub>2</sub>/year</label>
+            <div class="col l3">
+                <div class="card large">
+                    <div class="card-image">
+                        <img src="images/transportation/airplane1.png">
+                        <span class="card-title"><h3>Plane</h3></span>
+                    </div>
+                    <div class="card-content">
+                        <form id="plane" class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label for="planeDistanceTraveled">Annual Distance Traveled</label>
+                                    <input type="number" name="planeDistanceTraveled" id="planeDistanceTraveled">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            Miles
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="row">
-                <div class="com m12 center">
-                    <div class="btn-block">
-                        <button type="button" class="btn" id="cancel">Cancel</button>
-                        <button type="button" class="btn" id="next">Next</button>
+            <div class="col l3">
+                <div class="card large">
+                    <div class="card-image">
+                        <img src="images/transportation/motorcycle1.png">
+                        <span class="card-title"><h3>Motorcycle</h3></span>
                     </div>
+                    <div class="card-content">
+                        <form id="motorcycle" class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label for="motorcycleDistanceTraveled">Annual Distance Traveled</label>
+                                    <input type="number" name="motorcycleDistanceTraveled" id="motorcycleDistanceTraveled">
+                                </div>
+                            </div>
+                            <div class="row">
+                                Miles
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="card center">
+                <div class="col s4 offset-s4">
+                    <div class="card-panel">
+                        <div class="row">
+                            <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">Total Transport</label>
+                        </div>
+                        <div class="row">
+                            <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">STUFF</label>
+                        </div>
+                        <div class="row">
+                            <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">tons CO<sub>2</sub>/year</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="com m12 center">
+                <div class="btn-block">
+                    <button type="button" class="btn" id="cancel">Cancel</button>
+                    <button type="button" class="btn" id="next">Next</button>
                 </div>
             </div>
         </div>
