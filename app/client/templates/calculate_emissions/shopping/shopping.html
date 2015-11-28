@@ -1,5 +1,146 @@
 <template name="shopping">
     <div id="shopping">
+        <div class="row center">
+            <h5>How much do you expend per month?</h5>
+        </div>
 
+        <div class="divider"></div>
+
+        <div class="row">
+            <div class="col l4">
+                <div class="card medium">
+                    <div class="card-image">
+                        <img src="images/shopping/clothes1.jpg">
+                        <span class="card-title"><h3>Clothes</h3></span>
+                    </div>
+                    <div class="card-content">
+                        <form id="clothes" class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label for="clothesSpentOn">Dollars Spent On</label>
+                                    <input type="number" name="clothesSpentOn" id="clothesSpentOn">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col l4">
+                <div class="card medium">
+                    <div class="card-image">
+                        <img src="images/shopping/furniture2.jpg">
+                        <span class="card-title"><h3>Furniture</h3></span>
+                    </div>
+                    <div class="card-content">
+                        <form id="furniture" class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label for="furnitureSpentOn">Dollars Spent On</label>
+                                    <input type="number" name="furnitureSpentOn" id="furnitureSpentOn">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col l4">
+                <div class="card medium">
+                    <div class="card-image">
+                        <img src="images/shopping/health1.jpg">
+                        <span class="card-title"><h3>Health Care</h3></span>
+                    </div>
+                    <div class="card-content">
+                        <form id="healthCare" class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <label for="healthCareSpentOn">Dollars Spent On</label>
+                                    <input type="number" name="healthCareSpentOn" id="healthCareSpentOn">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <div class="col l6">
+                    <div class="card large">
+                        <div class="card-image">
+                            <img src="images/shopping/vehicles1.jpg">
+                            <span class="card-title"><h3>Vehicles</h3></span>
+                        </div>
+                        <div class="card-content">
+                            <form id="vehicles" class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <label for="vehiclesSpentOn">Dollars Spent On</label>
+                                        <input type="number" name="vehiclesSpentOn" id="vehiclesSpentOn">
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col l6">
+                    <div class="card large">
+                        <div class="card-image">
+                            <img src="images/shopping/maintenance1.jpg">
+                            <span class="card-title"><h3>Home Maintenance</h3></span>
+                        </div>
+                        <div class="card-content">
+                            <form id="maintenance" class="col s12">
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <label for="maintenanceSpentOn">Dollars Spent On</label>
+                                        <input type="number" name="maintenanceSpentOn" id="maintenanceSpentOn">
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="row">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="card center">
+                <div class="col s4 offset-s4">
+                    <div class="card-panel">
+                        <div class="row">
+                            <label id="totalHousingEmissions"
+                                   style="text-align: center; width: 100%; margin: auto;">Total Food</label>
+                        </div>
+                        <div class="row">
+                            <label id="totalHousingEmissions"
+                                   style="text-align: center; width: 100%; margin: auto;">STUFF</label>
+                        </div>
+                        <div class="row">
+                            <label id="totalHousingEmissions"
+                                   style="text-align: center; width: 100%; margin: auto;">tons CO<sub>2</sub>/year</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col m12 center">
+                <div class="btn-block">
+                    <a class="waves-effect waves-light btn red" id="cancel">Cancel</a>
+                    <a class="waves-effect waves-light btn" id="next">Next</a>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
