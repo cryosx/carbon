@@ -22,7 +22,21 @@ Template.carbonNav.helpers({
             return "nav_active";
         }
         return "";
+    },
+    enableIndicators: function(page_name) {
+        if (page_name === "transportation") {
+            $('ul.tabs').tabs('select_tab', '#' + page_name)
+        } else if (page_name === "housing") {
+            $('ul.tabs').tabs('select_tab', '#' + page_name)
+        } else if (page_name === "food") {
+            $('ul.tabs').tabs('select_tab', '#' + page_name)
+        } else if (page_name === "shopping") {
+            $('ul.tabs').tabs('select_tab', '#' + page_name)
+
+        }
+
     }
+
 });
 
 Template.carbonNav.events({
@@ -34,7 +48,9 @@ Template.carbonNav.onCreated(function () {
 });
 
 Template.carbonNav.onRendered(function () {
-    //add your statement here
+    $('ul.tabs').tabs();
+
+
 });
 
 Template.carbonNav.onDestroyed(function () {

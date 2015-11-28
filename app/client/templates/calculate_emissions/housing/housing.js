@@ -11,7 +11,7 @@ Template.housing.onCreated(function () {
 });
 
 Template.housing.onRendered(function () {
-    //add your statement here
+    $('select').material_select();
 });
 
 Template.housing.onDestroyed(function () {

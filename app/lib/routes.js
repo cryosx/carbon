@@ -11,6 +11,11 @@ Router.route('home', {
   path: '/'
 });
 
+Router.route('emissions', {
+  name: 'emissions',
+  controller: 'HomeController',
+  path: '/emissions'
+});
 
 Router.route('transportation', {
   name: 'transportation',

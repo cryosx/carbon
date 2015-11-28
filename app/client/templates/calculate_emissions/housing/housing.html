@@ -1,7 +1,5 @@
 <template name="housing">
-    {{#if currentUser}}
-        {{> carbonNav active="housing"}}
-
+    <div id="housing">
         <div class="row center">
             <h5>How much do you use per year?</h5>
         </div>
@@ -10,7 +8,7 @@
 
         <div class="row">
             <div class="col l3">
-                <div class="card">
+                <div class="card medium">
                     <div class="card-image">
                         <img src="images/housing/electricity1.jpg">
                         <span class="card-title"><h3>Electricity</h3></span>
@@ -19,7 +17,8 @@
                         <form id="electricity" class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input type="number" name="electrictyUsed" id="electricityUsed" class="validate">
+                                    <input type="number" name="electrictyUsed" id="electricityUsed"
+                                           class="validate">
                                     <label for="electricityUsed">Kilowatts Used In A Year</label>
                                 </div>
                             </div>
@@ -96,13 +95,17 @@
                 <div class="col s4 offset-s4">
                     <div class="card-panel">
                         <div class="row">
-                            <label id="totalHousingEmissions" style="text-align: center; width: 100%; margin: auto;">Total Housing</label>
+                            <label id="totalHousingEmissions"
+                                   style="text-align: center; width: 100%; margin: auto;">Total Housing</label>
                         </div>
                         <div class="row">
-                            <label id="totalHousingEmissions" style="text-align: center; width: 100%; margin: auto;">STUFF</label>
+                            <label id="totalHousingEmissions"
+                                   style="text-align: center; width: 100%; margin: auto;">STUFF</label>
                         </div>
                         <div class="row">
-                            <label id="totalHousingEmissions" style="text-align: center; width: 100%; margin: auto;">tons CO<sub>2</sub>/year</label>
+                            <label id="totalHousingEmissions"
+                                   style="text-align: center; width: 100%; margin: auto;">tons
+                                CO<sub>2</sub>/year</label>
                         </div>
                     </div>
                 </div>
@@ -118,7 +121,5 @@
                 </div>
             </div>
         </div>
-    {{else}}
-        {{> notLoggedIn}}
-    {{/if}}
+    </div>
 </template>

@@ -11,7 +11,7 @@ Template.food.onCreated(function () {
 });
 
 Template.food.onRendered(function () {
-    //add your statement here
+    $('select').material_select();
 });
 
 Template.food.onDestroyed(function () {

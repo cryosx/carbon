@@ -1,0 +1,12 @@
+<template name="emissions">
+    {{#if currentUser}}
+        {{> carbonNav}}
+        {{> transportation}}
+        {{> housing}}
+        {{> food}}
+        {{> shopping}}
+    {{else}}
+        {{> notLoggedIn}}
+    {{/if}}
+
+</template>

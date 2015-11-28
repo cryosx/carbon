@@ -1,22 +1,26 @@
 <template name="transportation">
-    {{#if currentUser}}
-        {{> carbonNav active="transportation"}}
-
+    <div id="transportation">
         <div class="row center">
             <h5>How much do you travel per year?</h5>
         </div>
 
         <div class="row padding">
-            <div class="input-field col s12">
-                <label for="units">Select Units</label>
-                <br>
-                <br>
-                <form id="units">
-                    <select>
-                        <option value="miles">Miles</option>
-                        <option value="kilometers">Kilometers</option>
-                    </select>
-                </form>
+            <div class="card center">
+                <div class="input-field col s12">
+                    <div class="card-panel">
+
+                        <label for="units" style="padding-left:1.5%"><h5>Select Your Units</h5></label>
+                        <br>
+                        <br>
+
+                        <form id="units">
+                            <select>
+                                <option value="miles">Miles</option>
+                                <option value="kilometers">Kilometers</option>
+                            </select>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -33,7 +37,8 @@
                         <form id="car" class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input type="number" name="carDistanceTraveled" id="carDistanceTraveled" class="validate">
+                                    <input type="number" name="carDistanceTraveled" id="carDistanceTraveled"
+                                           class="validate">
                                     <label for="carDistanceTraveled">Annual Distance Traveled</label>
                                 </div>
                             </div>
@@ -60,7 +65,7 @@
                 </div>
             </div>
             <div class="col l3">
-                <div class="card large">
+                <div class="card medium">
                     <div class="card-image">
                         <img src="images/transportation/train1.png">
                         <span class="card-title"><h3>Train</h3></span>
@@ -81,7 +86,7 @@
                 </div>
             </div>
             <div class="col l3">
-                <div class="card large">
+                <div class="card medium">
                     <div class="card-image">
                         <img src="images/transportation/airplane1.png">
                         <span class="card-title"><h3>Plane</h3></span>
@@ -102,7 +107,7 @@
                 </div>
             </div>
             <div class="col l3">
-                <div class="card large">
+                <div class="card medium">
                     <div class="card-image">
                         <img src="images/transportation/motorcycle1.png">
                         <span class="card-title"><h3>Motorcycle</h3></span>
@@ -112,7 +117,8 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="motorcycleDistanceTraveled">Annual Distance Traveled</label>
-                                    <input type="number" name="motorcycleDistanceTraveled" id="motorcycleDistanceTraveled">
+                                    <input type="number" name="motorcycleDistanceTraveled"
+                                           id="motorcycleDistanceTraveled">
                                 </div>
                             </div>
                             <div class="row">
@@ -129,20 +135,22 @@
                 <div class="col s4 offset-s4">
                     <div class="card-panel">
                         <div class="row">
-                            <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">Total Transport</label>
+                            <label id="totalTransportEmissions"
+                                   style="text-align: center; width: 100%; margin: auto;">Total Transport</label>
                         </div>
                         <div class="row">
-                            <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">STUFF</label>
+                            <label id="totalTransportEmissions"
+                                   style="text-align: center; width: 100%; margin: auto;">STUFF</label>
                         </div>
                         <div class="row">
-                            <label id="totalTransportEmissions" style="text-align: center; width: 100%; margin: auto;">tons CO<sub>2</sub>/year</label>
+                            <label id="totalTransportEmissions"
+                                   style="text-align: center; width: 100%; margin: auto;">tons
+                                CO<sub>2</sub>/year</label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
         <div class="row">
             <div class="com m12 center">
                 <div class="btn-block">
@@ -151,7 +159,5 @@
                 </div>
             </div>
         </div>
-    {{else}}
-        {{> notLoggedIn}}
-    {{/if}}
+    </div>
 </template>

@@ -11,7 +11,7 @@ Template.shopping.onCreated(function () {
 });
 
 Template.shopping.onRendered(function () {
-    //add your statement here
+    $('select').material_select();
 });
 
 Template.shopping.onDestroyed(function () {
