@@ -44,6 +44,7 @@ AccountsTemplates.configure({
 
     // Texts
     texts: {
+        sep: "OR",
         button: {
             signUp: "Register Now!"
         },
