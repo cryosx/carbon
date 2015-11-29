@@ -10,3 +10,11 @@
 #sidebar-card {
     margin: 0 0 0 0;
 }
+
+#log-out-button .btn{
+    background:coral;
+    color:white;
+}
+#sign-in-button .btn{
+    color:white;
+}

@@ -16,6 +16,7 @@ Template.header.events({
         console.log("NO");
     },
     "click": function() {
+        event.preventDefault();
         console.log("YES");
     }
 });

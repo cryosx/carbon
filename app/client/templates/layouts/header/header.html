@@ -10,7 +10,11 @@
                     <li><a href="http://www.soc.hawaii.edu/mora/Courses.html">Courses</a></li>
                     <li><a href="http://www.soc.hawaii.edu/mora/PressRoom.html">Press</a></li>
                     <li><a href="http://www.soc.hawaii.edu/mora/del.html">CO2 Neutrality</a></li>
-                    <li>{{> atNavButton}}</li>
+                    {{#if currentUser}}
+                        <li id="log-out-button">{{> atNavButton}}</li>
+                    {{else}}
+                        <li id="sign-in-button">{{> atNavButton}}</li>
+                    {{/if}}
                 </ul>
 
                 <ul id="nav-mobile" class="right side-nav">
@@ -26,8 +30,12 @@
                     <li><a href="http://www.soc.hawaii.edu/mora/Courses.html">Courses</a></li>
                     <li><a href="http://www.soc.hawaii.edu/mora/PressRoom.html">Press</a></li>
                     <li><a href="http://www.soc.hawaii.edu/mora/del.html">CO2 Neutrality</a></li>
-                    <li id="sign-in-button">{{> atNavButton}}</li>
 
+                    {{#if currentUser}}
+                        <li id="log-out-button">{{> atNavButton}}</li>
+                    {{else}}
+                        <li id="sign-in-button">{{> atNavButton}}</li>
+                    {{/if}}
                 </ul>
                 <a class="button-collapse" href="#" data-activates="nav-mobile" id="sidebar-button-collapse"><i class="mdi-navigation-menu"></i></a>
             </div>
