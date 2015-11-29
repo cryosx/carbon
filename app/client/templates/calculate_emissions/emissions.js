@@ -20,12 +20,10 @@ Template.emissions.onDestroyed(function () {
 
 
 
-//alert(totalcal);
 
-
-function common_carbon() {
-    var totalcal = 0;
-
+function calculateTransport() {
+    var totalTransport = 0;
+    console.log(totalTransport);
 
     var miles_year = (document.getElementById('miles_year1').value);
     var miles_gallon = (document.getElementById('miles_gallon1').value);
@@ -39,77 +37,70 @@ function common_carbon() {
     var optionvalue = (document.getElementById('option_value').value);
 
     var unit_value = (document.getElementById('unit_value').value);
-    if (unit_value == 'mile')
-    {
+    if (unit_value == 'mile') {
         DistanceConversor = 1;
     }
-    else if(bus != '' || transit != '' || air_travel != '' || miles_year != '' || miles_gallon != '')
-    {
+    else if (bus != '' || transit != '' || air_travel != '' || miles_year != '' || miles_gallon != '') {
         DistanceConversor = 1.60934;
     }
 
-//alert(optionvalue);
-
-
-
+    //alert(optionvalue);
     //gallon per year
 
     if (optionvalue == 'diesel' && miles_gallon != '' && miles_year != '') {
         //var car_diesel = (miles_year / 20 * 2335 + 100 / 20 * 10153 + 100 * 56) * 0.000001;
 
-        var gallon=(((miles_year/miles_gallon*2307)+(miles_year/miles_gallon*10153)+(miles_year*56))*0.000001) * DistanceConversor;
+        var gallon = (((miles_year / miles_gallon * 2307) + (miles_year / miles_gallon * 10153) + (miles_year * 56)) * 0.000001) * DistanceConversor;
         //alert(gallon);
         $('#miles_gallon').val(gallon.toFixed(2));
-        totalcal = totalcal + gallon;
-        //alert(totalcal);
-        $('#total_carbon').val(totalcal.toFixed(2));
-        document.getElementById("amount").innerHTML = totalcal.toFixed(2);
+        totalTransport = totalTransport + gallon;
+        //alert(totalTransport);
+        $('#total_carbon').val(totalTransport.toFixed(2));
+        document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
 
-    } else if(optionvalue == 'gasolin' && miles_gallon != '' && miles_year != ''){
+    } else if (optionvalue == 'gasolin' && miles_gallon != '' && miles_year != '') {
 
 
         //alert(miles_year);
-        var gallon=(((miles_year/miles_gallon*2307)+(miles_year/miles_gallon*8874)+(miles_year*56))*0.000001) * DistanceConversor;
+        var gallon = (((miles_year / miles_gallon * 2307) + (miles_year / miles_gallon * 8874) + (miles_year * 56)) * 0.000001) * DistanceConversor;
 
         //alert(gallon);
         //var car_diesel = (miles_year / 20 * 2335 + 100 / 20 * 8874 + 100 * 56) * 0.000001;
         $('#miles_gallon').val(gallon.toFixed(2));
-        totalcal = totalcal + gallon;
-        // alert(totalcal);
-        $('#total_carbon').val(totalcal.toFixed(2));
-        document.getElementById("amount").innerHTML = totalcal.toFixed(2);
+        totalTransport = totalTransport + gallon;
+        // alert(totalTransport);
+        $('#total_carbon').val(totalTransport.toFixed(2));
+        document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
     }
-
-
 
 
     if (bus !== '') {
         var bus_total = (bus * 300 * 1.26 * 0.000001) * DistanceConversor;
         // alert(bus_total);
         $('#bus').val(bus_total.toFixed(2));
-        totalcal = totalcal + bus_total;
-        $('#total_carbon').val(totalcal.toFixed(2));
-        //alert(totalcal);
-        document.getElementById("amount").innerHTML = totalcal.toFixed(2);
+        totalTransport = totalTransport + bus_total;
+        $('#total_carbon').val(totalTransport.toFixed(2));
+        //alert(totalTransport);
+        document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
     }
     if (transit !== '') {
         var transit_total = (transit * 163 * 1.26 * 0.000001) * DistanceConversor;
         $('#transit_rail').val(transit_total.toFixed(2));
-        totalcal = totalcal + transit_total;
-        //alert(totalcal);
-        $('#total_carbon').val(totalcal.toFixed(2));
-        document.getElementById("amount").innerHTML = totalcal.toFixed(2);
+        totalTransport = totalTransport + transit_total;
+        //alert(totalTransport);
+        $('#total_carbon').val(totalTransport.toFixed(2));
+        document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
     }
 
     if (air_travel !== '') {
 
         var air_total = (air_travel * 223 * 2 * 0.000001) * DistanceConversor;
         $('#miles_flown').val(air_total.toFixed(2));
-        totalcal = totalcal + air_total;
-        document.getElementById("amount").innerHTML = totalcal.toFixed(2);
-        $('#total_carbon').val(totalcal.toFixed(2));
+        totalTransport = totalTransport + air_total;
+        document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
+        $('#total_carbon').val(totalTransport.toFixed(2));
     }
-    document.getElementById("amount").innerHTML = totalcal.toFixed(2);
+    document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
     $('#dis').hide();
     $('#andi').show();
 
@@ -180,10 +171,7 @@ function common_housing() {
     $('#andihouse').show();
 
 
-
-
 }
-
 
 
 function common_food() {
@@ -275,7 +263,6 @@ function common_goods() {
     var house_maintance = (document.getElementById('house_maintance1').value);
 
 
-
     if (cloth !== '') {
         var cloth_total = cloth * 750 * 12 * 0.000001;
         $('#cloth').val(cloth_total.toFixed(2));
@@ -325,7 +312,6 @@ function common_goods() {
     document.getElementById("goods").innerHTML = totalgoods.toFixed(2);
     $('#disgoods').hide();
     $('#andigoods').show();
-
 
 
 }
