@@ -18,8 +18,8 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input type="number" name="electrictyUsed" id="electricityUsed"
-                                           class="validate">
-                                    <label for="electricityUsed">Kilowatts Used In A Year</label>
+                                           class="validate" min="0" max="50000" required>
+                                    <label for="electricityUsed">Kilowatt Hours Used In A Year</label>
                                 </div>
                             </div>
                         </form>
@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="fuelUsed">Gallons Used</label>
-                                    <input type="number" name="fuelUsed" id="fuelUsed">
+                                    <input type="number" name="fuelUsed" id="fuelUsed" min="0" max="5000" required>
                                 </div>
                             </div>
                         </form>
@@ -58,8 +58,8 @@
                         <form id="gas" class="col s12">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <label for="gasUsed">Amount Used</label>
-                                    <input type="number" name="gasUsed" id="gasUsed">
+                                    <label for="gasUsed">Cubic Feet Used</label>
+                                    <input type="number" name="gasUsed" id="gasUsed" min="0" max="500" required>
                                 </div>
                             </div>
                         </form>
@@ -79,7 +79,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="waterUsed">Gallons Used</label>
-                                    <input type="number" name="waterUsed" id="waterUsed">
+                                    <input type="number" name="waterUsed" id="waterUsed" min="0" max="50000" required>
                                 </div>
                             </div>
                             <div class="row">

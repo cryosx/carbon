@@ -13,8 +13,8 @@
                         <br>
                         <br>
 
-                        <form id="units">
-                            <select>
+                        <form>
+                            <select id="units">
                                 <option value="miles">Miles</option>
                                 <option value="kilometers">Kilometers</option>
                             </select>
@@ -38,13 +38,13 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <input type="number" name="carDistanceTraveled" id="carDistanceTraveled"
-                                           class="validate">
+                                           class="validate" min="0" max="50000" required>
                                     <label for="carDistanceTraveled">Annual Distance Traveled</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <select>
+                                    <select id="fuelType">
                                         <option value="gasoline">Gasoline</option>
                                         <option value="diesel">Diesel</option>
                                     </select>
@@ -53,13 +53,13 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input type="number" name="fuelEfficiency" id="fuelEfficiency" class="validate">
+                                    <input type="number" name="fuelEfficiency" id="fuelEfficiency" class="validate" min="0" max="200" required>
                                     <label for="fuelEfficiency">Fuel efficiency of your car?</label>
                                 </div>
                             </div>
                         </form>
                         <div class="row">
-                            Miles
+                            {{units}}
                         </div>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="trainDistanceTraveled">Annual Distance Traveled </label>
-                                    <input type="number" name="trainDistanceTraveled" id="trainDistanceTraveled">
+                                    <input type="number" name="trainDistanceTraveled" id="trainDistanceTraveled" min="0" max="5000" required>
                                 </div>
                             </div>
                         </form>
@@ -96,7 +96,7 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <label for="planeDistanceTraveled">Annual Distance Traveled</label>
-                                    <input type="number" name="planeDistanceTraveled" id="planeDistanceTraveled">
+                                    <input type="number" name="planeDistanceTraveled" id="planeDistanceTraveled" min="0" max="50000" required>
                                 </div>
                             </div>
                         </form>
@@ -118,7 +118,7 @@
                                 <div class="input-field col s12">
                                     <label for="motorcycleDistanceTraveled">Annual Distance Traveled</label>
                                     <input type="number" name="motorcycleDistanceTraveled"
-                                           id="motorcycleDistanceTraveled">
+                                           id="motorcycleDistanceTraveled" min="0" max="50000" required>
                                 </div>
                             </div>
                             <div class="row">

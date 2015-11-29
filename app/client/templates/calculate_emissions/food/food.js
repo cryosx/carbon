@@ -5,7 +5,7 @@ Template.food.helpers({
 Template.food.events({
     "click #cancel": function() {
         var url = "/";
-        $(location).attr('href',url);
+        window.location.replace(url);
     },
     "click #next": function() {
         event.preventDefault();

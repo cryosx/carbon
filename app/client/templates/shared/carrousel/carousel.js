@@ -2,23 +2,37 @@ Template.carousel.helpers({
     //add you helpers here
 });
 
+
 Template.carousel.events({
-    //add your events here
+
+    "click .play": function() {
+        owl.play();
+    },
+    "click .stop": function() {
+        owl.stop();
+    },
+    "click .prev": function() {
+        owl.prev();
+    },
+    "click .next": function() {
+        owl.next();
+    }
 });
 
 Template.carousel.onCreated(function () {
 });
 
 Template.carousel.onRendered(function () {
-    $("#test-carousel").owlCarousel({
+    $(".owl-carousel").owlCarousel({
 
         autoPlay: 3000, //Set AutoPlay to 3 seconds
-        stopOnHover : false,
         items : 4,
         itemsDesktop : [1199,3],
         itemsDesktopSmall : [979,3]
 
     });
+    var owl = $(".owl-carousel").data('owlCarousel');
+    owl.play();
 });
 
 Template.carousel.onDestroyed(function () {

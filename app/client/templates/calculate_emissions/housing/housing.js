@@ -5,7 +5,7 @@ Template.housing.helpers({
 Template.housing.events({
     "click #cancel": function() {
         var url = "/";
-        $(location).attr('href',url);
+        window.location.replace(url);
     },
     "click #next": function() {
         event.preventDefault();

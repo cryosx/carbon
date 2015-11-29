@@ -3,7 +3,13 @@ Template.shopping.helpers({
 });
 
 Template.shopping.events({
-    //add your events here
+    "click #cancel": function(){
+        var url = "/";
+        window.location.replace(url);
+    },
+    "click #submit": function() {
+
+    }
 });
 
 Template.shopping.onCreated(function () {
@@ -17,4 +23,5 @@ Template.shopping.onRendered(function () {
 Template.shopping.onDestroyed(function () {
     //add your statement here
 });
+
 
