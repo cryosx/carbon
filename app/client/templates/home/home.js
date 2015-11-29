@@ -7,6 +7,9 @@ Template.home.events({
         //event.preventDefault();
         //goToEmissions();
         setTimeout(scrollToTop, 2000);
+    },
+    "click": function() {
+        console.log("NO");
     }
 });
 
