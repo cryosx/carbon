@@ -11,10 +11,21 @@
         <div class="item"><img src="/parallax/background7.jpg" alt="/parallax/background1.jpg"></div>
         <div class="item"><img src="/parallax/background8.jpg" alt="/parallax/background1.jpg"></div>
     </div>
-    <div class="customNavigation">
-        <a class="btn prev waves-effect waves-ripple">Previous</a>
-        <a class="btn next waves-effect waves-ripple">Next</a>
-        <a class="btn play waves-effect waves-ripple">Autoplay</a>
-        <a class="btn stop waves-effect waves-ripple">Stop</a>
+    <div class="customNavigation row">
+        <div class="col s3" >&nbsp;</div>
+        <a class="btn-flat prev waves-effect waves-ripple col s2"><i class="large material-icons">keyboard_arrow_left</i></a>
+
+        <div class="fixed-action-btn col s2" style="position: relative; bottom: 0px; left: 0px;">
+            <a class="btn red">
+                <i class="large mdi-navigation-menu"></i>
+            </a>
+            <ul>
+                <li><a class="play btn-floating red"><i class="material-icons">play_arrow</i></a></li>
+                <li><a class="stop btn-floating yellow darken-1"><i class="material-icons">stop</i></a></li>
+            </ul>
+        </div>
+        <a class="btn-flat next waves-effect waves-ripple col s2"><i class="large material-icons">keyboard_arrow_right</i></a>
+        <div class="col s3">&nbsp;</div>
     </div>
+
 </template>
