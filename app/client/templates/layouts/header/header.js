@@ -4,12 +4,10 @@ Template.header.helpers({
 
 Template.header.events({
     "click #sign-in-button": function() {
-        console.log("NO");
-        $(".side-nav").slideToggle(2000);
+        $('.button-collapse').sideNav('hide');
     },
     "click #log-out-button": function() {
-        console.log("NO");
-        $(".side-nav").slideToggle(2000);
+        $('.button-collapse').sideNav('hide');
     },
     "click": function() {
         console.log("YES");
@@ -21,7 +19,11 @@ Template.header.onCreated(function () {
 });
 
 Template.header.onRendered(function () {
-    $(".button-collapse").sideNav();
+    $(".button-collapse").sideNav({
+        menuWidth: 300,
+        closeOnClick: true
+
+    });
 });
 
 Template.header.onDestroyed(function () {
