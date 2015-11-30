@@ -1,5 +1,7 @@
 Template.emissions.helpers({
-    //add you helpers here
+    totalTransport: function() {
+        return Session.get("totalTransport");
+    }
 });
 
 Template.emissions.events({
@@ -11,7 +13,10 @@ Template.emissions.onCreated(function () {
 });
 
 Template.emissions.onRendered(function () {
-
+    Session.set("totalTransport", 0);
+    Session.set("totalHousing", 0);
+    Session.set("totalFood", 0);
+    Session.set("totalShopping", 0);
 
 
     function calculateTransport() {
@@ -29,6 +34,7 @@ Template.emissions.onRendered(function () {
         var motorcycleDistanceTraveled = (document.getElementById('motorcycleDistanceTraveled').value);
 
         var units = (document.getElementById('units').value);
+        console.log(units);
         if (units == 'miles') {
             unitConversion = 1;
         }
@@ -89,6 +95,8 @@ Template.emissions.onRendered(function () {
         $('#andi').show();
 
     }
+    calculateTransport();
+
     function common_housing() {
         var totalhouse = 0;
 

@@ -57,9 +57,14 @@
                     <div class="card-content">
                         <form id="gas" class="col s12">
                             <div class="row">
-                                <div class="input-field col s12">
+                                <div class="input-field col s7">
                                     <label for="gasUsed">Cubic Feet Used</label>
                                     <input type="number" name="gasUsed" id="gasUsed" min="0" max="500" required>
+                                </div>
+                                <div class="input-field col s5">
+                                    <select id="gas-units">
+                                        <option value="cubic-feet" selected="selected">Cubic Feet</option>
+                                    </select>
                                 </div>
                             </div>
                         </form>

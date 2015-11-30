@@ -11,8 +11,12 @@
         {{#if currentUser}}
         <div class="row padding">
             <div class="col m12">
-                <a href="{{pathFor 'emissions'}}" id="emissionsLink">Calculate Emissions</a>
                 {{> carbonInfo}}
+                <div class="row">
+                    <div class="col s4">&nbsp;</div>
+                    <a href="{{pathFor 'emissions'}}" id="emissionsLink" class="col s4 btn waves-effect waves-light center z-depth-1">Calculate Emissions</a>
+                    <div class="col s4">&nbsp;</div>
+                </div>
             </div>
         </div>
         {{else}}

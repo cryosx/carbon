@@ -2,7 +2,7 @@ Template.transportation.helpers({
 
     units: function() {
         var units = Session.get("units");
-        console.log(units);
+        //console.log(units);
         if (units === "miles") {
             return "Miles"
         } else if (units === "kilometers") {
