@@ -3,8 +3,13 @@ Template.header.helpers({
 });
 
 Template.header.events({
-    "click #sign-in": function() {
+    "click #sign-in-button": function() {
         console.log("NO");
+        $(".side-nav").slideToggle(2000);
+    },
+    "click #log-out-button": function() {
+        console.log("NO");
+        $(".side-nav").slideToggle(2000);
     },
     "click": function() {
         console.log("YES");

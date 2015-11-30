@@ -21,12 +21,13 @@
         </div>
         {{else}}
             <div class="row padding">
-                <div class="col s12 l9 push-l3">
-                    {{> carbonInfo}}
-                </div>
-                <div class="col s12 l3 z-depth-1 sign-in-form">
+                <div class="col s12 m12 l3 push-l9 z-depth-1 sign-in-form">
                     {{> atForm}}
                 </div>
+                <div class="col s12 m12 l9 pull-l3">
+                    {{> carbonInfo}}
+                </div>
+
             </div>
         {{/if}}
         <br>
