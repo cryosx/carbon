@@ -35,3 +35,6 @@ a.nav_active {
     margin-bottom: 10px;
 }
 
+.card-title h3 {
+    text-shadow: 2px 2px 4px #000000;
+}
