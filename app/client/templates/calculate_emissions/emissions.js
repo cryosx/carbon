@@ -15,80 +15,71 @@ Template.emissions.onRendered(function () {
 
 
     function calculateTransport() {
+
         var totalTransport = 0;
+        var unitConversion = 1;
 
         var carDistanceTraveled = (document.getElementById('carDistanceTraveled').value);
-        var fuelEfficiency = (document.getElementById('fuelEfficiency1').value);
+        var fuelEfficiency = (document.getElementById('fuelEfficiency').value);
+        var fuelType = (document.getElementById('fuelType').value);
 
-        //alert(fuelEfficiency);
-        //alert(carDistanceTraveled);
-
-        var bus = (document.getElementById('bus1').value);
-        //alert(bus);
-        var transit = (document.getElementById('transit_rail1').value);
-        var air_travel = (document.getElementById('miles_flown1').value);
-        var optionvalue = (document.getElementById('option_value').value);
+        var trainDistanceTraveled = (document.getElementById('trainDistanceTraveled').value);
+        var busDistanceTraveled = (document.getElementById('busDistanceTraveled').value);
+        var planeDistanceTraveled = (document.getElementById('planeDistanceTraveled').value);
+        var motorcycleDistanceTraveled = (document.getElementById('motorcycleDistanceTraveled').value);
 
         var units = (document.getElementById('units').value);
-        if (unit_value == 'mile') {
-            DistanceConversor = 1;
+        if (units == 'miles') {
+            unitConversion = 1;
         }
-        else if (bus != '' || transit != '' || air_travel != '' || carDistanceTraveled != '' || fuelEfficiency != '') {
-            DistanceConversor = 1.60934;
+        else {
+            unitConversion = 1.60934;
         }
 
-        //alert(optionvalue);
-        //gallon per year
 
-        if (optionvalue == 'diesel' && fuelEfficiency != '' && carDistanceTraveled != '') {
+        if (fuelType == 'diesel' && fuelEfficiency != "" && carDistanceTraveled != "") {
             //var car_diesel = (carDistanceTraveled / 20 * 2335 + 100 / 20 * 10153 + 100 * 56) * 0.000001;
 
-            var gallon = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 10153) + (carDistanceTraveled * 56)) * 0.000001) * DistanceConversor;
-            //alert(gallon);
-            $('#fuelEfficiency').val(gallon.toFixed(2));
-            totalTransport = totalTransport + gallon;
-            //alert(totalTransport);
+            var gallons = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 10153) + (carDistanceTraveled * 56)) * 0.000001) * unitConversion;
+            $('#fuelEfficiency').val(gallons.toFixed(2));
+            totalTransport = totalTransport + gallons;
             $('#total_carbon').val(totalTransport.toFixed(2));
             document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
 
-        } else if (optionvalue == 'gasolin' && fuelEfficiency != '' && carDistanceTraveled != '') {
+        } else if (fuelType == 'gasoline' && fuelEfficiency != "" && carDistanceTraveled != "") {
 
 
             //alert(carDistanceTraveled);
-            var gallon = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 8874) + (carDistanceTraveled * 56)) * 0.000001) * DistanceConversor;
+            var gallons = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 8874) + (carDistanceTraveled * 56)) * 0.000001) * unitConversion;
 
-            //alert(gallon);
             //var car_diesel = (carDistanceTraveled / 20 * 2335 + 100 / 20 * 8874 + 100 * 56) * 0.000001;
-            $('#fuelEfficiency').val(gallon.toFixed(2));
-            totalTransport = totalTransport + gallon;
-            // alert(totalTransport);
+            $('#fuelEfficiency').val(gallons.toFixed(2));
+            totalTransport = totalTransport + gallons;
             $('#total_carbon').val(totalTransport.toFixed(2));
             document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
         }
 
 
-        if (bus !== '') {
-            var bus_total = (bus * 300 * 1.26 * 0.000001) * DistanceConversor;
-            // alert(bus_total);
-            $('#bus').val(bus_total.toFixed(2));
-            totalTransport = totalTransport + bus_total;
+        if (busDistanceTraveled !== "") {
+            var busDistanceTraveled_total = (busDistanceTraveled * 300 * 1.26 * 0.000001) * unitConversion;
+            $('#busDistanceTraveled').val(busDistanceTraveled_total.toFixed(2));
+            totalTransport = totalTransport + busDistanceTraveled_total;
             $('#total_carbon').val(totalTransport.toFixed(2));
-            //alert(totalTransport);
             document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
         }
-        if (transit !== '') {
-            var transit_total = (transit * 163 * 1.26 * 0.000001) * DistanceConversor;
-            $('#transit_rail').val(transit_total.toFixed(2));
+        if (trainDistanceTraveled !== "") {
+            var transit_total = (trainDistanceTraveled * 163 * 1.26 * 0.000001) * unitConversion;
+            $('#trainDistanceTraveled').val(transit_total.toFixed(2));
             totalTransport = totalTransport + transit_total;
             //alert(totalTransport);
             $('#total_carbon').val(totalTransport.toFixed(2));
             document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
         }
 
-        if (air_travel !== '') {
+        if (planeDistanceTraveled !== "") {
 
-            var air_total = (air_travel * 223 * 2 * 0.000001) * DistanceConversor;
-            $('#miles_flown').val(air_total.toFixed(2));
+            var air_total = (planeDistanceTraveled * 223 * 2 * 0.000001) * unitConversion;
+            $('#planeDistanceTraveled').val(air_total.toFixed(2));
             totalTransport = totalTransport + air_total;
             document.getElementById("amount").innerHTML = totalTransport.toFixed(2);
             $('#total_carbon').val(totalTransport.toFixed(2));
@@ -104,7 +95,7 @@ Template.emissions.onRendered(function () {
         var electricity = (document.getElementById('electricity1').value);
         //alert(electricity);
         var gas = (document.getElementById('gas1').value);
-        //alert(bus);
+        //alert(busDistanceTraveled);
         var fuels = (document.getElementById('fuels1').value);
         var water_used = (document.getElementById('water_used1').value);
         var termvalue = (document.getElementById('term_value').value);
@@ -130,7 +121,7 @@ Template.emissions.onRendered(function () {
             document.getElementById("house").innerHTML = totalhouse.toFixed(2);
         }
 
-        if (electricity !== '') {
+        if (electricity !== "") {
             var electricity_total = electricity * 11789 * 1.09 * 0.000001;
             $('#electricity').val(electricity_total.toFixed(2));
             totalhouse = totalhouse + electricity_total;
@@ -139,7 +130,7 @@ Template.emissions.onRendered(function () {
             document.getElementById("house").innerHTML = totalhouse.toFixed(2);
         }
 
-        if (fuels !== '') {
+        if (fuels !== "") {
             var fuels_total = fuels * 682 * 0.000001;
             $('#fuels').val(fuels_total.toFixed(2));
             totalhouse = totalhouse + fuels_total;
@@ -148,7 +139,7 @@ Template.emissions.onRendered(function () {
             document.getElementById("house").innerHTML = totalhouse.toFixed(2);
         }
 
-        if (water_used !== '') {
+        if (water_used !== "") {
             var water_used_total = water_used * 11707 * 0.000001;
             $('#water_used').val(water_used_total.toFixed(2));
             totalhouse = totalhouse + water_used_total;
@@ -179,7 +170,7 @@ Template.emissions.onRendered(function () {
         var drinks = (document.getElementById('drinks1').value);
         var beef = (document.getElementById('beef1').value);
 
-        if (beef !== '') {
+        if (beef !== "") {
             var beef_total = beef * 6.09 * 365 * 0.000001;
             $('#beef').val(beef_total.toFixed(2));
             totalfood = totalfood + beef_total;
@@ -188,7 +179,7 @@ Template.emissions.onRendered(function () {
             document.getElementById("food").innerHTML = totalfood.toFixed(2);
         }
 
-        if (poultry !== '') {
+        if (poultry !== "") {
             var poultry_total = poultry * 4.27 * 365 * 0.000001;
             $('#poultry').val(poultry_total.toFixed(2));
             totalfood = totalfood + poultry_total;
@@ -196,7 +187,7 @@ Template.emissions.onRendered(function () {
             //alert(totalcal);
             document.getElementById("food").innerHTML = totalfood.toFixed(2);
         }
-        if (fish !== '') {
+        if (fish !== "") {
             var fish_total = fish * 5.71 * 365 * 0.000001;
             $('#fish').val(fish_total.toFixed(2));
             totalfood = totalfood + fish_total;
@@ -204,7 +195,7 @@ Template.emissions.onRendered(function () {
             //alert(totalcal);
             document.getElementById("food").innerHTML = totalfood.toFixed(2);
         }
-        if (dairy !== '') {
+        if (dairy !== "") {
             var dairy_total = dairy * 4 * 365 * 0.000001;
             $('#dairy').val(dairy_total.toFixed(2));
             totalfood = totalfood + dairy_total;
@@ -212,7 +203,7 @@ Template.emissions.onRendered(function () {
             //alert(totalcal);
             document.getElementById("food").innerHTML = totalfood.toFixed(2);
         }
-        if (vegetables !== '') {
+        if (vegetables !== "") {
             var vegetables_total = vegetables * 3.35 * 365 * 0.000001;
             $('#vegetables').val(vegetables_total.toFixed(2));
             totalfood = totalfood + vegetables_total;
@@ -220,7 +211,7 @@ Template.emissions.onRendered(function () {
             //alert(totalcal);
             document.getElementById("food").innerHTML = totalfood.toFixed(2);
         }
-        if (bakery !== '') {
+        if (bakery !== "") {
             var bakery_total = bakery * 1.45 * 365 * 0.000001;
             $('#bakery').val(bakery_total.toFixed(2));
             totalfood = totalfood + bakery_total;
@@ -228,7 +219,7 @@ Template.emissions.onRendered(function () {
             //alert(totalcal);
             document.getElementById("food").innerHTML = totalfood.toFixed(2);
         }
-        if (drinks !== '') {
+        if (drinks !== "") {
             var drinks_total = drinks * 2.24 * 365 * 0.000001;
             $('#drinks').val(drinks_total.toFixed(2));
             totalfood = totalfood + drinks_total;
@@ -254,7 +245,7 @@ Template.emissions.onRendered(function () {
         var house_maintance = (document.getElementById('house_maintance1').value);
 
 
-        if (cloth !== '') {
+        if (cloth !== "") {
             var cloth_total = cloth * 750 * 12 * 0.000001;
             $('#cloth').val(cloth_total.toFixed(2));
             totalgoods = totalgoods + cloth_total;
@@ -263,7 +254,7 @@ Template.emissions.onRendered(function () {
             document.getElementById("goods").innerHTML = totalgoods.toFixed(2);
         }
 
-        if (furniture !== '') {
+        if (furniture !== "") {
             var furniture_total = furniture * 614 * 12 * 0.000001;
             $('#furniture').val(furniture_total.toFixed(2));
             totalgoods = totalgoods + furniture_total;
@@ -272,7 +263,7 @@ Template.emissions.onRendered(function () {
             document.getElementById("goods").innerHTML = totalgoods.toFixed(2);
         }
 
-        if (health_care !== '') {
+        if (health_care !== "") {
             var health_care_total = health_care * 1151 * 12 * 0.000001;
             $('#health_care').val(health_care_total.toFixed(2));
             totalgoods = totalgoods + health_care_total;
@@ -281,7 +272,7 @@ Template.emissions.onRendered(function () {
             document.getElementById("goods").innerHTML = totalgoods.toFixed(2);
         }
 
-        if (vehicle !== '') {
+        if (vehicle !== "") {
             var vehicle_total = vehicle * 433 * 12 * 0.000001;
             $('#vehicle').val(vehicle_total.toFixed(2));
             totalgoods = totalgoods + vehicle_total;
@@ -290,7 +281,7 @@ Template.emissions.onRendered(function () {
             document.getElementById("goods").innerHTML = totalgoods.toFixed(2);
         }
 
-        if (house_maintance !== '') {
+        if (house_maintance !== "") {
             var house_maintance_total = house_maintance * 134 * 12 * 0.000001;
             $('#house_maintance').val(house_maintance_total.toFixed(2));
             totalgoods = totalgoods + house_maintance_total;
@@ -307,17 +298,17 @@ Template.emissions.onRendered(function () {
 
     }
     $(document).ready(function () {
-        $('.miles').tooltip({title: "miles per gallon", placement: "top"});
+        $('.miles').tooltip({title: "miles per gallons", placement: "top"});
 
     });
 
     $(document).ready(function () {
-        $('.miles').tooltip({title: "miles per gallon", placement: "top"});
+        $('.miles').tooltip({title: "miles per gallons", placement: "top"});
 
     });
 
     $(document).ready(function () {
-        $('.bus').tooltip({title: "bus", placement: "top"});
+        $('.busDistanceTraveled').tooltip({title: "busDistanceTraveled", placement: "top"});
 
     });
     $(document).ready(function () {
@@ -330,7 +321,7 @@ Template.emissions.onRendered(function () {
 
     });
     $(document).ready(function () {
-        $('.transit').tooltip({title: "transit rail", placement: "top"});
+        $('.trainDistanceTraveled').tooltip({title: "trainDistanceTraveled rail", placement: "top"});
 
     });
     $(document).ready(function () {

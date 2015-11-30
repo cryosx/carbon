@@ -15,7 +15,7 @@
 
                         <form>
                             <select id="units">
-                                <option value="miles">Miles</option>
+                                <option value="miles" selected="selected">Miles</option>
                                 <option value="kilometers">Kilometers</option>
                             </select>
                         </form>
@@ -58,7 +58,7 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="row">
+                        <div class="row unit-label">
                             {{units}}
                         </div>
                     </div>
@@ -79,8 +79,8 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="row">
-                            Miles
+                        <div class="row unit-label">
+                            {{units}}
                         </div>
                     </div>
                 </div>
@@ -100,8 +100,8 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="row">
-                            Miles
+                        <div class="row unit-label">
+                            {{units}}
                         </div>
                     </div>
                 </div>
@@ -123,8 +123,8 @@
                                 </div>
                             </div>
                         </form>
-                        <div class="row">
-                            Miles
+                        <div class="row unit-label">
+                            {{units}}
                         </div>
                     </div>
                 </div>
@@ -144,8 +144,8 @@
                                            id="motorcycleDistanceTraveled" min="0" max="50000" required>
                                 </div>
                             </div>
-                            <div class="row">
-                                Miles
+                            <div class="row unit-label">
+                                {{units}}
                             </div>
                         </form>
                     </div>
