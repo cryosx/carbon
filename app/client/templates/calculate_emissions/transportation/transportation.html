@@ -4,7 +4,7 @@
             <h5>How much do you travel per year?</h5>
         </div>
 
-        <form>
+        <form id="transportation-form">
             <div class="row padding">
                 <div class="card center">
                     <div class="input-field col s12">
@@ -151,21 +151,16 @@
             <div class="divider"></div>
 
             <div class="row">
-                <div class="card center">
-                    <div class="col s12 m4 offset-m4 l4 offset-l4">
+                <div class="card">
+                    <div class="col s12 m6 offset-m3 l4 offset-l4">
                         <div class="card-panel">
-                            <div class="row">
-                                <label id="totalTransportEmissions"
-                                       style="text-align: center; width: 100%; margin: auto;">Total Transport</label>
+                            <div class="row center">
+                                <h5 class="">Total Transport</h5>
                             </div>
-                            <div class="row">
-                                <label id="totalTransportEmissions"
-                                       style="text-align: center; width: 100%; margin: auto;">{{totalTransport}}</label>
-                            </div>
-                            <div class="row">
-                                <label id="totalTransportEmissions"
-                                       style="text-align: center; width: 100%; margin: auto;">tons
-                                    CO<sub>2</sub>/year</label>
+                            <div class="divider"></div>
+                            <div class="row" style="position:relative">
+                                <h2 class="col s7 m7 l7 center" id="totalTransportEmissions">{{totalTransport}}</h2>
+                                <h6 class="col s5 m5 l5 center" style="position: absolute;top:40%; left:50%">tons of CO<sub>2</sub>/Year</h6>
                             </div>
                         </div>
                     </div>

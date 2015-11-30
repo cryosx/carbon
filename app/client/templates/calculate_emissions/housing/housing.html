@@ -7,7 +7,7 @@
         <div class="divider"></div>
         <br>
 
-        <form>
+        <form id="housing-form">
             <div class="row">
                 <div class="col s12 m6 l3">
                     <div class="card medium">
@@ -18,7 +18,7 @@
                         <div class="card-content">
                             <div class="row">
                                 <div class="input-field col s12">
-                                    <input type="number" name="electrictyUsed" id="electricityUsed"
+                                    <input type="number" name="electricityUsed" id="electricityUsed"
                                            class="validate" min="0" max="50000" autofocus required>
                                     <label for="electricityUsed">Kilowatt Hours Used In A Year</label>
                                 </div>
@@ -59,8 +59,9 @@
                                     <input type="number" name="gasUsed" id="gasUsed" min="0" max="500" required>
                                 </div>
                                 <div class="input-field col s5">
-                                    <select id="gas-units">
-                                        <option value="cubic-feet" selected="selected">Cubic Feet</option>
+                                    <select id="gasUnits">
+                                        <option value="cubicFeet" selected="selected">Cubic Feet</option>
+                                        <option value="btu" selected="selected">BTU</option>
                                     </select>
                                 </div>
                             </div>
@@ -94,17 +95,13 @@
                     <div class="col s12 m4 offset-m4 l4 offset-l4">
                         <div class="card-panel">
                             <div class="row">
-                                <label id="totalHousingEmissions"
-                                       style="text-align: center; width: 100%; margin: auto;">Total Housing</label>
+                                <label style="text-align: center; width: 100%; margin: auto;">Total Housing</label>
+                            </div>
+                            <div class="row center">
+                                <label id="totalHousingEmissions">{{totalHousing}}</label>
                             </div>
                             <div class="row">
-                                <label id="totalHousingEmissions"
-                                       style="text-align: center; width: 100%; margin: auto;">STUFF</label>
-                            </div>
-                            <div class="row">
-                                <label id="totalHousingEmissions"
-                                       style="text-align: center; width: 100%; margin: auto;">tons
-                                    CO<sub>2</sub>/year</label>
+                                <label style="text-align: center; width: 100%; margin: auto;">tons of CO<sub>2</sub>Year</label>
                             </div>
                         </div>
                     </div>
