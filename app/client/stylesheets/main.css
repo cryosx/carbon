@@ -38,3 +38,9 @@ a.nav_active {
 .card-title h3 {
     text-shadow: 2px 2px 4px #000000;
 }
+@media only screen and (min-width: 601px) {
+    #totalCarbonCard {
+        width:50%;
+        margin-left:25%;
+    }
+}

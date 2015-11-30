@@ -42,7 +42,7 @@ Template.housing.onDestroyed(function () {
 });
 
 function updateHousing() {
-    var total = calculateTransport();
+    var total = calculateHousing();
     document.getElementById("totalHousingEmissions").innerHTML = total.toFixed(2);
 }
 

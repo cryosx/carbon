@@ -91,17 +91,16 @@
                 </div>
             </div>
             <div class="row">
-                <div class="card center">
-                    <div class="col s12 m4 offset-m4 l4 offset-l4">
+                <div class="card">
+                    <div class="col s12 m6 offset-m3 l4 offset-l4" id="totalCarbonCard">
                         <div class="card-panel">
-                            <div class="row">
-                                <label style="text-align: center; width: 100%; margin: auto;">Total Housing</label>
-                            </div>
                             <div class="row center">
-                                <label id="totalHousingEmissions">{{totalHousing}}</label>
+                                <h5 class="">Total Housing</h5>
                             </div>
-                            <div class="row">
-                                <label style="text-align: center; width: 100%; margin: auto;">tons of CO<sub>2</sub>Year</label>
+                            <div class="divider"></div>
+                            <div class="row" style="position:relative">
+                                <h2 class="col s7 m7 l7 center" id="totalHousingEmissions">{{totalHousing}}</h2>
+                                <h6 class="col s5 m5 l5 center" style="position: absolute;top:35%; left:50%">tons of CO<sub>2</sub>/Year</h6>
                             </div>
                         </div>
                     </div>
