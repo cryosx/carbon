@@ -12,6 +12,11 @@ Template.fixedActionButton.events({
         event.preventDefault();
         $("html, body").animate({ scrollTop: $(document).height() }, 2000);
         return false;
+    },
+    "click #disqus-comments": function() {
+        $('html, body').animate({
+            scrollTop: $("#disqus_thread").offset().top
+        }, 2000);
     }
 });
 
@@ -20,7 +25,7 @@ Template.fixedActionButton.onCreated(function () {
 });
 
 Template.fixedActionButton.onRendered(function () {
-    //add your statement here
+
 });
 
 Template.fixedActionButton.onDestroyed(function () {
