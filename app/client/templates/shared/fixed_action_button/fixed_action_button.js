@@ -15,7 +15,7 @@ Template.fixedActionButton.events({
     },
     "click #disqus-comments": function() {
         $('html, body').animate({
-            scrollTop: $("#disqus_thread").offset().top
+            scrollTop: $("#disqus_thread").offset().top - 80
         }, 2000);
     }
 });
