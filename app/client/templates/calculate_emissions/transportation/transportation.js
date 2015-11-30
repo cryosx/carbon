@@ -17,12 +17,12 @@ Template.transportation.events({
         var url = "/";
         window.location.replace(url);
     },
-    "click #next": function() {
-        event.preventDefault();
-        $("ul.tabs").tabs("select_tab", "housing");
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        return false;
-    },
+    //"click #next": function() {
+    //    event.preventDefault();
+    //    $("ul.tabs").tabs("select_tab", "housing");
+    //    $("html, body").animate({ scrollTop: 0 }, "slow");
+    //    return false;
+    //},
 
     "change #units": function() {
         var value = document.getElementById("units").value;
@@ -31,7 +31,34 @@ Template.transportation.events({
         } else if (value === "kilometers") {
             Session.set("units", value);
         }
+    },
+    //"keypress #transportation-submit": function(e) {
+    //    if(e.charCode == 13) {
+    //        console.log("KEY");
+    //        event.preventDefault();
+    //    }
+    //},
+    //"click #transporation-submit": function() {
+    //    console.log("CLICK");
+    //    event.preventDefault();
+    //},
+    "submit": function() {
+        console.log("SUBMIT");
+        event.preventDefault();
+        $("ul.tabs").tabs("select_tab", "housing");
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        return false;
     }
+    //"mousewheel input": function() {
+    //    event.preventDefault();
+    //}
+    //"keypress input": function(event) {
+    //    if (event.charCode == 13) {
+    //        console.log("METEOR");
+    //
+    //        event.preventDefault();
+    //    }
+    //}
 });
 
 Template.transportation.onCreated(function () {

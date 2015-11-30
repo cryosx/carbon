@@ -7,8 +7,10 @@ Template.shopping.events({
         var url = "/";
         window.location.replace(url);
     },
-    "click #submit": function() {
-
+    "submit": function() {
+        console.log("SUBMIT");
+        //event.preventDefault();
+        return false;
     }
 });
 

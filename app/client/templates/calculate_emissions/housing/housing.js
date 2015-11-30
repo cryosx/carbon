@@ -7,12 +7,19 @@ Template.housing.events({
         var url = "/";
         window.location.replace(url);
     },
-    "click #next": function() {
+    //"click #next": function() {
+    //    event.preventDefault();
+    //    $("ul.tabs").tabs("select_tab", "food");
+    //    $("html, body").animate({ scrollTop: 0 }, "slow");
+    //    return false;
+    //
+    //}
+    "submit": function() {
+        console.log("SUBMIT");
         event.preventDefault();
         $("ul.tabs").tabs("select_tab", "food");
         $("html, body").animate({ scrollTop: 0 }, "slow");
         return false;
-
     }
 });
 
