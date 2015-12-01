@@ -34,11 +34,36 @@ Template.trees.events({
     'click #save':function(event, template) {
         console.log('Saving a tree');
         var species=template.find("#species").value;
+        var location=template.find("#location").value;
+        var latitude=template.find("#latitude").value;
+        var longitude=template.find("#longitude").value;
+        var datePlanted=template.find("#datePlanted").value;
+        var diameter=template.find("#diameter").value;
+        var createdDate=newDate();
+        var tree={'userID':Meteor.user()._id,
+            'species':species,
+            'location':location,
+            'latitude':latitude,
+            'longitude':longitude,
+            'datePlanted':datePlanted,
+            'diameter':diameter,
+            'created':createdDate
+        };
+        //tree['userID']=Meteor.user()._id; //or tree.key=value
         console.log(species);
-/*        TreeCollection.insert({
-            name: species,
-            score: 0
-        });*/
+        console.log(Meteor.user()._id);
+        //TreeCollection.insert(tree);
+        var treeID;
+
+        //see methods.js in server
+        Meteor.call('insertTree', tree, function(error, result){
+            console.log(result);
+            treeID=result;
+        });
+
+
+        //to get last inputted tree
+        Session.set('lastTreePlanted', treeID);
     }
 });
 
