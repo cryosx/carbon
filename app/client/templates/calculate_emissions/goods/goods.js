@@ -51,7 +51,7 @@ function calculateGoods() {
     var paperSpentOn = (document.getElementById('paperSpentOn').value);
     var cleaningSpentOn = (document.getElementById('cleaningSpentOn').value);
     var medicalSpentOn = (document.getElementById('medicalSpentOn').value);
-    var vehiclesSpentOn = (document.getElementById('vehiclesSpentOn').value);
+    var autoSpentOn = (document.getElementById('autoSpentOn').value);
 
 
     if (clothesSpentOn !== "") {
@@ -85,9 +85,9 @@ function calculateGoods() {
         totalGoods = totalGoods + medicalCarbon;
     }
 
-    if (vehiclesSpentOn !== "") {
-        var vehiclesCarbon = vehiclesSpentOn * 558 * 12 * 0.000001;
-        totalGoods = totalGoods + vehiclesCarbon;
+    if (autoSpentOn !== "") {
+        var autoCarbon = autoSpentOn * 558 * 12 * 0.000001;
+        totalGoods = totalGoods + autoCarbon;
     }
 
     return totalGoods;

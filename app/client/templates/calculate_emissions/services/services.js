@@ -53,7 +53,7 @@ Template.services.events({
                     paperSpentOn: document.getElementById('paperSpentOn').value,
                     cleaningSpentOn: document.getElementById('cleaningSpentOn').value,
                     medicalSpentOn: document.getElementById('medicalSpentOn').value,
-                    vehiclesSpentOn: document.getElementById('vehiclesSpentOn').value,
+                    autoSpentOn: document.getElementById('autoSpentOn').value,
                     totalGoods: document.getElementById("totalGoodsEmissions").innerText
                 },
                 services: {
@@ -64,18 +64,13 @@ Template.services.events({
                     totalServices: document.getElementById("totalServicesEmissions").innerText
                 }
             };
-            console.log("AFTER");
-            console.log(document.getElementById("totalTransportEmissions").innerText);
-            console.log(document.getElementById("totalHousingEmissions").innerText);
-            console.log(document.getElementById("totalFoodEmissions").innerText);
-            console.log(document.getElementById("totalGoodsEmissions").innerText);
-            console.log(document.getElementById("totalServicesEmissions").innerText);
-            console.log("BEFORE");
+
             var records = CarbonStats.find({userID: Meteor.userId(), year: 2015}).fetch();
+            console.log("CHECK LENGTH");
             console.log(records.length);
-            if (records.length > 0) {
-                CarbonStats.update({userID: Meteor.userId(), year: 2015}, record);
-            } else {
+            if (records.length === 1) {
+                CarbonStats.update({_id: records[0]._id, year: 2015}, record);
+            } else if (records.length === 0) {
                 console.log("BEFORE INSET?");
                 CarbonStats.insert(record);
                 console.log("DEAD");
@@ -189,7 +184,7 @@ function calculateServices() {
 
     var healthSpentOn = (document.getElementById('healthSpentOn').value);
     var communicationsSpentOn = (document.getElementById('communicationsSpentOn').value);
-    var vehiclesSpentOn = (document.getElementById('vehiclesSpentOn').value);
+    var vehiclesSpentOn = (document.getElementById("vehiclesSpentOn").value);
     var maintenanceSpentOn = (document.getElementById('maintenanceSpentOn').value);
 
     
@@ -202,9 +197,13 @@ function calculateServices() {
         var communicationsCarbon = communicationsSpentOn * 291 * 12 * 0.000001;
         totalServices = totalServices + communicationsCarbon;
     }
+    console.log("?");
+    console.log(vehiclesSpentOn);
 
     if (vehiclesSpentOn !== "") {
+        console.log("VEHICLES SPENT ON");
         var vehiclesCarbon = vehiclesSpentOn * 433 * 12 * 0.000001;
+        console.log(vehiclesCarbon);
         totalServices = totalServices + vehiclesCarbon;
     }
     if (maintenanceSpentOn !== "") {
