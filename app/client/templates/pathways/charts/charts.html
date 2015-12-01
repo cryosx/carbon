@@ -1,4 +1,14 @@
 <template name="charts">
-    {{> highchartsHelper chartId="test" chartWidth="100%" charHeight="100%" chartObject=topGenresChart}}
+    <div class="row">
+        <div class="col s12 m6 l6">
+            {{> highchartsHelper chartId="carbonChart" chartWidth="100%" charHeight="100%" chartObject=carbonChart}}
+
+        </div>
+        <div class="col s12 m6 l6">
+            {{> highchartsHelper chartId="treeChart" chartWidth="100%" charHeight="100%" chartObject=treeChart}}
+        </div>
+
+    </div>
+
     <!--<div id="carbon-chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>-->
 </template>
