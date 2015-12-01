@@ -9,6 +9,16 @@ Template.trees.helpers({
     //can do things like if a person has 17 trees, add a star next to them or something
     //can use in trees2 to use javascript to create a graph and place it in a div in the
     //template file
+    exampleMapOptions: function() {
+        // Make sure the maps API has loaded
+        if (GoogleMaps.loaded()) {
+            // Map initialization options
+            return {
+                center: new google.maps.LatLng(-37.8136, 144.9631),
+                zoom: 8
+            };
+        }
+    }
 });
 
 Template.trees.events({
@@ -33,11 +43,18 @@ Template.trees.events({
 });
 
 Template.trees.onCreated(function () {
-    //add your statement here
+    // We can use the `ready` callback to interact with the map API once the map is ready.
+    GoogleMaps.ready('exampleMap', function(map) {
+        // Add a marker to the map once it's ready
+        var marker = new google.maps.Marker({
+            position: map.options.center,
+            map: map.instance
+        });
+    });
 });
 
 Template.trees.onRendered(function () {
-    //add your statement here
+    GoogleMaps.load();
 });
 
 Template.trees.onDestroyed(function () {
