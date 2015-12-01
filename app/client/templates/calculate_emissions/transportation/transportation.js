@@ -77,10 +77,9 @@ function calculateTransport() {
         var carDistanceTraveled = (document.getElementById('carDistanceTraveled').value);
         var fuelEfficiency = (document.getElementById('fuelEfficiency').value);
         var fuelType = (document.getElementById('fuelType').value);
-        var trainDistanceTraveled = (document.getElementById('trainDistanceTraveled').value);
+        var railDistanceTraveled = (document.getElementById('railDistanceTraveled').value);
         var busDistanceTraveled = (document.getElementById('busDistanceTraveled').value);
-        var planeDistanceTraveled = (document.getElementById('planeDistanceTraveled').value);
-        var motorcycleDistanceTraveled = (document.getElementById('motorcycleDistanceTraveled').value);
+        var airDistanceTraveled = (document.getElementById('airDistanceTraveled').value);
 
         var units = (document.getElementById('units').value);
 
@@ -92,31 +91,26 @@ function calculateTransport() {
         }
 
         if (fuelType == 'diesel' && fuelEfficiency != "" && carDistanceTraveled != "") {
-
-            var gallons = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 10153) + (carDistanceTraveled * 56)) * 0.000001) * unitConversion;
-            totalTransport = totalTransport + gallons;
-
+            var carCarbon = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 10153) + (carDistanceTraveled * 56)) * 0.000001) * unitConversion;
+            totalTransport = totalTransport + carCarbon;
         } else if (fuelType == 'gasoline' && fuelEfficiency != "" && carDistanceTraveled != "") {
 
-
-            var gallons = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 8874) + (carDistanceTraveled * 56)) * 0.000001) * unitConversion;
-            totalTransport = totalTransport + gallons;
+            var carCarbon = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 8874) + (carDistanceTraveled * 56)) * 0.000001) * unitConversion;
+            totalTransport = totalTransport + carCarbon;
         }
-
 
         if (busDistanceTraveled !== "") {
-            var busDistanceTraveled_total = (busDistanceTraveled * 300 * 1.26 * 0.000001) * unitConversion;
-            totalTransport = totalTransport + busDistanceTraveled_total;
+            var busCarbon = (busDistanceTraveled * 300 * 1.26 * 0.000001) * unitConversion;
+            totalTransport = totalTransport + busCarbon;
         }
-        if (trainDistanceTraveled !== "") {
-            var transit_total = (trainDistanceTraveled * 163 * 1.26 * 0.000001) * unitConversion;
-            totalTransport = totalTransport + transit_total;
+        if (railDistanceTraveled !== "") {
+            var railCarbon = (railDistanceTraveled * 163 * 1.26 * 0.000001) * unitConversion;
+            totalTransport = totalTransport + railCarbon;
         }
+        if (airDistanceTraveled !== "") {
 
-        if (planeDistanceTraveled !== "") {
-
-            var air_total = (planeDistanceTraveled * 223 * 2 * 0.000001) * unitConversion;
-            totalTransport = totalTransport + air_total;
+            var airCarbon = (airDistanceTraveled * 223 * 2 * 0.000001) * unitConversion;
+            totalTransport = totalTransport + airCarbon;
         }
         return totalTransport;
     }

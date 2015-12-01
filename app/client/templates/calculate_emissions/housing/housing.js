@@ -42,15 +42,15 @@ Template.housing.onDestroyed(function () {
 });
 
 function updateHousing() {
-    var total = calculateHousing();
-    document.getElementById("totalHousingEmissions").innerHTML = total.toFixed(2);
+    var totalHousing = calculateHousing();
+    document.getElementById("totalHousingEmissions").innerHTML = totalHousing.toFixed(2);
 }
 
 
 function calculateHousing() {
     var totalHousing = 0;
 
-    var electricityUsed = (document.getElementById('electricityUsedUsed').value);
+    var electricityUsed = (document.getElementById('electricityUsed').value);
     var fuelUsed = (document.getElementById('fuelUsed').value);
     var gasUsed = (document.getElementById('gasUsed').value);
     var gasUnits = (document.getElementById('gasUnits').value);
