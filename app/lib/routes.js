@@ -29,6 +29,14 @@ Router.route("pathways",{
     progressSpinner : false
 });
 
+Router.route("technology",{
+    name: "technology",
+    controller: "HomeController",
+    path: "/about/technology",
+    progress: true,
+    progressSpinner : false
+});
+
 //Router.route("transportation", {
 //    name: "transportation",
 //    controller: "EmissionsController",
