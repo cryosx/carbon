@@ -259,52 +259,52 @@ Template.charts.helpers({
                     id: 'transportYou',
                     name: 'CO2 Breakdown',
                     data: [
-                        ['Car', carCarbon],
-                        ['Rail Transit', railCarbon],
-                        ['Bus', busCarbon],
-                        ['Air Travel', airCarbon],
+                        ['Car', round(carCarbon,2)],
+                        ['Rail Transit', round(railCarbon,2)],
+                        ['Bus', round(busCarbon,2)],
+                        ['Air Travel', round(airCarbon,2)]
                     ]
                 }, {
                     id: 'housingYou',
                     name: 'CO2 Breakdown',
                     data: [
-                        ['Electricity', electricityCarbon],
-                        ['Fuel', fuelCarbon],
-                        ['Natural Gas', gasCarbon],
-                        ['Water Usage', waterCarbon],
+                        ['Electricity', round(electricityCarbon,2)],
+                        ['Fuel', round(fuelCarbon,2)],
+                        ['Natural Gas', round(gasCarbon,2)],
+                        ['Water Usage', round(waterCarbon,2)]
                     ]
                 }, {
                     id: 'foodYou',
                     name: 'CO2 Breakdown',
                     data: [
-                        ['Beef, Pork, Lamb, Veal', meatCarbon],
-                        ['Poultry & Eggs', poultryCarbon],
-                        ['Fish & Seafood', seafoodCarbon],
-                        ['Dairy', dairyCarbon],
-                        ['Fruits & Vegetables', vegetablesCarbon],
-                        ['Grains & Baked Goods', grainsCarbon],
-                        ['Drinks', drinksCarbon]
+                        ['Beef, Pork, Lamb, Veal', round(meatCarbon,2)],
+                        ['Poultry & Eggs', round(poultryCarbon,2)],
+                        ['Fish & Seafood', round(seafoodCarbon,2)],
+                        ['Dairy', round(dairyCarbon,2)],
+                        ['Fruits & Vegetables', round(vegetablesCarbon,2)],
+                        ['Grains & Baked Goods', round(grainsCarbon,2)],
+                        ['Drinks', round(drinksCarbon,2)]
                     ]
                 }, {
                     id: 'goodsYou',
                     name: 'CO2 Breakdown',
                     data: [
-                        ['Clothing', clothesCarbon],
-                        ['Furniture & Appliances', furnitureCarbon],
-                        ['Entertainment', entertainmentCarbon],
-                        ['Paper & Reading', paperCarbon],
-                        ['Personal Care & Cleaning', cleaningCarbon],
-                        ['Medical', medicalCarbon],
-                        ['Auto Parts', autoCarbon]
+                        ['Clothing' , round(clothesCarbon, 2)],
+                        ['Furniture & Appliances' , round(furnitureCarbon, 2)],
+                        ['Entertainment' , round(entertainmentCarbon, 2)],
+                        ['Paper & Reading' , round(paperCarbon, 2)],
+                        ['Personal Care & Cleaning' , round(cleaningCarbon, 2)],
+                        ['Medical' , round(medicalCarbon, 2)],
+                        ['Auto Parts' , round(autoCarbon, 2)]
                     ]
                 }, {
                     id: 'servicesYou',
                     name: 'CO2 Breakdwon',
                     data: [
-                        ['Health Care', healthCarbon],
-                        ['Communication', communicationsCarbon],
-                        ['Vehicle Services', vehiclesCarbon],
-                        ['Household Maintenance', maintenanceCarbon]
+                        ['Health Care', round(healthCarbon, 2)],
+                        ['Communication', round(communicationsCarbon, 2)],
+                        ['Vehicle Services', round(vehiclesCarbon, 2)],
+                        ['Household Maintenance', round(maintenanceCarbon, 2)]
                     ]
                 }]
             }
@@ -699,3 +699,6 @@ Highcharts.theme = {
 };
 Highcharts.setOptions(Highcharts.theme);
 
+function round(value, decimals) {
+    return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
