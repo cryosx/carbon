@@ -17,21 +17,69 @@ Template.services.events({
             var record = {
                 userID: Meteor.userId(),
                 year: 2015,
-                transportation: {units: document.getElementById('units').value, },
-                housing: {},
-                food: {},
-                goods: {},
-                Services: {}
+                transportation: {
+                    units: document.getElementById("units").value,
+                    carDistanceTraveled: document.getElementById("carDistanceTraveled").value,
+                    fuelEfficiency: document.getElementById("fuelEfficiency").value,
+                    fuelType: document.getElementById("fuelType").value,
+                    railDistanceTraveled: document.getElementById("railDistanceTraveled").value,
+                    busDistanceTraveled: document.getElementById("busDistanceTraveled").value,
+                    airDistanceTraveled: document.getElementById("airDistanceTraveled").value,
+                    totalTransport: parseFloat(document.getElementById("totalTransportEmissions").innerText)
+                },
+                housing: {
+                    electricityUsed: document.getElementById('electricityUsed').value,
+                    fuelUsed: document.getElementById('fuelUsed').value,
+                    gasUsed: document.getElementById('gasUsed').value,
+                    gasUnits: document.getElementById('gasUnits').value,
+                    waterUsed: document.getElementById('waterUsed').value,
+                    totalHousing: parseFloat(document.getElementById("totalHousingEmissions").innerText)
+                },
+                food: {
 
+                    meatConsumed: document.getElementById('meatConsumed').value,
+                    poultryConsumed: document.getElementById('poultryConsumed').value,
+                    seafoodConsumed: document.getElementById('seafoodConsumed').value,
+                    dairyConsumed: document.getElementById('dairyConsumed').value,
+                    vegetablesConsumed: document.getElementById('vegetablesConsumed').value,
+                    grainsConsumed: document.getElementById('grainsConsumed').value,
+                    drinksConsumed: document.getElementById('drinksConsumed').value,
+                    totalFood: parseFloat(document.getElementById("totalFoodEmissions").innerText)
+                },
+                goods: {
+                    clothesSpentOn: document.getElementById('clothesSpentOn').value,
+                    furnitureSpentOn: document.getElementById('furnitureSpentOn').value,
+                    entertainmentSpentOn: document.getElementById('entertainmentSpentOn').value,
+                    paperSpentOn: document.getElementById('paperSpentOn').value,
+                    cleaningSpentOn: document.getElementById('cleaningSpentOn').value,
+                    medicalSpentOn: document.getElementById('medicalSpentOn').value,
+                    vehiclesSpentOn: document.getElementById('vehiclesSpentOn').value,
+                    totalGoods: parseFloat(document.getElementById("totalGoodsEmissions").innerText)
+                },
+                services: {
+                    healthSpentOn: document.getElementById('healthSpentOn').value,
+                    communicationsSpentOn: document.getElementById('communicationsSpentOn').value,
+                    vehiclesSpentOn: document.getElementById('vehiclesSpentOn').value,
+                    maintenanceSpentOn: document.getElementById('maintenanceSpentOn').value,
+                    totalServices: parseFloat(document.getElementById("totalServicesEmissions").innerText)
+                }
             };
-            var records = CarbonStats.find({userID: Meteor.userId(), year:2015}).fetch();
+            console.log("AFTER");
+            console.log(parseFloat(document.getElementById("totalTransportEmissions").innerText));
+            console.log(parseFloat(document.getElementById("totalHousingEmissions").innerText));
+            console.log(parseFloat(document.getElementById("totalFoodEmissions").innerText));
+            console.log(parseFloat(document.getElementById("totalGoodsEmissions").innerText));
+            console.log(parseFloat(document.getElementById("totalServicesEmissions").innerText));
+            console.log("BEFORE");
+            var records = CarbonStats.find({userID: Meteor.userId(), year: 2015}).fetch();
+            console.log(records.length);
             if (records.length > 0) {
-                CarbonStats.update({userID: Meteor.userId(), year:2015}, record);
+                CarbonStats.update({userID: Meteor.userId(), year: 2015}, record);
             } else {
+                console.log("BEFORE INSET?");
                 CarbonStats.insert(record);
-
+                console.log("DEAD");
             }
-
             console.log("AFTER");
         }
         return false;

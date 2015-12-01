@@ -90,10 +90,10 @@ function calculateTransport() {
             unitConversion = 1.60934;
         }
 
-        if (fuelType == 'diesel' && fuelEfficiency != "" && carDistanceTraveled != "") {
+        if (fuelType === 'diesel' && fuelEfficiency !== "" && carDistanceTraveled !== "") {
             var carCarbon = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 10153) + (carDistanceTraveled * 56)) * 0.000001) * unitConversion;
             totalTransport = totalTransport + carCarbon;
-        } else if (fuelType == 'gasoline' && fuelEfficiency != "" && carDistanceTraveled != "") {
+        } else if (fuelType === 'gasoline' && fuelEfficiency !== "" && carDistanceTraveled !== "") {
 
             var carCarbon = (((carDistanceTraveled / fuelEfficiency * 2307) + (carDistanceTraveled / fuelEfficiency * 8874) + (carDistanceTraveled * 56)) * 0.000001) * unitConversion;
             totalTransport = totalTransport + carCarbon;

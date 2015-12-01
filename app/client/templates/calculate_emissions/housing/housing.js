@@ -57,10 +57,10 @@ function calculateHousing() {
     var waterUsed = (document.getElementById('waterUsed').value);
 
 
-    if (gasUnits == 'cubicFeet') {
+    if (gasUnits === 'cubicFeet') {
         var gasCarbon = gasUsed * 4317 * 1.14 * 0.000001;
         totalHousing = totalHousing + gasCarbon;
-    } else if (gasUnits == 'btu') {
+    } else if (gasUnits === 'btu') {
         var gasCarbon = gasUsed * 5470 * 1.14 * 0.000001;
         totalHousing = totalHousing + gasCarbon;
     } else {

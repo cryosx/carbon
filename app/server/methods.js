@@ -1,6 +1,9 @@
 Meteor.methods({
     removeAllUserRecords: function () {
         return UserRecords.remove({});
+    },
+    removeAllCarbonStatsRecords: function () {
+        return CarbonStats.remove({});
     }
 });
 

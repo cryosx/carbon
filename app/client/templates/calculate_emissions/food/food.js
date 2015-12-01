@@ -18,7 +18,7 @@ Template.food.events({
     "submit": function() {
         console.log("SUBMIT");
         event.preventDefault();
-        $("ul.tabs").tabs("select_tab", "shopping");
+        $("ul.tabs").tabs("select_tab", "goods");
         $("html, body").animate({ scrollTop: 0 }, "slow");
         return false;
     },

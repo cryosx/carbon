@@ -9,7 +9,6 @@ Template.carbonNav.helpers({
             $('ul.tabs').tabs('select_tab', '#' + page_name)
         } else if (page_name === "goods") {
             $('ul.tabs').tabs('select_tab', '#' + page_name)
-
         }else if (page_name === "services") {
             $('ul.tabs').tabs('select_tab', '#' + page_name)
         }
