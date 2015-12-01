@@ -25,7 +25,7 @@ Template.services.events({
                     railDistanceTraveled: document.getElementById("railDistanceTraveled").value,
                     busDistanceTraveled: document.getElementById("busDistanceTraveled").value,
                     airDistanceTraveled: document.getElementById("airDistanceTraveled").value,
-                    totalTransport: parseFloat(document.getElementById("totalTransportEmissions").innerText)
+                    totalTransport: document.getElementById("totalTransportEmissions").innerText
                 },
                 housing: {
                     electricityUsed: document.getElementById('electricityUsed').value,
@@ -33,7 +33,7 @@ Template.services.events({
                     gasUsed: document.getElementById('gasUsed').value,
                     gasUnits: document.getElementById('gasUnits').value,
                     waterUsed: document.getElementById('waterUsed').value,
-                    totalHousing: parseFloat(document.getElementById("totalHousingEmissions").innerText)
+                    totalHousing: document.getElementById("totalHousingEmissions").innerText
                 },
                 food: {
 
@@ -44,7 +44,7 @@ Template.services.events({
                     vegetablesConsumed: document.getElementById('vegetablesConsumed').value,
                     grainsConsumed: document.getElementById('grainsConsumed').value,
                     drinksConsumed: document.getElementById('drinksConsumed').value,
-                    totalFood: parseFloat(document.getElementById("totalFoodEmissions").innerText)
+                    totalFood: document.getElementById("totalFoodEmissions").innerText
                 },
                 goods: {
                     clothesSpentOn: document.getElementById('clothesSpentOn').value,
@@ -54,22 +54,22 @@ Template.services.events({
                     cleaningSpentOn: document.getElementById('cleaningSpentOn').value,
                     medicalSpentOn: document.getElementById('medicalSpentOn').value,
                     vehiclesSpentOn: document.getElementById('vehiclesSpentOn').value,
-                    totalGoods: parseFloat(document.getElementById("totalGoodsEmissions").innerText)
+                    totalGoods: document.getElementById("totalGoodsEmissions").innerText
                 },
                 services: {
                     healthSpentOn: document.getElementById('healthSpentOn').value,
                     communicationsSpentOn: document.getElementById('communicationsSpentOn').value,
                     vehiclesSpentOn: document.getElementById('vehiclesSpentOn').value,
                     maintenanceSpentOn: document.getElementById('maintenanceSpentOn').value,
-                    totalServices: parseFloat(document.getElementById("totalServicesEmissions").innerText)
+                    totalServices: document.getElementById("totalServicesEmissions").innerText
                 }
             };
             console.log("AFTER");
-            console.log(parseFloat(document.getElementById("totalTransportEmissions").innerText));
-            console.log(parseFloat(document.getElementById("totalHousingEmissions").innerText));
-            console.log(parseFloat(document.getElementById("totalFoodEmissions").innerText));
-            console.log(parseFloat(document.getElementById("totalGoodsEmissions").innerText));
-            console.log(parseFloat(document.getElementById("totalServicesEmissions").innerText));
+            console.log(document.getElementById("totalTransportEmissions").innerText);
+            console.log(document.getElementById("totalHousingEmissions").innerText);
+            console.log(document.getElementById("totalFoodEmissions").innerText);
+            console.log(document.getElementById("totalGoodsEmissions").innerText);
+            console.log(document.getElementById("totalServicesEmissions").innerText;
             console.log("BEFORE");
             var records = CarbonStats.find({userID: Meteor.userId(), year: 2015}).fetch();
             console.log(records.length);
