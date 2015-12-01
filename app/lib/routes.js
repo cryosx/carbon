@@ -15,7 +15,7 @@ Router.route('home', {
 
 Router.route('emissions', {
     name: 'emissions',
-    controller: 'HomeController',
+    controller: 'EmissionsController',
     path: '/emissions',
     progress: true,
     progressSpinner : false
@@ -23,28 +23,28 @@ Router.route('emissions', {
 
 Router.route('transportation', {
     name: 'transportation',
-    controller: 'HomeController',
+    controller: 'EmissionsController',
     path: '/transportation'
 });
 
 Router.route('housing', {
     name: 'housing',
-    controller: 'HomeController',
+    controller: 'EmissionsController',
     path: '/housing'
 });
 
 
 Router.route('food', {
     name: 'food',
-    controller: 'HomeController',
+    controller: 'EmissionsController',
     path: '/food'
 });
 
 
-Router.route('shopping', {
-    name: 'shopping',
-    controller: 'HomeController',
-    path: '/shopping'
+Router.route('goods', {
+    name: 'goods',
+    controller: 'EmissionsController',
+    path: '/goods'
 });
 
 Router.route('trees', {

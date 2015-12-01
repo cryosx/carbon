@@ -1,28 +1,5 @@
 Template.carbonNav.helpers({
-    isTransportation: function(page_name) {
-        if (page_name === "transportation") {
-            return "nav_active";
-        }
-        return "";
-    },
-    isHousing: function(page_name) {
-        if (page_name === "housing") {
-            return "nav_active";
-        }
-        return "";
-    },
-    isFood: function(page_name) {
-        if (page_name === "food") {
-            return "nav_active";
-        }
-        return "";
-    },
-    isShopping: function(page_name) {
-        if (page_name === "shopping") {
-            return "nav_active";
-        }
-        return "";
-    },
+
     enableIndicators: function(page_name) {
         if (page_name === "transportation") {
             $('ul.tabs').tabs('select_tab', '#' + page_name)
@@ -30,7 +7,7 @@ Template.carbonNav.helpers({
             $('ul.tabs').tabs('select_tab', '#' + page_name)
         } else if (page_name === "food") {
             $('ul.tabs').tabs('select_tab', '#' + page_name)
-        } else if (page_name === "shopping") {
+        } else if (page_name === "goods") {
             $('ul.tabs').tabs('select_tab', '#' + page_name)
 
         }
