@@ -68,8 +68,10 @@ Template.services.events({
             var records = CarbonStats.find({userID: Meteor.userId(), year: 2015}).fetch();
             console.log("CHECK LENGTH");
             console.log(records.length);
+            console.log(records[0]._id);
+
             if (records.length === 1) {
-                CarbonStats.update({_id: records[0]._id, year: 2015}, record);
+                CarbonStats.update({_id: records[0]._id}, record);
             } else if (records.length === 0) {
                 console.log("BEFORE INSET?");
                 CarbonStats.insert(record);
