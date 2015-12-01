@@ -28,6 +28,7 @@ Template.goods.onCreated(function () {
 
 Template.goods.onRendered(function () {
     $('select').material_select();
+
 });
 
 Template.goods.onDestroyed(function () {

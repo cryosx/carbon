@@ -35,6 +35,7 @@ Template.housing.onCreated(function () {
 
 Template.housing.onRendered(function () {
     $('select').material_select();
+
 });
 
 Template.housing.onDestroyed(function () {
@@ -58,13 +59,13 @@ function calculateHousing() {
 
 
     if (gasUnits === 'cubicFeet') {
-        var gasCarbon = gasUsed * 4317 * 1.14 * 0.000001;
+        var gasCarbon = gasUsed * 54.7 * 1.14 * 0.000001;
         totalHousing = totalHousing + gasCarbon;
     } else if (gasUnits === 'btu') {
         var gasCarbon = gasUsed * 5470 * 1.14 * 0.000001;
         totalHousing = totalHousing + gasCarbon;
     } else {
-        var gasCarbon = gasUsed * 547 * 1.14 * 0.000001;
+        var gasCarbon = gasUsed * 4317 * 1.14 * 0.000001;
         totalHousing = totalHousing + gasCarbon;
     }
     if (electricityUsed !== "") {

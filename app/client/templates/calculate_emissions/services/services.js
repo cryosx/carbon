@@ -69,6 +69,8 @@ Template.services.events({
             } else if (records.length === 0) {
                 CarbonStats.insert(record);
             }
+            window.location.replace("/pathways");
+
         }
         return false;
     },
@@ -84,6 +86,7 @@ Template.services.onCreated(function () {
 
 Template.services.onRendered(function () {
     $('select').material_select();
+
 });
 
 Template.services.onDestroyed(function () {
@@ -190,13 +193,9 @@ function calculateServices() {
         var communicationsCarbon = communicationsSpentOn * 291 * 12 * 0.000001;
         totalServices = totalServices + communicationsCarbon;
     }
-    console.log("?");
-    console.log(vehiclesSpentOn);
 
     if (vehiclesSpentOn !== "") {
-        console.log("VEHICLES SPENT ON");
         var vehiclesCarbon = vehiclesSpentOn * 433 * 12 * 0.000001;
-        console.log(vehiclesCarbon);
         totalServices = totalServices + vehiclesCarbon;
     }
     if (maintenanceSpentOn !== "") {

@@ -33,6 +33,7 @@ Template.food.onCreated(function () {
 
 Template.food.onRendered(function () {
     $('select').material_select();
+
 });
 
 Template.food.onDestroyed(function () {

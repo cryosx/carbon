@@ -24,7 +24,9 @@ Template.emissions.onRendered(function () {
         $("#railDistanceTraveled").val(transportation.railDistanceTraveled);
         $("#busDistanceTraveled").val(transportation.busDistanceTraveled);
         $("#airDistanceTraveled").val(transportation.airDistanceTraveled);
-        $("#totalTransport").val(transportation.totalTransport);
+        //$("#totalTransportEmissions").innerText = (transportation.totalTransport);
+        document.getElementById("totalTransportEmissions").innerHTML = records[0].transportation.totalTransport;
+
         //PROCESS HOUSING
         var housing = currentYear.housing;
         $("#electricityUsed").val(housing.electricityUsed);
@@ -32,7 +34,7 @@ Template.emissions.onRendered(function () {
         $("#gasUsed").val(housing.gasUsed);
         $("#gasUnits").val(housing.gasUnits);
         $("#waterUsed").val(housing.waterUsed);
-        $("#totalHousing").val(housing.totalHousing);
+        document.getElementById("totalHousingEmissions").innerHTML = records[0].transportation.totalTransport;
         //PROCESS FOOD
         var food = currentYear.food;
         $("#meatConsumed").val(food.meatConsumed);
@@ -42,7 +44,7 @@ Template.emissions.onRendered(function () {
         $("#vegetablesConsumed").val(food.vegetablesConsumed);
         $("#grainsConsumed").val(food.grainsConsumed);
         $("#drinksConsumed").val(food.drinksConsumed);
-        $("#totalFood").val(food.totalFood);
+        document.getElementById("totalFoodEmissions").innerHTML = records[0].transportation.totalTransport;
         //PROCESS GOODS
         var goods = currentYear.goods;
         $("#clothesSpentOn").val(goods.clothesSpentOn);
@@ -52,14 +54,14 @@ Template.emissions.onRendered(function () {
         $("#cleaningSpentOn").val(goods.cleaningSpentOn);
         $("#medicalSpentOn").val(goods.medicalSpentOn);
         $("#autoSpentOn").val(goods.autoSpentOn);
-        $("#totalGoods").val(goods.totalGoods);
+        document.getElementById("totalGoodsEmissions").innerHTML = records[0].transportation.totalTransport;
         //PROCESS SERVICES
         var services = currentYear.services;
         $("#healthSpentOn").val(services.healthSpentOn);
         $("#communicationsSpentOn").val(services.communicationsSpentOn);
         $("#vehiclesSpentOn").val(services.vehiclesSpentOn);
         $("#maintenanceSpentOn").val(services.maintenanceSpentOn);
-        $("#totalServices").val(services.totalServices);
+        document.getElementById("totalServicesEmissions").innerHTML = records[0].transportation.totalTransport;
     }
 });
 

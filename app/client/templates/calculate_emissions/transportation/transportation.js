@@ -28,6 +28,13 @@ Template.transportation.events({
     //    return false;
     //},
 
+    //"click": function(){
+    //    var records = CarbonStats.find({userID: Meteor.userId(), year:2015}).fetch();
+    //    console.log(records[0].transportation.totalTransport);
+    //    document.getElementById("totalTransportEmissions").innerHTML = records[0].transportation.totalTransport;
+    //
+    //},
+
     "change #units": function() {
         var value = document.getElementById("units").value;
         if (value === "miles") {
@@ -55,6 +62,7 @@ Template.transportation.onCreated(function () {
 
 Template.transportation.onRendered(function () {
     $('select').material_select();
+
 });
 
 Template.transportation.onDestroyed(function () {

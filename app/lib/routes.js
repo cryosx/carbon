@@ -21,6 +21,14 @@ Router.route("emissions", {
     progressSpinner : false
 });
 
+Router.route("pathways",{
+    name: "pathways",
+    controller: "EmissionsController",
+    path: "/pathways",
+    progress: true,
+    progressSpinner : false
+});
+
 //Router.route("transportation", {
 //    name: "transportation",
 //    controller: "EmissionsController",
