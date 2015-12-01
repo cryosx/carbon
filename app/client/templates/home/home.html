@@ -13,9 +13,9 @@
             <div class="col m12">
                 {{> carbonInfo}}
                 <div class="row">
-                    <div class="col s4">&nbsp;</div>
-                    <a href="{{pathFor 'emissions'}}" id="emissionsLink" class="col s4 btn waves-effect waves-light center z-depth-1">Calculate Emissions</a>
-                    <div class="col s4">&nbsp;</div>
+                    <div class="col s2 m4 l4">&nbsp;</div>
+                    <a href="{{pathFor 'emissions'}}" id="emissionsLink" class="col s8 m4 l4 btn waves-effect waves-light center z-depth-1">Calculate Emissions</a>
+                    <div class="col s2 m4 l4">&nbsp;</div>
                 </div>
             </div>
         </div>
@@ -25,10 +25,31 @@
                     {{> atForm}}
                 </div>
                 <div class="col s12 m12 l9 pull-l3">
-                    {{> carbonInfo}}
+                    <div class="video-container">
+                        <iframe width="853" height="480" src="https://www.youtube.com/embed/S7jpMG5DS4Q" frameborder="0" allowfullscreen></iframe>
+                    </div>
                 </div>
+            </div>
+            <div class="row padding">
+                <div class="col s4 m5 l5">&nbsp;</div>
+                {{> atSignupLink}}
+                <div class="col s4 m5 l5">&nbsp;</div>
 
             </div>
+            <div class="row padding">
+                <div class="col s4 m5 l5">&nbsp;</div>
+                <div class="at-signup-link">
+                    <a href="{{signUpLink}}" id="at-signUp" class="at-link at-signup btn {{disabled}}">{{linkText}}</a>
+
+                    <p>
+                        {{preText}}
+                        {{suffText}}
+                    </p>
+                </div>
+                <div class="col s4 m5 l5">&nbsp;</div>
+
+            </div>
+
         {{/if}}
         <br>
         <div class="row">

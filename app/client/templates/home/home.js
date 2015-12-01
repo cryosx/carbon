@@ -13,8 +13,6 @@ Template.home.events({
     }
 });
 
-
-
 Template.home.onCreated(function () {
     //$('.parallax').parallax();
     //window.disqus = new Disqus('cryosx-carbon');
@@ -30,6 +28,12 @@ Template.home.onRendered(function () {
 
 Template.home.onDestroyed(function () {
 });
+
+// Simply 'inherites' helpers from AccountsTemplates
+Template.home.helpers(AccountsTemplates.atSignupLinkHelpers);
+
+// Simply 'inherites' events from AccountsTemplates
+Template.home.events(AccountsTemplates.atSignupLinkEvents);
 
 function scrollToTop() {
     $("html, body").animate({ scrollTop: 0 }, "slow");

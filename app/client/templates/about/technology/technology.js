@@ -18,7 +18,7 @@ Template.technology.onRendered(function () {
 
     var owl = $(".owl-carousel").owlCarousel({
 
-        autoPlay: 3000, //Set AutoPlay to 3 seconds
+        autoPlay: 7000, //Set AutoPlay to 3 seconds
         items : 1,
         itemsDesktop : [1199,3],
         itemsDesktopSmall : [979,3]
@@ -32,7 +32,7 @@ Template.technology.onRendered(function () {
         owl.trigger('owl.prev');
     });
     $(".play").click(function(){
-        owl.trigger('owl.play',10000); //owl.play event accept autoPlay speed as second parameter
+        owl.trigger('owl.play',7000); //owl.play event accept autoPlay speed as second parameter
     });
     $(".stop").click(function(){
         owl.trigger('owl.stop');
@@ -48,6 +48,8 @@ Template.technology.onRendered(function () {
         }
     });
     $('.materialboxed').materialbox();
+    $('.slider').slider({full_width: true});
+
 });
 
 Template.technology.onDestroyed(function () {

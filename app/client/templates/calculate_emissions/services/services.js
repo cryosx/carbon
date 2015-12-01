@@ -157,11 +157,10 @@ function validateGoods() {
 
     var errors =[];
 
-    $('#food-form *').filter(':input').each(function(){
+    $('#goods-form *').filter(':input').each(function(){
         if($(this).val() === "") {
-            error.push("Errors");
+            errors.push("Errors");
         }
-
     });
     if (errors.length > 0 ) {
         $("ul.tabs").tabs("select_tab", "goods");

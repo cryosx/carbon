@@ -44,6 +44,8 @@ Template.carousel.onRendered(function () {
             owl.trigger('owl.next');
         }
     });
+    $('.materialboxed').materialbox();
+
 
 });
 
