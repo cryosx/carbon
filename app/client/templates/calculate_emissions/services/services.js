@@ -69,7 +69,7 @@ Template.services.events({
             console.log(document.getElementById("totalHousingEmissions").innerText);
             console.log(document.getElementById("totalFoodEmissions").innerText);
             console.log(document.getElementById("totalGoodsEmissions").innerText);
-            console.log(document.getElementById("totalServicesEmissions").innerText;
+            console.log(document.getElementById("totalServicesEmissions").innerText);
             console.log("BEFORE");
             var records = CarbonStats.find({userID: Meteor.userId(), year: 2015}).fetch();
             console.log(records.length);
