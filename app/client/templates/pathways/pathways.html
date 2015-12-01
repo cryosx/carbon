@@ -1,9 +1,28 @@
 <template name="pathways">
     {{> carousel}}
-    <div class="container">
+    <div>
         <div class="row col m12 padding">
             <h1>The <strong class="light-green-text">Carbon Neutrality</strong> Project</h1>
         </div>
     </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="card large">
+                    <div class="card">
+                    </div>
+                    <div class="card-content">
+                        <div class="row">
+                            <div><h1>{{getTotalCarbon}}</h1></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section padding">
+        <div id="disqus_thread"></div>
+    </div>
 </template>

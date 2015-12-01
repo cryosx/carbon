@@ -1,9 +1,13 @@
 Template.pathways.helpers({
-    //add you helpers here
+    getTotalCarbon: function(){
+        return getTotalCarbon();
+    }
 });
 
 Template.pathways.events({
-    //add your events here
+    "click": function() {
+        getTotalCarbon();
+    }
 });
 
 Template.pathways.onCreated(function () {
@@ -19,3 +23,11 @@ Template.pathways.onDestroyed(function () {
     //add your statement here
 });
 
+var records = CarbonStats.find({userID: Meteor.userId(), year: 2015}).fetch();
+var record = records[0];
+
+function getTotalCarbon() {
+    var totalCarbon = record.totalCarbon;
+    console.log(totalCarbon);
+    return totalCarbon;
+}

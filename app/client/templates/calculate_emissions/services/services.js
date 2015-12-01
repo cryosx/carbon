@@ -12,9 +12,12 @@ Template.services.events({
     "submit": function() {
         event.preventDefault();
         if (validateTransport()) {
+            var totalCarbon = parseFloat(document.getElementById("totalTransportEmissions").innerText) + parseFloat(document.getElementById("totalHousingEmissions").innerText) + parseFloat(document.getElementById("totalFoodEmissions").innerText) + parseFloat(document.getElementById("totalGoodsEmissions").innerText) + parseFloat(document.getElementById("totalServicesEmissions").innerText);
+            totalCarbon = totalCarbon.toFixed(2);
             var record = {
                 userID: Meteor.userId(),
                 year: 2015,
+                totalCarbon: totalCarbon,
                 transportation: {
                     units: document.getElementById("units").value,
                     carDistanceTraveled: document.getElementById("carDistanceTraveled").value,
