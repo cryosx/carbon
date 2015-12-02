@@ -1,52 +1,113 @@
 <template name="trees2">
+
     <div class="row">
-        <div class="col-md-12" style="text-align: center">
+        <div class="col m12" style="text-align: center">
             <br>
             <br>
             <br>
-            <h4>------- My Tree -------</h4>
+            <h1>My <strong class="light-green-text">Tree</strong></h1>
             <br>
             <br>
         </div>
     </div>
 
-    <div class="container">
+    <div class="padding">
         <div class="row">
-        <div class="col-md-3" style="border: 1px solid grey">
-            Picture of a tree
+            <div class="col s12 m3 l3 card">
+                <div class="card-content">
+                    <img src="babyTree.jpg"  style="width:100%;height:100%">
+                </div>
+            </div>
+
+            <div class="col s12 m9 l9 card">
+                <div class="card-content">
+                    <h2> Apple Tree </h2>
+                    <br>
+                    <h7>___________________________________________________________</h7>
+                    <br>
+                    <h2>Planted in Wahiawa on December 3, 2015</h2>
+                </div>
+            </div>
         </div>
 
-        <div class="col-md-9" style="border: 1px solid grey">
-            Name
-            <br>
-            ---------------------------------------
-            <br>
-            Planted in Location on Month Day, Year
+        <div class="row">
+            <div class="col s12 m12 l12" >
+                <h5>Given a diameter of 50cm, this tree will sequester 45k(kg) of CO2 over its life time.</h5>
+                <!--(If tree died use instead, This tree WOULD have sequestered 45 kg of CO2 over its life time)-->
+            </div>
         </div>
-    </div>
-    </div>
 
-    <div class="row">
-        Given a diameter of 50cm, this tree will sequester 45kg of CO2 over its life time
-        (If tree died use instead, This tree WOULD have sequestered 45 kg of CO2 over its life time)
-        <br>
-        GRAPH
+        <div class="row">
+            <div class="col s12 m12 l12 card">
+                <script src="https://code.highcharts.com/highcharts.js"></script>
+                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                <div class="card-content">
+                    <div id="graph" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+        </div>
 
-    </div>
-
-    <div class="row">
-        <div class='wrapper text-center'>
-            <div class="btn-group btn-group-lg">
-                <a href="/trees3" class="btn btn-default" style="background-color: lawngreen; color: white; border: solid black" id="save2">
-                    Save
-                </a>
-                <a href="/trees" class="btn btn-default" style="background-color: lawngreen; color: white; border: solid black" id="goBack2">
-                    Go Back
-                </a>
-                <a href="/trees2" class="btn btn-default" style="background-color: lawngreen; color: white; border: solid black" id="cancel2">
-                    Cancel
-                </a>
+        <div class="row">
+            <div class="center">
+                <a href="/trees" class="waves-effect waves-light btn red" id="cancel2">Cancel</a>
+                <a href="/trees3" class="waves-effect waves-light btn" id="save2">Save</a>
             </div>
         </div>
     </div>
+
+
+    <script>
+        $(function () {
+            $('#graph').highcharts({
+                chart: {
+                    type: 'areaspline'
+                },
+                title: {
+                    text: 'Projected CO2 stored by this tree'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'left',
+                    verticalAlign: 'top',
+                    x: 100,
+                    y: 150,
+                    floating: true,
+                    borderWidth: 1,
+                    backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+                },
+                xAxis: {
+                    title: {
+                        text: 'Year'
+                    },
+                    categories: [
+                        '2016', '2020', '2024', '2028', '2032', '2036', '2040', '2044',
+                        '2048', '2052', '2056', '2060', '2064', '2068', '2072', '2078',
+                        '2082', '2086', '2090', '2094', '2098'
+                    ]
+                },
+                yAxis: {
+                    title: {
+                        text: 'CO2 Sequestered (kg)'
+                    }
+                },
+                tooltip: {
+                    shared: true,
+                    valuePrefix: 'will sequester ',
+                    valueSuffix: 'kg'
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    areaspline: {
+                        fillOpacity: 0.5
+                    }
+                },
+                series: [{
+                    name: 'Your Tree',
+                    data: [5000, 15000, 21000, 26000, 31000, 34000, 37000, 40000, 41000, 43000, 44000, 44000, 44000, 45000, 45000, 45000, 45000, 47000, 47000, 47000, 47000,  ]
+                }]
+            });
+        });
+    </script>
 </template>
