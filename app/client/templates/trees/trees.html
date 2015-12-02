@@ -1,103 +1,24 @@
 <template name="trees">
     {{#if currentUser}}
-        <form id="treeData" action="{{pathFor "trees2"}}">
-            <div class="row">
-                <div class="col m12" style="text-align: center">
-                    <br>
-                    <br>
-                    <br>
-                    <h1>Plant a <strong class="light-green-text">Tree</strong></h1>
-                    <br>
-                    <br>
-                </div>
-            </div>
 
-            <div class="row padding">
-                <div class="card">
-                    <div class="card-content">
-                        <span class="card-title"><h4 class="">Enter Your <strong class="light-green-text">Tree Data</strong></h4></span>
-
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div class="card-content">
-                        <div class="row">
-                            <div class="col s12 m12 l6 push-l6">
-                                <div class="map-container">
-                                    {{> googleMap name="exampleMap" options=exampleMapOptions}}
-                                </div>
-                            </div>
-                            <div class="col s12 m12 l6 pull-l6">
-                                <div class="row">
-                                    <div class="input-field col s12 m12 l12">
-                                        <i class="material-icons prefix">local_florist</i>
-                                        <input id="species" type="text" class="validate" required>
-                                        <label for="species">Species</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12 m12 l12">
-                                        <i class="material-icons prefix">place</i>
-                                        <input id="location" type="text" class="validate" required>
-                                        <label for="location">Location</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12 m12 l12">
-                                        <i class="material-icons prefix">gps_fixed</i>
-                                        <input id="latitude" min="-90" max="90" type="number" step="any" class="validate" required>
-                                        <label for="latitude" class="active">Latitude</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12 m12 l12">
-                                        <i class="material-icons prefix">gps_fixed</i>
-                                        <input id="longitude" min="-180" max="180" type="number" step="any" class="validate" required>
-                                        <label for="longitude" class="active">Longitude</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12 m12 l12">
-                                        <i class="material-icons prefix">date_range</i>
-                                        <input id="datePlanted" type="date" class="validate" required>
-                                        <label for="datePlanted" class="active">Date Planted</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s8 m8 l8">
-                                        <i class="fa fa-tree prefix"></i>
-                                        <input id="diameter" type="number" class="validate" required>
-                                        <label for="diameter">Diameter</label>
-                                    </div>
-                                    <div class="input-field col s4 m4 l4">
-                                        <select id="diameterUnits">
-                                            <option value="cm" select="selected">cm</option>
-                                            <option values="inches">Inches</option>
-                                            <label class="active" for="diameterUnits"><h5>Select Your Units</h5></label>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col m12" style="text-align: center">
+                <br>
+                <br>
+                <br>
+                <h1>Plant a <strong class="light-green-text">Tree</strong></h1>
+                <br>
+                <br>
             </div>
+        </div>
 
-            <div class="row padding">
-                <div class="col s12 m12 l12 card">
-                    <div class="card-content">
-                        {{> upload_bootstrap contentType='images' fileTypes='.jpg' multiple=true}}
-                    </div>
-                </div>
-            </div>
-            <div class="row padding">
-                <div class="center">
-                    <a href="/trees" class="btn">Cancel</a>
-                    <input  type="submit" class="waves-effect waves-light btn next" id="save" value="Save">
-                </div>
-            </div>
-        </form>
+        {{> treeNav}}
+        {{> plantTree}}
+        {{> checkTree}}
+    {{else}}
+        {{>notLoggedIn}}
+
     {{/if}}
+
 </template>
 
