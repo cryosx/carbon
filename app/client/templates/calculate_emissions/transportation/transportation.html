@@ -8,7 +8,7 @@
             <div class="row padding">
                 <div class="card hoverable center">
                     <div class="input-field col s12">
-                        <div class="card-panel">
+                        <div class="card-panel input-field">
 
                             <br>
                             <br>
@@ -17,7 +17,6 @@
                                 <option value="miles" selected="selected">Miles</option>
                                 <option value="kilometers">Kilometers</option>
                                 <label class="active" for="units"><h5>Select Your Units</h5></label>
-
                             </select>
                         </div>
                     </div>
@@ -37,6 +36,7 @@
                         <div class="card-content">
                             <div class="row">
                                 <div class="input-field col s12">
+                                    <i class="material-icons prefix">directions_car</i>
                                     <input type="number" name="carDistanceTraveled" id="carDistanceTraveled"
                                            class="validate" min="0" max="50000" autofocus required>
                                     <label class="active">Annual Distance Traveled</label>
@@ -53,6 +53,7 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
+                                    <i class="material-icons prefix">drive_eta</i>
                                     <input type="number" name="fuelEfficiency" id="fuelEfficiency" class="validate"
                                            min="0" max="200" required>
                                     <label  class="active">Fuel efficiency of your car?</label>
@@ -68,11 +69,12 @@
                     <div class="card hoverable medium">
                         <div class="card-image">
                             <img src="images/transportation/rail2.png">
-                            <span class="card-title"><h3>Rail</h3></span>
+                            <span class="card-title"><h3>Mono Rail</h3></span>
                         </div>
                         <div class="card-content">
                             <div class="row">
                                 <div class="input-field col s12">
+                                    <i class="material-icons prefix">directions_transit</i>
                                     <input type="number" name="railDistanceTraveled" id="railDistanceTraveled"
                                            class="validate" min="0" max="50000" required>
                                     <label  class="active">Annual Distance Traveled </label>
@@ -93,6 +95,7 @@
                         <div class="card-content">
                             <div class="row">
                                 <div class="input-field col s12">
+                                    <i class="material-icons prefix">directions_bus</i>
                                     <input type="number" name="busDistanceTraveled" id="busDistanceTraveled"
                                            class="validate" min="0" max="50000" required>
                                     <label class="active">Annual Distance Traveled </label>
@@ -110,11 +113,12 @@
                     <div class="card hoverable medium">
                         <div class="card-image">
                             <img src="images/transportation/air1.png">
-                            <span class="card-title"><h3>Air</h3></span>
+                            <span class="card-title"><h3>Air Travel</h3></span>
                         </div>
                         <div class="card-content">
                             <div class="row">
                                 <div class="input-field col s12">
+                                    <i class="material-icons prefix">airplanemode_active</i>
                                     <input type="number" name="airDistanceTraveled" id="airDistanceTraveled"
                                            class="validate" min="0" max="50000" required>
                                     <label class="active">Annual Distance Traveled</label>
@@ -146,7 +150,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col s12 m12 l12 center">
                     <div class="btn-block">
