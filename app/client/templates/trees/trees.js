@@ -1,37 +1,20 @@
 Template.trees.helpers({
-/*    Pencil: ['foo', 'bar', 'baz'],
-    Pen: function(){
-        if(Math.random() > 0.5){
-            return true;
-        }
-        return false;
-    }*/
-    //can do things like if a person has 17 trees, add a star next to them or something
-    //can use in trees2 to use javascript to create a graph and place it in a div in the
-    //template file
+
     exampleMapOptions: function() {
         // Make sure the maps API has loaded
         if (GoogleMaps.loaded()) {
             // Map initialization options
             return {
-                center: new google.maps.LatLng(-37.8136, 144.9631),
-                zoom: 8
+                center: new google.maps.LatLng(21.3500, -157.8000),
+                zoom: 12
             };
         }
     }
 });
 
 Template.trees.events({
-/*    'click #Save':function(event,template){
-        console.log('Save button pressed');
-        var Species=template.find("#Species").value;
-        console.log(Species);
-        //take values from the form that is being saved
 
-        TreeCollection.find({species:'Pine'}, {$sort:{diameter:13}}
-    }*/
-
-    'click #save':function(event, template) {
+    'click #save': function(event, template) {
         console.log('Saving a tree');
         var species=template.find("#species").value;
         var location=template.find("#location").value;
@@ -57,27 +40,15 @@ Template.trees.events({
 
         var treeID;
 
-        //see methods.js in server
-/*        Meteor.call('insertTree', tree, function(error, result){
-            console.log(result);
-            treeID=result;
-        });*/
-
-
-        //to get last inputted tree
-        //Session.set('lastTreePlanted', treeID);
+    },
+    "click": function() {
+        alertCoords();
     }
 });
 
+
 Template.trees.onCreated(function () {
-    // We can use the `ready` callback to interact with the map API once the map is ready.
-    GoogleMaps.ready('exampleMap', function(map) {
-        // Add a marker to the map once it's ready
-        var marker = new google.maps.Marker({
-            position: map.options.center,
-            map: map.instance
-        });
-    });
+   init();
 });
 
 Template.trees.onRendered(function () {
@@ -91,4 +62,43 @@ Template.trees.onRendered(function () {
 Template.trees.onDestroyed(function () {
     //add your statement here
 });
+function init() {
+    // We can use the `ready` callback to interact with the map API once the map is ready.
+    GoogleMaps.ready('exampleMap', function(map) {
+        // Add a marker to the map once it's ready
+        marker = new google.maps.Marker({
+            position: map.options.center,
+            map: map.instance,
+            draggable: true,
+            animation: google.maps.Animation.DROP
+        });
+        marker.addListener('click', toggleBounce);
+        marker.addListener('drag', updateLatLng);
 
+    });
+}
+
+
+function alertCoords(){
+    console.log("Marker: " + marker.getPosition().lat());
+}
+
+function updateLatLng() {
+    document.getElementById("latitude");
+}
+
+function toggleBounce() {
+    if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
+}
+
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+}

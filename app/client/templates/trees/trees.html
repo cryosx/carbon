@@ -2,143 +2,158 @@
     <script src="http://maps.googleapis.com/maps/api/js"></script>
     {{#if currentUser}}
 
-    <div class="row">
-        <div class="col m12" style="text-align: center">
-            <br>
-            <br>
-            <br>
-            <h1>My <strong class="light-green-text">Tree</strong></h1>
-            <br>
-            <br>
-        </div>
-    </div>
-
-    <div class="padding">
         <div class="row">
-            <div class="card">
-                <div class="card-title"><h5>Title</h5></div>
-                <div class="card-content">
+            <div class="col m12" style="text-align: center">
+                <br>
+                <br>
+                <br>
+                <h1>Plant a <strong class="light-green-text">Tree</strong></h1>
+                <br>
+                <br>
+            </div>
+        </div>
 
+        <div class="padding">
+            <div class="row">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title"><h4 class="">Enter Your <strong class="light-green-text">Tree Data</strong></h4></span>
+
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="row">
+                        </div>
+                        <div class="row">
+
+                            <div class="col s12 m6 l6">
+                                <form id="treeData" class="form-inline" data-toggle="validator">
+                                    <div class="row">
+                                        <div class="input-field col s12 m12 l12">
+                                            <input id="species" type="text" class="validate" required>
+                                            <label for="species">Species</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m12 l12">
+                                            <input id="location" type="text" class="validate" required>
+                                            <label for="location">Location</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m12 l12">
+                                            <input id="latitude" type="number" class="validate" required>
+                                            <label for="latitude">Latitude</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m12 l12">
+                                            <input id="longitude" type="number" class="validate" required>
+                                            <label for="longitude">Longitude</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m12 l12">
+                                            <input id="datePlanted" type="date" class="validate datepicker" required>
+                                            <label for="datePlanted" class="active">Date Planted</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12 m12 l12">
+                                            <input id="diameter" type="number" class="validate" required>
+                                            <label for="diameter">Diameter</label>
+                                        </div>
+                                    </div>
+                                    <!--<div class="form-group">-->
+                                    <!--<label for="Species"></label>-->
+                                    <!--<input type="text" class="form-control" placeholder="Species name:" id="species">-->
+                                    <!--</div>-->
+                                    <!--<br>-->
+                                    <!--<div class="form-group">-->
+                                    <!--<label for="Location"></label>-->
+                                    <!--<input type="text" class="form-control" placeholder="Location name:" id="location">-->
+                                    <!--</div>-->
+                                    <!--<br>-->
+                                    <!--<div class="form-group">-->
+                                    <!--<label for="Latitude"></label>-->
+                                    <!--<input type="number" class="form-control" placeholder="Latitude:" id="latitude">-->
+                                    <!--<div class="help-block with-errors">-->
+                                    <!--</div>-->
+                                    <!--</div>-->
+                                    <!--<div class="form-group">-->
+                                    <!--<label for="Longitude"></label>-->
+                                    <!--<input type="number" class="form-control" placeholder="Longitude:" id="longitude">-->
+                                    <!--</div>-->
+                                    <!--<br>-->
+                                    <!--<div class="form-group">-->
+                                    <!--<label for="Date"></label>-->
+                                    <!--<input type="date" class="form-control" placeholder="YYYY-MM-DD" id="datePlanted">-->
+                                    <!--</div>-->
+                                    <!--<br>-->
+                                    <!--<div class="form-group">-->
+                                    <!--<label for="Diameter"></label>-->
+                                    <!--<input type="number" class="form-control" placeholder="Diameter when adult:" id="diameter">-->
+                                    <!--</div>-->
+                                    <!--<br>-->
+                                </form>
+                                <script>
+                                    $('#treeData').validator();
+                                </script>
+                            </div>
+                            <div class="col s12 m6 l6">
+                                <div class="map-container">
+                                    {{> googleMap name="exampleMap" options=exampleMapOptions}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="col s12 m6 l6">
-                <form id="treeData" class="form-inline" data-toggle="validator">
-                    <div class="row">
-                        <div class="input-field col s12 m12 l12">
-                            <input id="species" type="text" class="validate" required>
-                            <label for="species">Species</label>
-                        </div>
+
+            <div class="row">
+                <div id="map" style="height:500px">
+                    Map
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col m12 card">
+                    <div class="card-content">
+                        {{> upload_bootstrap}}
                     </div>
-                    <div class="row">
-                        <div class="input-field col s12 m12 l12">
-                            <input id="location" type="text" class="validate" required>
-                            <label for="location">Location</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 m12 l12">
-                            <input id="latitude" type="number" class="validate" required>
-                            <label for="latitude">Latitude</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 m12 l12">
-                            <input id="longitude" type="number" class="validate" required>
-                            <label for="longitude">Longitude</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 m12 l12">
-                            <input id="datePlanted" type="date" class="validate datepicker" required>
-                            <label for="datePlanted">Date Planted</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="input-field col s12 m12 l12">
-                            <input id="diameter" type="number" class="validate" required>
-                            <label for="diameter">Diameter</label>
-                        </div>
-                    </div>
+                </div>
+            </div>
+
+            <!--<div class="row">-->
+                <!--<div class='wrapper text-right'>-->
                     <!--<div class="form-group">-->
-                        <!--<label for="Species"></label>-->
-                        <!--<input type="text" class="form-control" placeholder="Species name:" id="species">-->
-                    <!--</div>-->
-                    <!--<br>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="Location"></label>-->
-                        <!--<input type="text" class="form-control" placeholder="Location name:" id="location">-->
-                    <!--</div>-->
-                    <!--<br>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="Latitude"></label>-->
-                        <!--<input type="number" class="form-control" placeholder="Latitude:" id="latitude">-->
-                        <!--<div class="help-block with-errors">-->
+                        <!--This tree died-->
+                        <!--<label for="Dead"></label>-->
+                        <!--<input type="checkbox" value="" id="dead">-->
+                        <!--<a href="#" class="popper" data-popbox="pop1">-->
+                            <!--<img src="questionmark.jpg"  style="width:50px;height:50px">-->
+                        <!--</a>-->
+                        <!--<div id="pop1" class="popbox">-->
+                            <!--Mark this option if your tree died for any reason.-->
+                            <!--<br>-->
+                            <!--A record of the tree will be kept, but its CO2-->
+                            <!--<br>-->
+                            <!--sequestration will not be counted.-->
                         <!--</div>-->
                     <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="Longitude"></label>-->
-                        <!--<input type="number" class="form-control" placeholder="Longitude:" id="longitude">-->
-                    <!--</div>-->
-                    <!--<br>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="Date"></label>-->
-                        <!--<input type="date" class="form-control" placeholder="YYYY-MM-DD" id="datePlanted">-->
-                    <!--</div>-->
-                    <!--<br>-->
-                    <!--<div class="form-group">-->
-                        <!--<label for="Diameter"></label>-->
-                        <!--<input type="number" class="form-control" placeholder="Diameter when adult:" id="diameter">-->
-                    <!--</div>-->
-                    <!--<br>-->
-                </form>
-                <script>
-                    $('#treeData').validator();
-                </script>
-            </div>
-            <div class="col s12 m6 l6">
-                <div class="map-container">
-                    {{> googleMap name="exampleMap" options=exampleMapOptions}}
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="row">
+                <div class="center">
+                    <a href="/trees" class="btn">Cancel</a>
+                    <a href="/trees2" class="btn" id="save">Save</a>
                 </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col m12 card">
-                <div class="card-content">
-                    {{> upload_bootstrap}}
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class='wrapper text-right'>
-                <div class="form-group">
-                    This tree died
-                    <label for="Dead"></label>
-                    <input type="checkbox" value="" id="dead">
-                    <a href="#" class="popper" data-popbox="pop1">
-                        <img src="questionmark.jpg"  style="width:50px;height:50px">
-                    </a>
-                    <div id="pop1" class="popbox">
-                        Mark this option if your tree died for any reason.
-                        <br>
-                        A record of the tree will be kept, but its CO2
-                        <br>
-                        sequestration will not be counted.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="center">
-                <a href="/trees2" class="btn" id="save">Save</a>
-                <a href="/trees" class="btn">Cancel</a>
-            </div>
-        </div>
-    </div>
-
-    <!--<script>-->
+        <!--<script>-->
         <!--$('a.popper').hover(function (e) {-->
         <!--var target = '#' + ($(this).attr('data-popbox'));-->
         <!--$(target).show();-->
@@ -150,40 +165,40 @@
         <!--$(target).hide();-->
         <!--}-->
         <!--});-->
-    <!--</script>-->
-    <!--<script>-->
+        <!--</script>-->
+        <!--<script>-->
         <!--$('a.popper').mousemove(function (e) {-->
-            <!--var target = '#' + ($(this).attr('data-popbox'));-->
+        <!--var target = '#' + ($(this).attr('data-popbox'));-->
 
-            <!--leftD = e.pageX + parseInt(moveLeft);-->
-            <!--maxRight = leftD + $(target).outerWidth();-->
-            <!--windowLeft = $(window).width() - 40;-->
-            <!--windowRight = 0;-->
-            <!--maxLeft = e.pageX - (parseInt(moveLeft) + $(target).outerWidth() + 20);-->
+        <!--leftD = e.pageX + parseInt(moveLeft);-->
+        <!--maxRight = leftD + $(target).outerWidth();-->
+        <!--windowLeft = $(window).width() - 40;-->
+        <!--windowRight = 0;-->
+        <!--maxLeft = e.pageX - (parseInt(moveLeft) + $(target).outerWidth() + 20);-->
 
-            <!--if (maxRight > windowLeft && maxLeft > windowRight) {-->
-                <!--leftD = maxLeft;-->
-            <!--}-->
+        <!--if (maxRight > windowLeft && maxLeft > windowRight) {-->
+        <!--leftD = maxLeft;-->
+        <!--}-->
 
-            <!--topD = e.pageY - parseInt(moveDown);-->
-            <!--maxBottom = parseInt(e.pageY + parseInt(moveDown) + 20);-->
-            <!--windowBottom = parseInt(parseInt($(document).scrollTop()) + parseInt($(window).height()));-->
-            <!--maxTop = topD;-->
-            <!--windowTop = parseInt($(document).scrollTop());-->
-            <!--if (maxBottom > windowBottom) {-->
-                <!--topD = windowBottom - $(target).outerHeight() - 20;-->
-            <!--} else if (maxTop < windowTop) {-->
-                <!--topD = windowTop + 20;-->
-            <!--}-->
+        <!--topD = e.pageY - parseInt(moveDown);-->
+        <!--maxBottom = parseInt(e.pageY + parseInt(moveDown) + 20);-->
+        <!--windowBottom = parseInt(parseInt($(document).scrollTop()) + parseInt($(window).height()));-->
+        <!--maxTop = topD;-->
+        <!--windowTop = parseInt($(document).scrollTop());-->
+        <!--if (maxBottom > windowBottom) {-->
+        <!--topD = windowBottom - $(target).outerHeight() - 20;-->
+        <!--} else if (maxTop < windowTop) {-->
+        <!--topD = windowTop + 20;-->
+        <!--}-->
 
-            <!--$(target).css('top', topD).css('left', leftD);-->
+        <!--$(target).css('top', topD).css('left', leftD);-->
         <!--});-->
-    <!--</script>-->
+        <!--</script>-->
 
-    <!--<script>-->
+        <!--<script>-->
         <!--//place this in save button?-->
 
-    <!--</script>-->
-{{/if}}
+        <!--</script>-->
+    {{/if}}
 </template>
 
