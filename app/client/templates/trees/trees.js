@@ -85,7 +85,7 @@ function alertCoords(){
 
 function updateLatLng() {
     $("#latitude").val(marker.getPosition().lat());
-    $("#longitude").val(marker.getPosition().lgn());
+    $("#longitude").val(marker.getPosition().lng());
 }
 
 function toggleBounce() {
