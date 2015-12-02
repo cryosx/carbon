@@ -39,7 +39,7 @@ Template.trees.events({
         var longitude=template.find("#longitude").value;
         var datePlanted=template.find("#datePlanted").value;
         var diameter=template.find("#diameter").value;
-        var createdDate=newDate();
+        //var createdDate=newDate();
         var tree={'userID':Meteor.user()._id,
             'species':species,
             'location':location,
@@ -47,23 +47,25 @@ Template.trees.events({
             'longitude':longitude,
             'datePlanted':datePlanted,
             'diameter':diameter,
-            'created':createdDate
+            //'created':createdDate
         };
         //tree['userID']=Meteor.user()._id; //or tree.key=value
-        console.log(species);
+        console.log(tree);
         console.log(Meteor.user()._id);
-        //TreeCollection.insert(tree);
+
+        TreeCollection.insert(tree);
+
         var treeID;
 
         //see methods.js in server
-        Meteor.call('insertTree', tree, function(error, result){
+/*        Meteor.call('insertTree', tree, function(error, result){
             console.log(result);
             treeID=result;
-        });
+        });*/
 
 
         //to get last inputted tree
-        Session.set('lastTreePlanted', treeID);
+        //Session.set('lastTreePlanted', treeID);
     }
 });
 

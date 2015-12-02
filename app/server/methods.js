@@ -4,8 +4,16 @@ Meteor.methods({
     },
     removeAllCarbonStatsRecords: function () {
         return CarbonStats.remove({});
+    },
+
+    'insertTree':function(tree){
+        var val = TreeCollection.insert(tree);
+        console.log(val);
+        return val;
     }
 });
+
+
 
 // Some Meteor Functions I've Used
 //
