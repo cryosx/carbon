@@ -89,7 +89,6 @@ Template.services.onCreated(function () {
 
 Template.services.onRendered(function () {
     $('select').material_select();
-
 });
 
 Template.services.onDestroyed(function () {

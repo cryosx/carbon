@@ -7,50 +7,89 @@
             <br>
             <br>
             <br>
-            <h4>------- My Tree -------</h4>
+            <h1>My <strong class="light-green-text">Tree</strong></h1>
             <br>
             <br>
         </div>
     </div>
 
-    <div class="container">
-        <div class="row card">
-            <div class="col s12 m6 l6">
-                <div class="col m12">
-                    Tree Data
+    <div class="padding">
+        <div class="row">
+            <div class="card">
+                <div class="card-title"><h5>Title</h5></div>
+                <div class="card-content">
+
                 </div>
+            </div>
+            <div class="col s12 m6 l6">
                 <form id="treeData" class="form-inline" data-toggle="validator">
-                    <div class="form-group">
-                        <label for="Species"></label>
-                        <input type="text" class="form-control" placeholder="Species name:" id="species">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="Location"></label>
-                        <input type="text" class="form-control" placeholder="Location name:" id="location">
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="Latitude"></label>
-                        <input type="number" class="form-control" placeholder="Latitude:" id="latitude">
-                        <div class="help-block with-errors">
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <input id="species" type="text" class="validate" required>
+                            <label for="species">Species</label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Longitude"></label>
-                        <input type="number" class="form-control" placeholder="Longitude:" id="longitude">
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <input id="location" type="text" class="validate" required>
+                            <label for="location">Location</label>
+                        </div>
                     </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="Date"></label>
-                        <input type="date" class="form-control" placeholder="YYYY-MM-DD" id="datePlanted">
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <input id="latitude" type="number" class="validate" required>
+                            <label for="latitude">Latitude</label>
+                        </div>
                     </div>
-                    <br>
-                    <div class="form-group">
-                        <label for="Diameter"></label>
-                        <input type="number" class="form-control" placeholder="Diameter when adult:" id="diameter">
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <input id="longitude" type="number" class="validate" required>
+                            <label for="longitude">Longitude</label>
+                        </div>
                     </div>
-                    <br>
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <input id="datePlanted" type="date" class="validate datepicker" required>
+                            <label for="datePlanted">Date Planted</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <input id="diameter" type="number" class="validate" required>
+                            <label for="diameter">Diameter</label>
+                        </div>
+                    </div>
+                    <!--<div class="form-group">-->
+                        <!--<label for="Species"></label>-->
+                        <!--<input type="text" class="form-control" placeholder="Species name:" id="species">-->
+                    <!--</div>-->
+                    <!--<br>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="Location"></label>-->
+                        <!--<input type="text" class="form-control" placeholder="Location name:" id="location">-->
+                    <!--</div>-->
+                    <!--<br>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="Latitude"></label>-->
+                        <!--<input type="number" class="form-control" placeholder="Latitude:" id="latitude">-->
+                        <!--<div class="help-block with-errors">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="Longitude"></label>-->
+                        <!--<input type="number" class="form-control" placeholder="Longitude:" id="longitude">-->
+                    <!--</div>-->
+                    <!--<br>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="Date"></label>-->
+                        <!--<input type="date" class="form-control" placeholder="YYYY-MM-DD" id="datePlanted">-->
+                    <!--</div>-->
+                    <!--<br>-->
+                    <!--<div class="form-group">-->
+                        <!--<label for="Diameter"></label>-->
+                        <!--<input type="number" class="form-control" placeholder="Diameter when adult:" id="diameter">-->
+                    <!--</div>-->
+                    <!--<br>-->
                 </form>
                 <script>
                     $('#treeData').validator();
@@ -93,8 +132,8 @@
 
         <div class="row">
             <div class="center">
-                    <a href="/trees2" class="btn" id="save">Save</a>
-                    <a href="/trees" class="btn">Cancel</a>
+                <a href="/trees2" class="btn" id="save">Save</a>
+                <a href="/trees" class="btn">Cancel</a>
             </div>
         </div>
     </div>
