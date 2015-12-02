@@ -43,7 +43,8 @@ Template.food.onDestroyed(function () {
 function updateFood() {
     var totalFood = calculateFood();
     document.getElementById("totalFoodEmissions").innerHTML = totalFood.toFixed(2);
-
+    var value = "Total: " + totalFood.toFixed(2);
+    Materialize.toast(value, 3000);
 }
 
 function calculateFood() {

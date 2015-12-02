@@ -39,7 +39,8 @@ Template.goods.onDestroyed(function () {
 function updateGoods() {
     var totalGoods = calculateGoods();
     document.getElementById("totalGoodsEmissions").innerHTML = totalGoods.toFixed(2);
-
+    var value = "Total: " + totalGoods.toFixed(2);
+    Materialize.toast(value, 3000);
 }
 
 function calculateGoods() {

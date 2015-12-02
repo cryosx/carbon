@@ -53,7 +53,7 @@ Template.transportation.events({
 
     "change input": function() {
         updateTransport();
-    }
+    },
 });
 
 Template.transportation.onCreated(function () {
@@ -62,16 +62,24 @@ Template.transportation.onCreated(function () {
 
 Template.transportation.onRendered(function () {
     $('select').material_select();
-
+    $(document).ready(function(){
+        $('.tabs-wrapper .row').pushpin({ top: $('.tabs-wrapper').offset().top });
+    });
 });
 
 Template.transportation.onDestroyed(function () {
     //add your statement here
 });
 
+function toast() {
+}
+
+
 function updateTransport() {
-    var total = calculateTransport();
-    document.getElementById("totalTransportEmissions").innerHTML = total.toFixed(2);
+    var totalTransport = calculateTransport();
+    document.getElementById("totalTransportEmissions").innerHTML = totalTransport.toFixed(2);
+    var value = "Total: " + totalTransport.toFixed(2);
+    Materialize.toast(value, 3000);
 }
 
 function calculateTransport() {

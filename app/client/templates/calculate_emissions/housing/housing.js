@@ -45,6 +45,8 @@ Template.housing.onDestroyed(function () {
 function updateHousing() {
     var totalHousing = calculateHousing();
     document.getElementById("totalHousingEmissions").innerHTML = totalHousing.toFixed(2);
+    var value = "Total: " + totalHousing.toFixed(2);
+    Materialize.toast(value, 3000);
 }
 
 

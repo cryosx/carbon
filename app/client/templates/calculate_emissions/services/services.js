@@ -172,7 +172,8 @@ function validateGoods() {
 function updateServices() {
     var totalServices = calculateServices();
     document.getElementById("totalServicesEmissions").innerHTML = totalServices.toFixed(2);
-
+    var value = "Total: " + totalServices.toFixed(2);
+    Materialize.toast(value, 3000);
 }
 
 function calculateServices() {

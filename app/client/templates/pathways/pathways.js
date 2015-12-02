@@ -11,6 +11,11 @@ Template.pathways.events({
     //"click": function() {
     //    getTotalCarbon();
     //}
+    "click #treesLink": function() {
+        //event.preventDefault();
+        //goToEmissions();
+        setTimeout(scrollToTop, 1000);
+    },
 });
 
 Template.pathways.onCreated(function () {
@@ -26,7 +31,9 @@ Template.pathways.onDestroyed(function () {
     //add your statement here
 });
 
-
+function scrollToTop() {
+    $("html, body").animate({ scrollTop: 0 }, 300);
+}
 function getTotalCarbon() {
 
     var records = CarbonStats.find({userID: Meteor.userId(), year: 2015}).fetch();
