@@ -166,7 +166,6 @@ Template.charts.helpers({
 
         if (healthSpentOn !== "") {
             healthCarbon = healthSpentOn * 1151 * 12 * 0.000001;
-            console.log(healthCarbon);
         }
 
         if (communicationsSpentOn !== "") {
