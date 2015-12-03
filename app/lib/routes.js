@@ -37,6 +37,15 @@ Router.route("technology",{
     progressSpinner : false
 });
 
+
+Router.route("pageTransitions",{
+    name: "pageTransitions",
+    controller: "HomeController",
+    path: "/pageTransitions",
+    progress: true,
+    progressSpinner : false
+});
+
 //Router.route("transportation", {
 //    name: "transportation",
 //    controller: "EmissionsController",
