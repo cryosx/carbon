@@ -6,8 +6,7 @@ Template.housing.helpers({
 
 Template.housing.events({
     "click #cancel": function() {
-        var url = "/";
-        window.location.replace(url);
+        Router.go("/");
     },
     //"click #next": function() {
     //    event.preventDefault();

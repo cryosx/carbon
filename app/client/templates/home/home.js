@@ -40,6 +40,5 @@ function scrollToTop() {
 }
 
 function goToEmissions() {
-    var url = "/emissions";
-    window.location.replace(url);
+    Router.go("/emissions");
 }

@@ -6,8 +6,7 @@ Template.goods.helpers({
 
 Template.goods.events({
     "click #cancel": function(){
-        var url = "/";
-        window.location.replace(url);
+        Router.go("/");
     },
     "submit": function() {
         console.log("SUBMIT");

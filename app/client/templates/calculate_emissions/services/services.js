@@ -6,8 +6,7 @@ Template.services.helpers({
 
 Template.services.events({
     "click #cancel": function(){
-        var url = "/";
-        window.location.replace(url);
+        Router.go("/");
     },
     "submit": function() {
         event.preventDefault();
@@ -72,7 +71,7 @@ Template.services.events({
             } else if (records.length === 0) {
                 CarbonStats.insert(record);
             }
-            window.location.replace("/pathways");
+            Router.go("/pathways");
 
         }
         return false;

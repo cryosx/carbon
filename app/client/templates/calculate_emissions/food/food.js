@@ -6,8 +6,7 @@ Template.food.helpers({
 
 Template.food.events({
     "click #cancel": function() {
-        var url = "/";
-        window.location.replace(url);
+        Router.go("/");
     },
     //"click #next": function() {
     //    event.preventDefault();
