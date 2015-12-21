@@ -1,11 +1,12 @@
 Template.trees2.helpers({
     //add you helpers here
+
 });
 
 Template.trees2.events({
-/*    'click #Save2':function(event,template){
-        console.log('Save2 button pressed');
-    }*/
+    'click #cancel2':function(event,template){
+        console.log(CarbonStats.find().count());
+    }
 });
 
 Template.trees2.onCreated(function () {

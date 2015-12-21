@@ -30,6 +30,10 @@ Template.plantTree.helpers({
 
 Template.plantTree.events({
 
+    'click #cancel': function(event, template) {
+        console.log('test');
+    },
+
     'click #save': function(event, template) {
         console.log('Saving a tree');
         var species = template.find("#species").value;
