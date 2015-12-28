@@ -1,3 +1,7 @@
+
+var treeArray;
+var treeRecord;
+
 Template.trees3.helpers({
 
     exampleMapOptions: function() {
@@ -31,13 +35,28 @@ Template.trees3.helpers({
 var owl = $("#tree-carousel");
 
 Template.trees3.events({
+    'click #tree1':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[treeArray.length -1];
+        console.log(treeRecord);
+        setMarker();
+    },
+
+    "change #latitude, change #longitude": function() {
+        setMarker();
+    },
+
+
 
 });
 
 Template.trees3.onCreated(function () {
+    init();
+    //myFunction();
 });
 
 Template.trees3.onRendered(function () {
+
 
     $('select').material_select();
     GoogleMaps.load();
@@ -88,6 +107,21 @@ Template.trees3.onDestroyed(function () {
     //add your statement here
 });
 
+/*function myFunction(){
+    var trees = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+    var treeCount = 0;
+    var i = 0;
+    do{
+        treeCount++;
+        i++;
+        console.log(treeCount);
+    }while(trees[i] != null);
+
+    //for(var j=1; j<=treeCount; j++){
+        //$('#testDiv').insertAfter('<div id="tree' + j + '"></div>');
+        $('#tree-carousel').insertAfter('<div id = "tree1" class="item"><img src="/parallax/babyTree.jpg" alt="/parallax/treeSample.jpg"></div>');
+    //}
+}*/
 
 function init() {
     // We can use the `ready` callback to interact with the map API once the map is ready.
@@ -111,8 +145,11 @@ function alertCoords(){
 }
 
 function setMarker() {
-    var lat = parseFloat($("#latitude").val());
-    var lng = parseFloat($("#longitude").val());
+    var lat = parseFloat(treeRecord.latitude);
+    var lng = parseFloat(treeRecord.longitude);
+
+    //var lat = parseFloat($("#latitude").val());
+    //var lng = parseFloat($("#longitude").val());
     console.log("Lat: " + lat);
     console.log("Lng: " + lng);
 
@@ -125,10 +162,13 @@ function setMarker() {
     }
 }
 
-/*function updateLatLng() {
-    $("#latitude").val(marker.getPosition().lat());
-    $("#longitude").val(marker.getPosition().lng());
-}*/
+function updateLatLng() {
+
+
+
+    //$("#latitude").val(marker.getPosition().lat());
+    //$("#longitude").val(marker.getPosition().lng());
+}
 
 function toggleBounce() {
     if (marker.getAnimation() !== null) {

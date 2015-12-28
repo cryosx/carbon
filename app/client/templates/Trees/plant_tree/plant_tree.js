@@ -30,8 +30,18 @@ Template.plantTree.helpers({
 
 Template.plantTree.events({
 
+
     'click #cancel': function(event, template) {
         console.log('test');
+
+        var trees = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        var treeCount = 0;
+        var i = 0;
+        do{
+            treeCount++;
+            i++
+            console.log(treeCount);
+        }while(trees[i] != null)
     },
 
     'click #save': function(event, template) {
@@ -42,7 +52,9 @@ Template.plantTree.events({
         var longitude = template.find("#longitude").value;
         var datePlanted = template.find("#datePlanted").value;
         var diameter = template.find("#diameter").value;
-        //var createdDate = newDate();
+        var diameterUnits = template.find("#diameterUnits").value;
+        var createdDate = new Date();
+
         var tree = {'userID':Meteor.userId(),
             'species':species,
             'location':location,
@@ -50,7 +62,8 @@ Template.plantTree.events({
             'longitude':longitude,
             'datePlanted':datePlanted,
             'diameter':diameter,
-            //'created':createdDate
+            'diameterUnits':diameterUnits,
+            'createdDate':createdDate
         };
         //tree['userID']=Meteor.user()._id; //or tree.key=value
         console.log(tree);

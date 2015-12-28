@@ -13,3 +13,7 @@ Meteor.publish('UserProflies', function () {
 Meteor.publish('Rankings', function () {
     return Rankings.find();
 });
+
+Meteor.publish('TreeCollection', function () {
+    return TreeCollection.find();
+});
