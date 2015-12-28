@@ -310,6 +310,32 @@ Template.charts.helpers({
         }
     },
     treeChart: function() {
+
+        AccumulatedCO2 = 0;
+
+        //fix these later, use the getYear function
+        YearOfCalculation = 2015;
+        YearPlanted = 2015;
+
+        //for(i=0; i<TreeCollection.length; i++){
+        var trees = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        TreeDiameter=trees[trees.length-1].diameter;
+
+        console.log(BodyMass =0.0998*(Math.pow(TreeDiameter,2.5445)));
+
+
+        GrowthRate=0.208 *(Math.pow(BodyMass,0.763));
+
+        dKdY=(Math.exp(1-(((GrowthRate*Math.exp(1))*(YearOfCalculation-YearPlanted))/BodyMass))/Math.exp(1))*(GrowthRate*Math.exp(1));
+
+        dKdYT=dKdY*1.24;
+
+        Carbon=dKdYT*0.47;
+
+        CO2=Carbon*3.6663;
+
+        AccumulatedCO2=AccumulatedCO2+CO2;
+
     return {
         chart: {
             type: 'column'
@@ -345,39 +371,11 @@ Template.charts.helpers({
         },
 
         series: [{
-            name: 'Transportation',
+            name: 'All Trees',
             data: [{
                 name: 'You',
-                y: 5,
-                drilldown: 'transportYou'
-            }]
-        }, {
-            name: 'Housing',
-            data: [{
-                name: 'You',
-                y: 5,
-                drilldown: 'housingYou'
-            }]
-        }, {
-            name: 'Food',
-            data: [{
-                name: 'You',
-                y: 5,
-                drilldown: 'foodYou'
-            }]
-        }, {
-            name: 'Goods',
-            data: [{
-                name: 'You',
-                y: 5,
-                drilldown: 'goodsYou'
-            }]
-        }, {
-            name: 'Services',
-            data: [{
-                name: 'You',
-                y: 5,
-                drilldown: 'servicesYou'
+                y: round(parseFloat(AccumulatedCO2), 2),
+                drilldown: 'trees'
             }]
         }],
         drilldown: {
@@ -386,13 +384,11 @@ Template.charts.helpers({
                 textShadow: '0 0 2px black, 0 0 2px black'
             },
             series: [{
-                id: 'transportYou',
+                id: 'trees',
                 name: 'CO2 Breakdown',
                 data: [
-                    ['Car', 4],
-                    ['Rail Transit', 2],
-                    ['Bus', 2],
-                    ['Air Travel', 1],
+                    ['tree1', round(parseFloat(AccumulatedCO2), 2)],
+                    //['tree2', round(parseFloat(AccumulatedCO2), 2)],
                 ]
             }, {
                 id: 'housingYou',

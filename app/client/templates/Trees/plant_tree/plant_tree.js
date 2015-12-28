@@ -34,14 +34,32 @@ Template.plantTree.events({
     'click #cancel': function(event, template) {
         console.log('test');
 
+        AccumulatedCO2 = 0;
+
+        //fix these later
+        YearOfCalculation = 2015;
+        YearPlanted = 2015;
+
+        //for(i=0; i<TreeCollection.length; i++){
         var trees = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        var treeCount = 0;
-        var i = 0;
-        do{
-            treeCount++;
-            i++
-            console.log(treeCount);
-        }while(trees[i] != null)
+        TreeDiameter=trees[trees.length-1].diameter;
+
+        console.log(BodyMass =0.0998*(Math.pow(TreeDiameter,2.5445)));
+
+
+        GrowthRate=0.208 *(Math.pow(BodyMass,0.763));
+
+        dKdY=(Math.exp(1-(((GrowthRate*Math.exp(1))*(YearOfCalculation-YearPlanted))/BodyMass))/Math.exp(1))*(GrowthRate*Math.exp(1));
+
+        dKdYT=dKdY*1.24;
+
+        Carbon=dKdYT*0.47;
+
+        CO2=Carbon*3.6663;
+
+        AccumulatedCO2=AccumulatedCO2+CO2;
+
+        console.log(AccumulatedCO2);
     },
 
     'click #save': function(event, template) {
