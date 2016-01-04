@@ -17,7 +17,7 @@ Template.trees2.onCreated(function () {
 
 Template.trees2.onRendered(function () {
     //add your statement here
-    $('#dbtest').html('Hello');
+    //$('#dbtest').html('Hello');
 
     var treeRecord;
     //fix this, sort isn't working properly.  I had to brute force find the last entry by doing length -1
