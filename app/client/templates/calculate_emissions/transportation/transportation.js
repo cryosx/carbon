@@ -13,8 +13,14 @@ Template.transportation.helpers({
 
     totalTransport: function() {
         return calculateTransport();
+    },
+
+    getMake: function() {
+        //console.log(CarEfficiency.distinct("Make"));
     }
 });
+
+
 
 Template.transportation.events({
     "click #cancel": function() {
@@ -46,13 +52,45 @@ Template.transportation.events({
         console.log("SUBMIT");
         event.preventDefault();
         $("ul.tabs").tabs("select_tab", "housing");
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+        $("html, body").animate({ scrollTop: 0 }, "fast");
         return false;
     },
 
     "change input": function() {
         updateTransport();
     },
+
+    "change #carDistanceTraveledCheckbox": function() {
+        if (document.getElementById("carDistanceTraveledCheckbox").checked) {
+            $("#carDistanceCollapse").css("display","block");
+        } else {
+            $("#carDistanceCollapse").css("display","none");
+
+        }
+    },
+
+    "change #fuelEfficiencyCheckbox": function() {
+        if (document.getElementById("fuelEfficiencyCheckbox").checked) {
+            $("#fuelEfficiencyCollapse").css("display","block");
+        } else {
+            $("#fuelEfficiencyCollapse").css("display","none");
+
+        }
+    },
+
+    "click": function() {
+        var distinctEntries = _.uniq(CarEfficiency.find({}, {
+            sort: {make: 1}, fields: {make: true}
+        }).fetch().map(function(x) {
+            return x.make;
+        }), true);
+        console.log(distinctEntries);
+        console.log(Meteor.call("test"));
+
+        var treeRecord = CarEfficiency.find( {sort : ['make', 'dsc']}).fetch();
+        console.log(treeRecord);
+    }
+
 });
 
 Template.transportation.onCreated(function () {
@@ -61,6 +99,15 @@ Template.transportation.onCreated(function () {
 
 Template.transportation.onRendered(function () {
     $('select').material_select();
+
+    //$('.modal-trigger').leanModal();
+    $('#modal1').openModal();
+
+    $('.collapsible').collapsible({
+        accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+    });
+
+
     $(document).ready(function(){
         $('.tabs-wrapper .row').pushpin({ top: $('.tabs-wrapper').offset().top });
     });
@@ -74,18 +121,17 @@ function toast() {
 }
 
 
+
 function updateTransport() {
     var totalTransport = calculateTransport();
     document.getElementById("totalTransportEmissions").innerHTML = totalTransport.toFixed(2);
     var value = "Total: " + totalTransport.toFixed(2);
-    Materialize.toast(value, 3000);
+    //Materialize.toast(value, 3000);
 }
 
 function calculateTransport() {
     if(document.getElementById('carDistanceTraveled') !== null) {
 
-
-        console.log("CALCULATE");
         var totalTransport = 0;
         var unitConversion = 1;
 

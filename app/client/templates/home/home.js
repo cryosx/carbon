@@ -6,7 +6,8 @@ Template.home.events({
     "click #emissionsLink": function() {
         //event.preventDefault();
         //goToEmissions();
-        setTimeout(scrollToTop, 2000);
+        //setTimeout(scrollToTop, 2000);
+        scrollToTop();
     },
     "click": function() {
         console.log("NO");
@@ -36,7 +37,7 @@ Template.home.helpers(AccountsTemplates.atSignupLinkHelpers);
 Template.home.events(AccountsTemplates.atSignupLinkEvents);
 
 function scrollToTop() {
-    $("html, body").animate({ scrollTop: 0 }, "slow");
+    $("html, body").animate({ scrollTop: 0 }, "fast");
 }
 
 function goToEmissions() {
