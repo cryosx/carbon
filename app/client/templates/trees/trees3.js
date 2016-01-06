@@ -33,11 +33,25 @@ Template.trees3.helpers({
 });
 
 var owl = $("#tree-carousel");
-
+var string = "'click #tree1'";
+console.log(string);
 Template.trees3.events({
-    'click #tree1':function(event,template){
+
+    string:function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        treeRecord = treeArray[treeArray.length -1];
+        treeRecord = treeArray[0];
+        console.log(treeRecord);
+        setMarker();
+    },
+    'click #tree2':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[1];
+        console.log(treeRecord);
+        setMarker();
+    },
+    'click #tree3':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[2];
         console.log(treeRecord);
         setMarker();
     },
@@ -52,7 +66,6 @@ Template.trees3.events({
 
 Template.trees3.onCreated(function () {
     init();
-    //myFunction();
 });
 
 Template.trees3.onRendered(function () {
@@ -100,6 +113,15 @@ Template.trees3.onRendered(function () {
     });
     $('.materialboxed').materialbox();
 
+    $(".add").ready(function(){
+        var treeRecords = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+
+        for(var i = 0; i < treeRecords.length; i++) {
+            var content = "<div id=\"tree" + (i+1) + "\" class=\"item\"><img src=\"/parallax/tree" + (i+1) +".jpg\" alt=\"/parallax/treeSample.jpg\"></div>";
+            owl.data('owl-carousel').addItem(content);
+        }
+
+    });
 
 });
 

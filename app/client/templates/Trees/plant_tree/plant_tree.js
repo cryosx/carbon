@@ -34,38 +34,9 @@ Template.plantTree.events({
     'click #cancel': function(event, template) {
         console.log('test');
 
-        AccumulatedCO2 = 0;
-
-        //fix these later
-        YearOfCalculation = 2015;
-        YearPlanted = 2015;
-
-        //for(i=0; i<TreeCollection.length; i++){
-        var trees = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        TreeDiameter=trees[trees.length-1].diameter;
-
-        console.log(BodyMass =0.0998*(Math.pow(TreeDiameter,2.5445)));
-
-
-        GrowthRate=0.208 *(Math.pow(BodyMass,0.763));
-
-        dKdY=(Math.exp(1-(((GrowthRate*Math.exp(1))*(YearOfCalculation-YearPlanted))/BodyMass))/Math.exp(1))*(GrowthRate*Math.exp(1));
-
-        dKdYT=dKdY*1.24;
-
-        Carbon=dKdYT*0.47;
-
-        CO2=Carbon*3.6663;
-
-        AccumulatedCO2=AccumulatedCO2+CO2;
-
-        console.log(AccumulatedCO2);
     },
 
     'click #save': function(event, template) {
-
-
-
         console.log('Saving a tree');
         var species = template.find("#species").value;
         var location = template.find("#location").value;
@@ -86,10 +57,6 @@ Template.plantTree.events({
             'diameterUnits':diameterUnits,
             'createdDate':createdDate
         };
-        //tree['userID']=Meteor.user()._id; //or tree.key=value
-        console.log(tree);
-        console.log(Meteor.user()._id);
-
         if(species == "" || location == "" || latitude == "" || longitude == "" || datePlanted == "" ||
             diameter == "" || diameterUnits == "" || createdDate == "" ){
             window.alert("Please fill out all of the fields");
@@ -97,12 +64,9 @@ Template.plantTree.events({
         else{
             TreeCollection.insert(tree);
 
-
             var treeRecord;
             //fix this, sort isn't working properly.  I had to brute force find the last entry by doing length -1
             treeRecord = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-
-            console.log(treeRecord[treeRecord.length -1].location);
             console.log(treeRecord);
 
             $('#species1').html(treeRecord[treeRecord.length -1].species);

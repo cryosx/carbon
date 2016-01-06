@@ -310,200 +310,120 @@ Template.charts.helpers({
         }
     },
     treeChart: function() {
+        var treeRecords = TreeCollection.find({userID: Meteor.userId()}, {sort: ['createdDate', 'dsc']}).fetch();
 
-        AccumulatedCO2 = 0;
+        var d = new Date();
+        var CurrentYear = d.getFullYear();
+        var Trees=[];
+        var FinalCO2 = 0;
 
-        //fix these later, use the getYear function
-        YearOfCalculation = 2015;
-        YearPlanted = 2015;
+        //****fix YearPlanted to work with datePlanted instead of createdDate
+        //****fix datePlanted to only take in a certain format for dates entered
 
-        //for(i=0; i<TreeCollection.length; i++){
-        var trees = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        TreeDiameter=trees[trees.length-1].diameter;
+        //runs by amount of trees
+        for(var i=0; i<treeRecords.length; i++) {
+            var YearPlanted = treeRecords[i].createdDate.getFullYear();
+            var AccumulatedCO2 = 0; //reset AccumulatedCO2 for Trees[]
 
-        console.log(BodyMass =0.0998*(Math.pow(TreeDiameter,2.5445)));
+            //runs over the course of 85 years from currentYear
+            for (var j = 0; j <=85; j++) {
+                var YearOfCalculation = j + CurrentYear;
+                var TreeDiameter = treeRecords[i].diameter;
 
+                //inches = 1
+                //cm = 2
+                if (treeRecords[i].diameterUnits == 1) {
+                    TreeDiameter=TreeDiameter/0.393701;
+                } else {
+                    TreeDiameter=TreeDiameter;
+                }
 
-        GrowthRate=0.208 *(Math.pow(BodyMass,0.763));
+                //calculations
+                BodyMass = 0.0998 * (Math.pow(TreeDiameter, 2.5445));
+                GrowthRate = 0.208 * (Math.pow(BodyMass, 0.763));
+                dKdY = (Math.exp(1 - (((GrowthRate * Math.exp(1)) * (YearOfCalculation - YearPlanted)) / BodyMass)) / Math.exp(1)) * (GrowthRate * Math.exp(1));
+                dKdYT = dKdY * 1.24;
+                Carbon = dKdYT * 0.47;
+                CO2 = Carbon * 3.6663;
 
-        dKdY=(Math.exp(1-(((GrowthRate*Math.exp(1))*(YearOfCalculation-YearPlanted))/BodyMass))/Math.exp(1))*(GrowthRate*Math.exp(1));
-
-        dKdYT=dKdY*1.24;
-
-        Carbon=dKdYT*0.47;
-
-        CO2=Carbon*3.6663;
-
-        AccumulatedCO2=AccumulatedCO2+CO2;
-
-    return {
-        chart: {
-            type: 'column'
-        },
-        title: {
-            text: 'Tree Sequestration'
-        },
-        yAxis: {
-            title: {
-                text: 'Tons of CO' + '2'.sub()
-            },
-        },
-        xAxis: {
-            type: 'category'
-        },
-
-        legend: {
-            enabled: true
-        },
-
-        plotOptions: {
-            series: {
-                borderWidth: 0,
-                dataLabels: {
-                    enabled: true,
-                    style: {
-                        color: 'white',
-                        textShadow: '0 0 2px black, 0 0 2px black'
-                    }
-                },
-                stacking: 'normal'
+                //recording data
+                AccumulatedCO2 = AccumulatedCO2 + CO2;
+                AccumulatedCO2 = Math.round(AccumulatedCO2 * 10) / 10;
+                Trees[i] = AccumulatedCO2;
             }
-        },
-
-        series: [{
-            name: 'All Trees',
-            data: [{
-                name: 'You',
-                y: round(parseFloat(AccumulatedCO2), 2),
-                drilldown: 'trees'
-            }]
-        }],
-        drilldown: {
-            activeDataLabelStyle: {
-                color: 'white',
-                textShadow: '0 0 2px black, 0 0 2px black'
-            },
-            series: [{
-                id: 'trees',
-                name: 'CO2 Breakdown',
-                data: [
-                    ['tree1', round(parseFloat(AccumulatedCO2), 2)],
-                    //['tree2', round(parseFloat(AccumulatedCO2), 2)],
-                ]
-            }, {
-                id: 'housingYou',
-                name: 'CO2 Breakdown',
-                data: [
-                    ['Electricity', 3],
-                    ['Fuel', 5],
-                    ['Natural Gas', 6],
-                    ['Water Usage', 2],
-                ]
-            }, {
-                id: 'foodYou',
-                name: 'CO2 Breakdown',
-                data: [
-                    ['Beef, Pork, Lamb, Veal', 4],
-                    ['Poultry & Eggs', 2],
-                    ['Fish & Seafood', 2],
-                    ['Dairy', 2],
-                    ['Fruits & Vegetables', 2],
-                    ['Grains & Baked Goods', 2],
-                    ['Drinks', 2]
-                ]
-            }, {
-                id: 'goodsYou',
-                name: 'CO2 Breakdown',
-                data: [
-                    ['Clothing', 4],
-                    ['Furniture & Appliances', 4],
-                    ['Entertainment', 4],
-                    ['Paper & Reading', 4],
-                    ['Personal Care & Cleaning', 4],
-                    ['Medical', 4],
-                    ['Auto Parts', 2]
-                ]
-            }, {
-                id: 'servicesYou',
-                name: 'CO2 Breakdown',
-                data: [
-                    ['Health Care', 1],
-                    ['Communication', 1],
-                    ['Vehicle Services', 1],
-                    ['Household Maintenance', 1]
-                ]
-            }]
+            FinalCO2 = FinalCO2 + AccumulatedCO2;
         }
-        //chart: {
-        //    type: 'column'
-        //},
-        //title: {
-        //    text: 'Your C0' + '2'.sub() + ' Balance'
-        //},
-        //xAxis: {
-        //    categories: ['You', 'Person1', 'Person2', 'Person3', 'Trees']
-        //},
-        //yAxis: {
-        //    min: 0,
-        //    title: {
-        //        text: 'Tons of CO' + '2'.sub()
-        //    },
-        //    stackLabels: {
-        //        enabled: true,
-        //        style: {
-        //            fontWeight: 'bold',
-        //            color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
-        //        }
-        //    }
-        //},
-        //legend: {
-        //    align: 'right',
-        //    x: -30,
-        //    verticalAlign: 'top',
-        //    y: 25,
-        //    floating: true,
-        //    backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-        //    borderColor: '#CCC',
-        //    borderWidth: 1,
-        //    shadow: false
-        //},
-        //tooltip: {
-        //    formatter: function () {
-        //        return '<b>' + this.x + '</b><br/>' +
-        //            this.series.name + ': ' + this.y + '<br/>' +
-        //            'Total: ' + this.point.stackTotal;
-        //    }
-        //},
-        //plotOptions: {
-        //    column: {
-        //        stacking: 'normal',
-        //        dataLabels: {
-        //            enabled: true,
-        //            color: (Highcharts.theme && Highcharts.theme.dataLabelsColor) || 'white',
-        //            style: {
-        //                textShadow: '0 0 3px black'
-        //            }
-        //        }
-        //    }
-        //},
-        //series: [{
-        //    name: 'Transportation',
-        //    data: [5, 3, 4, 7, 2]
-        //}, {
-        //    name: 'Housing',
-        //    data: [2, 2, 3, 2, 1]
-        //}, {
-        //    name: 'Food',
-        //    data: [3, 4, 4, 2, 5]
-        //}, {
-        //    name: 'Goods',
-        //    data: [3, 4, 4, 2, 5]
-        //}, {
-        //    name: 'Services',
-        //    data: [3, 4, 4, 2, 5]
-        //}]
+
+        var dataSet = [];
+
+        //plugs data into highchart
+        for(var k = 0; k < Trees.length; k++){
+            var data =[];
+            data = [
+                [treeRecords[k].species, round(parseFloat(Trees[k]), 2)]
+            ];
+            dataSet.push(data[0]);
+        }
+
+        var data_str = JSON.stringify(dataSet);
+
+        return {
+
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Tree Sequestration'
+            },
+            yAxis: {
+                title: {
+                    text: 'Tons of CO' + '2'.sub()
+                }
+            },
+            xAxis: {
+                type: 'category'
+            },
+
+            legend: {
+                enabled: true
+            },
+
+            plotOptions: {
+                series: {
+                    borderWidth: 0,
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            color: 'white',
+                            textShadow: '0 0 2px black, 0 0 2px black'
+                        }
+                    },
+                    stacking: 'normal'
+                }
+            },
+
+            series: [{
+                name: 'All Trees',
+                data: [{
+                    name: 'You',
+                    y: round(parseFloat(FinalCO2), 2),
+                    drilldown: 'trees'
+                }]
+            }],
+
+            drilldown: {
+                activeDataLabelStyle: {
+                    color: 'white',
+                    textShadow: '0 0 2px black, 0 0 2px black'
+                },
+                series: [{
+                    id: 'trees',
+                    name: 'CO2 Breakdown',
+                    data:  JSON.parse(data_str)
+                }]
+            }
+        }
     }
-}
 });
 
 

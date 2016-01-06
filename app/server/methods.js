@@ -3,7 +3,7 @@ Meteor.methods({
         return UserRecords.remove({});
     },
     removeAllUserProfiles: function() {
-        return UserProfiles.remve({});
+        return UserProfiles.remove({});
     },
     removeAllCarbonStatsRecords: function () {
         return CarbonStats.remove({});

@@ -86,7 +86,7 @@
 
 
                         for (i = 0; i <=85; i++) {
-                            YearOfCalculation = i + 2015;
+                            YearOfCalculation = i + 2016;
                             if (YearOfCalculation>=YearPlanted) {
 
                                 //Body mass (kg dry above groung matter) from Chave et al (2001):
@@ -109,6 +109,8 @@
 
                                 //adds CO2 over the years:
                                 AccumulatedCO2=AccumulatedCO2+CO2;
+
+                                console.log(AccumulatedCO2);
 
 //Generates data.frame that includes year:
                                 Results[i]= Math.round(AccumulatedCO2*10)/10 ;

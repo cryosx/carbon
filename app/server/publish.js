@@ -6,7 +6,7 @@ Meteor.publish('UserRecords', function () {
     return UserRecords.find();
 });
 
-Meteor.publish('UserProflies', function () {
+Meteor.publish('UserProfiles', function () {
     return UserProfiles.find();
 });
 
@@ -16,4 +16,8 @@ Meteor.publish('Rankings', function () {
 
 Meteor.publish('TreeCollection', function () {
     return TreeCollection.find();
+});
+
+Meteor.publish('TreeSpecies', function () {
+    return TreeSpecies.find();
 });
