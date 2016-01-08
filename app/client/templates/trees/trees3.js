@@ -37,9 +37,15 @@ var string = "'click #tree1'";
 console.log(string);
 Template.trees3.events({
 
-    string:function(event,template){
+    /*string:function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
         treeRecord = treeArray[0];
+        console.log(treeRecord);
+        setMarker();
+    },*/
+    'click #tree1':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[2];
         console.log(treeRecord);
         setMarker();
     },
@@ -55,12 +61,51 @@ Template.trees3.events({
         console.log(treeRecord);
         setMarker();
     },
-
+    'click #tree4':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[2];
+        console.log(treeRecord);
+        setMarker();
+    },
+    'click #tree5':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[2];
+        console.log(treeRecord);
+        setMarker();
+    },
+    'click #tree6':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[2];
+        console.log(treeRecord);
+        setMarker();
+    },
+    'click #tree7':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[2];
+        console.log(treeRecord);
+        setMarker();
+    },
+    'click #tree8':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[2];
+        console.log(treeRecord);
+        setMarker();
+    },
+    'click #tree9':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[2];
+        console.log(treeRecord);
+        setMarker();
+    },
+    'click #tree10':function(event,template){
+        treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
+        treeRecord = treeArray[2];
+        console.log(treeRecord);
+        setMarker();
+    },
     "change #latitude, change #longitude": function() {
         setMarker();
     },
-
-
 
 });
 

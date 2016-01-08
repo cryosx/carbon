@@ -95,3 +95,9 @@ Router.route("trees3", {
     controller: "TreeController",
     path: "/trees3"
 });
+
+Router.route("rankings", {
+    name: "rankings",
+    controller: "RankingsController",
+    path: "/rankings"
+});
