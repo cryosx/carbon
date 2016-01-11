@@ -41,6 +41,15 @@ Template.transportation.events({
         }
     },
 
+    "change #carMileageLastCheck, change #carDateLastCheck, change #carCurrentMileage, change #carCurrentDate": function() {
+        var carDistanceTraveled = document.getElementById("carDistanceTraveled");
+        var carMileageLastCheck = document.getElementById("carMileageLastCheck").value;
+        var carCurrentMileage = document.getElementById("carCurrentMileage").value;
+        var carDateLastCheck = new Date(document.getElementById("carDateLastCheck").value);
+        var carCurrentDate = new Date(document.getElementById("carCurrentDate").value);
+        carDistanceTraveled.value = ((carCurrentMileage - carMileageLastCheck) / (Math.floor((carCurrentDate - carDateLastCheck) / (1000*60*60*24)))) * 365;
+    },
+
     "change #carMake": function() {
 
         // POPULATE <options> for <select id="carModel">
