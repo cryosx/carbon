@@ -4,6 +4,7 @@ var treeRecord;
 
 Template.trees3.helpers({
 
+
     exampleMapOptions: function() {
         // Make sure the maps API has loaded
         if (GoogleMaps.loaded()) {
@@ -33,8 +34,9 @@ Template.trees3.helpers({
 });
 
 var owl = $("#tree-carousel");
-var string = "'click #tree1'";
+var string = "'click #tree1':function(event,template){console.log(hello);}";
 console.log(string);
+
 Template.trees3.events({
 
     /*string:function(event,template){
@@ -43,9 +45,9 @@ Template.trees3.events({
         console.log(treeRecord);
         setMarker();
     },*/
-    'click #tree1':function(event,template){
+    /*'click #tree1':function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        treeRecord = treeArray[2];
+        treeRecord = treeArray[0];
         console.log(treeRecord);
         setMarker();
     },
@@ -63,46 +65,47 @@ Template.trees3.events({
     },
     'click #tree4':function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        treeRecord = treeArray[2];
+        treeRecord = treeArray[3];
         console.log(treeRecord);
         setMarker();
     },
     'click #tree5':function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        treeRecord = treeArray[2];
+        treeRecord = treeArray[4];
         console.log(treeRecord);
         setMarker();
     },
     'click #tree6':function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        treeRecord = treeArray[2];
+        treeRecord = treeArray[5];
         console.log(treeRecord);
         setMarker();
     },
     'click #tree7':function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        treeRecord = treeArray[2];
+        treeRecord = treeArray[6];
         console.log(treeRecord);
         setMarker();
     },
     'click #tree8':function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        treeRecord = treeArray[2];
+        treeRecord = treeArray[7];
         console.log(treeRecord);
         setMarker();
     },
     'click #tree9':function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        treeRecord = treeArray[2];
+        treeRecord = treeArray[8];
         console.log(treeRecord);
         setMarker();
     },
     'click #tree10':function(event,template){
         treeArray = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
-        treeRecord = treeArray[2];
+        treeRecord = treeArray[9];
         console.log(treeRecord);
         setMarker();
     },
+    */
     "change #latitude, change #longitude": function() {
         setMarker();
     },
@@ -159,12 +162,23 @@ Template.trees3.onRendered(function () {
     $('.materialboxed').materialbox();
 
     $(".add").ready(function(){
+        /*
         var treeRecords = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
 
         for(var i = 0; i < treeRecords.length; i++) {
             var content = "<div id=\"tree" + (i+1) + "\" class=\"item\"><img src=\"/parallax/tree" + (i+1) +".jpg\" alt=\"/parallax/treeSample.jpg\"></div>";
-            owl.data('owl-carousel').addItem(content);
+
+            var htmlObject = document.createElement('div');
+            htmlObject.innerHTML = content;
+            document.getElementById("tree-carousel").appendChild(htmlObject);
         }
+
+        document.querySelector('body').addEventListener('click', function(event) {
+            if ( event.target.id=== 'tree1'){
+                alert(event.target.id);
+            }
+        });
+        */
 
     });
 

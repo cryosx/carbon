@@ -67,10 +67,12 @@ Template.rankings.events({
             'rank': rankNumber,
             'createdDate' : createdDate
         };
-        Rankings.insert(rank);
+        //Rankings.insert(rank);
         var array = [];
         array = Rankings.find({"userID" : id}, {sort: {createdDate: -1}}).fetch();
         console.log(array[0].footprint);
+
+
 
     },
 });
@@ -117,10 +119,22 @@ Template.rankings.onRendered(function () {
     $(".add").ready(function(){
         var array = [];
         var username;
+        var distinctArray = [];
+        var distinctValues;
 
         //make it sort by unique to have one entry per person
         console.log(array = Rankings.find({}, {sort: {footprint: 1}}).fetch());
         console.log(array.length);
+
+
+        var distinctEntries = _.uniq(Rankings.find({}, {
+            sort: {userID: 1}
+        }).fetch().map(function(x) {
+            return x.footprint;
+        }), true);
+
+        console.log(distinctEntries);
+
         for(var i = 0; i < array.length; i++) {
             username = array[i].userID;
             var content = "<div id=\"rank" + (i+1) + "\" class=\"item\"><img src=\"/parallax/tree" + (i+1) +".jpg\" alt=\"/parallax/treeSample.jpg\"> <p>" + username + ": " + array[i].footprint + "</p></div>";
