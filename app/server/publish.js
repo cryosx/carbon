@@ -2,6 +2,18 @@ Meteor.publish('CarbonStats', function () {
     return CarbonStats.find();
 });
 
+Meteor.publish('Cars', function () {
+    return Cars.find();
+});
+
+Meteor.publish('CarEfficiency', function () {
+    return CarEfficiency.find();
+});
+
+Meteor.publish('CarMakes', function() {
+    return CarMakes.find();
+});
+
 Meteor.publish('UserRecords', function () {
     return UserRecords.find();
 });

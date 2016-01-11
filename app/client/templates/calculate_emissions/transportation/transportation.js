@@ -2,7 +2,6 @@ Template.transportation.helpers({
 
     units: function() {
         var units = Session.get("units");
-        //console.log(units);
         if (units === "miles") {
             return "Miles"
         } else if (units === "kilometers") {
@@ -15,9 +14,9 @@ Template.transportation.helpers({
         return calculateTransport();
     },
 
-    getMake: function() {
-        //console.log(CarEfficiency.distinct("Make"));
-    }
+    //carMake: function() {
+    //    return Cars.find();
+    //}
 });
 
 
@@ -33,13 +32,6 @@ Template.transportation.events({
     //    return false;
     //},
 
-    //"click": function(){
-    //    var records = CarbonStats.find({userID: Meteor.userId(), year:2015}).fetch();
-    //    console.log(records[0].transportation.totalTransport);
-    //    document.getElementById("totalTransportEmissions").innerHTML = records[0].transportation.totalTransport;
-    //
-    //},
-
     "change #units": function() {
         var value = document.getElementById("units").value;
         if (value === "miles") {
@@ -48,12 +40,81 @@ Template.transportation.events({
             Session.set("units", value);
         }
     },
+
+    "change #carMake": function() {
+
+        // POPULATE <options> for <select id="carModel">
+
+
+        var make = document.getElementById("carMake").value.split(" : ")[1];
+        var select = document.getElementById("carModel");
+        var option;
+        var temp = Cars.find({make: make}).fetch();
+
+        document.getElementById("carYear").innerHTML = "<option disabled selected>Select a Year</option>";
+        select.innerHTML = "<option disabled selected>Select a Model</option>";
+
+        temp = temp[0].models;
+        temp.forEach(function(current, index) {
+            option = document.createElement("option");
+            option.value = index + " : " + current.model;
+            option.text = current.model;
+            select.add(option);
+        })
+
+        // NEED to call material_seelct() again to update <options>
+        $('select').material_select();
+
+    },
+
+    "change #carModel": function() {
+
+        // POPULATE <options> for <select id="carYear">
+
+        var make = document.getElementById("carMake").value.split(" : ")[1];
+        var modelIndex = document.getElementById("carModel").value.split(" : ")[0];
+        var select = document.getElementById("carYear");
+
+        var option;
+        var temp = Cars.find({make: make}).fetch();
+        select.innerHTML = "<option disabled selected>Select a Year</option>";
+        temp = temp[0].models[modelIndex].years;
+        //for (var i = 0; i < temp.length; i++) {
+        //    if (model === temp[i].model.toString()) {
+        //        temp = temp[i].years;
+        //        break;
+        //    }
+        //}
+        temp.forEach(function(current, index) {
+            option = document.createElement("option");
+            option.value = index + " : " + current.year;
+            option.text = current.year;
+            select.add(option);
+        })
+
+        // NEED to call material_seelct() again to update <options>
+        $('select').material_select();
+    },
+
+    "change #carYear": function() {
+        var fuelEfficiency = document.getElementById("fuelEfficiency");
+        var make = document.getElementById("carMake").value.split(" : ")[1];
+        var modelIndex = document.getElementById("carModel").value.split(" : ")[0];
+        var yearIndex = document.getElementById("carYear").value.split(" : ")[0];
+        var temp = Cars.find({make: make}).fetch();
+        temp = temp[0].models[modelIndex].years[yearIndex];
+        if (document.getElementById("units").value === "miles") {
+            fuelEfficiency.value = temp.MPG;
+        } else if (document.getElementById("units").value === "kilometers") {
+            fuelEfficiency.value = temp.KPG;
+        }
+
+    },
+
     "submit": function() {
-        console.log("SUBMIT");
         event.preventDefault();
         $("ul.tabs").tabs("select_tab", "housing");
         $("html, body").animate({ scrollTop: 0 }, "fast");
-        return false;
     },
 
     "change input": function() {
@@ -70,34 +131,63 @@ Template.transportation.events({
     },
 
     "change #fuelEfficiencyCheckbox": function() {
+
+        // POPULATE the <options> for <select id="carMake">
+
+        // NEED to call material_seelct('destory) to update <options> along with material_select() at the bottom
+
+        $('select').material_select('destroy');
+
+        var cars = Cars.find().fetch();
+        var select = document.getElementById("carMake");
+        var option;
+
+        document.getElementById("carModel").innerHTML = "<option disabled selected>Select a Model</option>";
+        document.getElementById("carYear").innerHTML = "<option disabled selected>Select a Year</option>";
+
+        select.innerHTML = "<option disabled selected>Select a Make</option>";
+
+        cars.forEach(function(current, index) {
+            option = document.createElement("option");
+            option.value = index + " : " + current.make;
+            option.text = current.make;
+            select.add(option);
+        });
+
+        // NEED to call material_seelct() again to update <options>
+
+        $('select').material_select();
+
+        // HIDE and show car selection for fuel efficiency
+
         if (document.getElementById("fuelEfficiencyCheckbox").checked) {
             $("#fuelEfficiencyCollapse").css("display","block");
         } else {
             $("#fuelEfficiencyCollapse").css("display","none");
+        }
+    },
 
+    "change #motorcycleCheckbox": function() {
+        if (document.getElementById("motorcycleCheckbox").checked) {
+            $("#motorcycleDistanceCollapse").css("display","block");
+        } else {
+            $("#motorcycleDistanceCollapse").css("display","none");
         }
     },
 
     "click": function() {
-        var distinctEntries = _.uniq(CarEfficiency.find({}, {
-            sort: {make: 1}, fields: {make: true}
-        }).fetch().map(function(x) {
-            return x.make;
-        }), true);
-        console.log(distinctEntries);
-        console.log(Meteor.call("test"));
 
-        var treeRecord = CarEfficiency.find( {sort : ['make', 'dsc']}).fetch();
-        console.log(treeRecord);
     }
-
 });
 
 Template.transportation.onCreated(function () {
     Session.set("units", "Miles");
+
 });
 
 Template.transportation.onRendered(function () {
+
+
     $('select').material_select();
 
     //$('.modal-trigger').leanModal();
@@ -106,11 +196,11 @@ Template.transportation.onRendered(function () {
     $('.collapsible').collapsible({
         accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
     });
+    $('.tabs-wrapper .row').pushpin({ top: $('.tabs-wrapper').offset().top });
 
-
-    $(document).ready(function(){
-        $('.tabs-wrapper .row').pushpin({ top: $('.tabs-wrapper').offset().top });
-    });
+    //$(document).ready(function(){
+    //    $('.tabs-wrapper .row').pushpin({ top: $('.tabs-wrapper').offset().top });
+    //});
 });
 
 Template.transportation.onDestroyed(function () {

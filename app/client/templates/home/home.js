@@ -8,9 +8,6 @@ Template.home.events({
         //goToEmissions();
         //setTimeout(scrollToTop, 2000);
         scrollToTop();
-    },
-    "click": function() {
-        console.log("NO");
     }
 });
 
@@ -30,11 +27,11 @@ Template.home.onRendered(function () {
 Template.home.onDestroyed(function () {
 });
 
-// Simply 'inherites' helpers from AccountsTemplates
-Template.home.helpers(AccountsTemplates.atSignupLinkHelpers);
-
-// Simply 'inherites' events from AccountsTemplates
-Template.home.events(AccountsTemplates.atSignupLinkEvents);
+//// Simply 'inherites' helpers from AccountsTemplates
+//Template.home.helpers(AccountsTemplates.atSignupLinkHelpers);
+//
+//// Simply 'inherites' events from AccountsTemplates
+//Template.home.events(AccountsTemplates.atSignupLinkEvents);
 
 function scrollToTop() {
     $("html, body").animate({ scrollTop: 0 }, "fast");

@@ -25,9 +25,6 @@ Template.carbonNav.onCreated(function () {
 
 Template.carbonNav.onRendered(function () {
     $('ul.tabs').tabs();
-    //$('.parallax').parallax();
-
-
 });
 
 Template.carbonNav.onDestroyed(function () {
