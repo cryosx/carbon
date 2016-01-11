@@ -184,6 +184,14 @@ Template.transportation.events({
         }
     },
 
+    "change #railDistanceTraveledCheckbox": function() {
+        if (document.getElementById("railDistanceTraveledCheckbox").checked) {
+            $("#railDistanceCollapse").css("display","block");
+        } else {
+            $("#railDistanceCollapse").css("display","none");
+        }
+    },
+
     "click": function() {
 
     }
