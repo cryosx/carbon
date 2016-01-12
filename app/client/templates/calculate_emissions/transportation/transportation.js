@@ -184,6 +184,15 @@ Template.transportation.events({
         }
     },
 
+    "change #motorcycleMileageLastCheck, change #motorcycleDateLastCheck, change #motorcycleCurrentMileage, change #motorcycleCurrentDate": function() {
+        var motorcycleDistanceTraveled = document.getElementById("motorcycleDistanceTraveled");
+        var motorcycleMileageLastCheck = document.getElementById("motorcycleMileageLastCheck").value;
+        var motorcycleCurrentMileage = document.getElementById("motorcycleCurrentMileage").value;
+        var motorcycleDateLastCheck = new Date(document.getElementById("motorcycleDateLastCheck").value);
+        var motorcycleCurrentDate = new Date(document.getElementById("motorcycleCurrentDate").value);
+        motorcycleDistanceTraveled.value = ((motorcycleCurrentMileage - motorcycleMileageLastCheck) / (Math.floor((motorcycleCurrentDate - motorcycleDateLastCheck) / (1000*60*60*24)))) * 365;
+    },
+
     "change #railDistanceTraveledCheckbox": function() {
         if (document.getElementById("railDistanceTraveledCheckbox").checked) {
             $("#railDistanceCollapse").css("display","block");
