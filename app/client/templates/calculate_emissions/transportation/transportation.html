@@ -1,5 +1,6 @@
 <template name="transportation">
     <div id="transportation">
+
         <div class="row center">
             <h5>How much do you travel per year?</h5>
         </div>
@@ -21,6 +22,7 @@
         </div>
 
         <form id="transportation-form">
+
             <div class="row padding">
                 <div class="card hoverable center">
                     <div class="card-panel">
@@ -61,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <ul class="collapsible no-shadow" id="carDistanceTraveledCalculate" data-collapsible="accordion">
+                                <ul class="collapsible no-shadow" id="carDistanceTraveledCalculate" data-collapsible="expandable">
                                     <li>
                                         <div class="collapsible-body" id="carDistanceCollapse">
                                             <div class="row">
@@ -126,7 +128,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <ul class="collapsible no-shadow" id="fuelEfficiencyCarSelection" data-collapsible="accordion">
+                                <ul class="collapsible no-shadow" id="fuelEfficiencyCarSelection" data-collapsible="expandable">
                                     <li>
                                         <div class="collapsible-body" id="fuelEfficiencyCollapse">
                                             <div class="row">
@@ -184,7 +186,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <ul class="collapsible no-shadow" id="motorcycleDistanceTraveledCalculate" data-collapsible="accordion">
+                                <ul class="collapsible no-shadow" id="motorcycleDistanceTraveledCalculate" data-collapsible="expandable">
                                     <li>
                                         <div class="collapsible-body" id="motorcycleDistanceCollapse">
                                             <div class="row">
@@ -249,6 +251,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col s12 m12 l12">
                     <div class="card hoverable">
                         <div class="card-image">
@@ -270,10 +274,11 @@
                                     <label for="railDistanceTraveledCheckbox">Calculate it</label>
                                 </div>
                             </div>
+
                             <div class="row">
-                                <ul class="collapsible no-shadow" id="railDistanceTraveledCalculate" data-collapsible="accordion">
+                                <ul class="collapsible no-shadow" id="railDistanceTraveledCalculate" data-collapsible="expandable">
                                     <li>
-                                        <div class="collapsible-body" id="railDistanceCollapse">
+                                        <div class="collapsible-body padding" id="railDistanceCollapse">
                                             <div class="row">
                                                 &nbsp;
                                             </div>
@@ -291,16 +296,27 @@
                                                     <label for="railMapCheckbox">Find Distance</label>
                                                 </div>
                                             </div>
+
+                                            <div class="row">
+                                                <ul class="collapsible no-shadow" id="railMapContainer" data-collapsible="expandable">
+                                                    <li>
+                                                        <div class="collapsible-body" id="railMapCollapse">
+                                                            {{> railMap}}
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
                                             <div class="row valign-wrapper center-align">
                                                 <div class="col s3 offset-m1">
-                                                    <h6>I make this trip </h6>
+                                                    <h6>I make this trip</h6>
                                                 </div>
 
                                                 <div class="input-field col s2 center-align">
                                                     <input type="number" name="railRouteFrequencyInput" id="railRouteFrequencyInput" min="0" required>
                                                 </div>
                                                 <div class="col s3 m2 l2 center-align">
-                                                    <h6> times per </h6>
+                                                    <h6>times per</h6>
                                                 </div>
                                                 <div class="input-field col s2">
                                                     <select id="railRouteFrequency">

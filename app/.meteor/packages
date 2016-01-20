@@ -48,6 +48,7 @@ maazalik:highcharts
 maazalik:highcharts-3d
 maazalik:highcharts-gauge
 clarencel:highcharts-drilldown
-dburles:google-maps
 harrison:papa-parse
 underscore
+kadira:flow-router
+dburles:google-maps

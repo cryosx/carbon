@@ -12,11 +12,7 @@ Template.transportation.helpers({
 
     totalTransport: function() {
         return calculateTransport();
-    },
-
-    //carMake: function() {
-    //    return Cars.find();
-    //}
+    }
 });
 
 
@@ -64,6 +60,8 @@ Template.transportation.events({
         select.innerHTML = "<option disabled selected>Select a Model</option>";
 
         temp = temp[0].models;
+
+        // Using " : " (space, colon, space) as a delimiter.
         temp.forEach(function(current, index) {
             option = document.createElement("option");
             option.value = index + " : " + current.model;
@@ -131,12 +129,8 @@ Template.transportation.events({
     },
 
     "change #carDistanceTraveledCheckbox": function() {
-        if (document.getElementById("carDistanceTraveledCheckbox").checked) {
-            $("#carDistanceCollapse").css("display","block");
-        } else {
-            $("#carDistanceCollapse").css("display","none");
+        $("#carDistanceCollapse").slideToggle(500);
 
-        }
     },
 
     "change #fuelEfficiencyCheckbox": function() {
@@ -156,6 +150,8 @@ Template.transportation.events({
 
         select.innerHTML = "<option disabled selected>Select a Make</option>";
 
+
+        // Using " : " (space, colon, space) as a delimiter.
         cars.forEach(function(current, index) {
             option = document.createElement("option");
             option.value = index + " : " + current.make;
@@ -169,19 +165,12 @@ Template.transportation.events({
 
         // HIDE and show car selection for fuel efficiency
 
-        if (document.getElementById("fuelEfficiencyCheckbox").checked) {
-            $("#fuelEfficiencyCollapse").css("display","block");
-        } else {
-            $("#fuelEfficiencyCollapse").css("display","none");
-        }
+        $("#fuelEfficiencyCollapse").slideToggle(500);
+
     },
 
     "change #motorcycleCheckbox": function() {
-        if (document.getElementById("motorcycleCheckbox").checked) {
-            $("#motorcycleDistanceCollapse").css("display","block");
-        } else {
-            $("#motorcycleDistanceCollapse").css("display","none");
-        }
+        $("#motorcycleDistanceCollapse").slideToggle(500);
     },
 
     "change #motorcycleMileageLastCheck, change #motorcycleDateLastCheck, change #motorcycleCurrentMileage, change #motorcycleCurrentDate": function() {
@@ -194,11 +183,14 @@ Template.transportation.events({
     },
 
     "change #railDistanceTraveledCheckbox": function() {
-        if (document.getElementById("railDistanceTraveledCheckbox").checked) {
-            $("#railDistanceCollapse").css("display","block");
-        } else {
-            $("#railDistanceCollapse").css("display","none");
-        }
+        $("#railDistanceCollapse").slideToggle(500);
+    },
+
+    "change #railMapCheckbox": function() {
+        $("#railMapCollapse").slideToggle(500);
+        google.maps.event.trigger(GoogleMaps.maps.railMap.instance, 'resize');
+        //google.maps.event.trigger(GoogleMaps.maps.railMap.instance, 'center');
+
     },
 
     "click": function() {
@@ -213,29 +205,19 @@ Template.transportation.onCreated(function () {
 
 Template.transportation.onRendered(function () {
 
-
     $('select').material_select();
-
     //$('.modal-trigger').leanModal();
     $('#modal1').openModal();
-
     $('.collapsible').collapsible({
         accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
     });
     $('.tabs-wrapper .row').pushpin({ top: $('.tabs-wrapper').offset().top });
 
-    //$(document).ready(function(){
-    //    $('.tabs-wrapper .row').pushpin({ top: $('.tabs-wrapper').offset().top });
-    //});
 });
 
 Template.transportation.onDestroyed(function () {
     //add your statement here
 });
-
-function toast() {
-}
-
 
 
 function updateTransport() {
