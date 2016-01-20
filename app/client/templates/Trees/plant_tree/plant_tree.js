@@ -30,6 +30,9 @@ Template.plantTree.helpers({
 
 Template.plantTree.events({
 
+    'dropped #dropzone': function(e) {
+        console.log('dropped a file');
+    },
 
     'click #cancel': function(event, template) {
         console.log('test');

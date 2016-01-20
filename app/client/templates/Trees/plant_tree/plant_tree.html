@@ -75,14 +75,18 @@
 
                 <div class="row">
                     <div class="col s12 m12 l12 card">
-                        <div id="upload" class="card-content">
-                            {{> upload_bootstrap contentType='images' fileTypes='.jpg' multiple=true}}
-                            <!--<form action="carbon\app\public" class="dropzone">
-                                <div class="fallback">
-                                    <input name="file" type="file" multiple />
-                                </div>
-                            </form>-->
+
+
+                        <div id="dropzone" class="dropzone">
+                            <div class="well well-drop-zone">
+                                Drop file(s) here to upload
+                            </div>
                         </div>
+
+
+                        <!--<div id="upload" class="card-content">
+                            &lt;!&ndash;{{> upload_bootstrap contentType='images' fileTypes='.jpg' multiple=true}}&ndash;&gt;
+                        </div>-->
                     </div>
                 </div>
                 <div class="row">

@@ -50,5 +50,12 @@ maazalik:highcharts-gauge
 clarencel:highcharts-drilldown
 harrison:papa-parse
 underscore
+<<<<<<< HEAD
 kadira:flow-router
 dburles:google-maps
+=======
+cfs:standard-packages
+cfs:gridfs
+raix:ui-dropped-event
+cfs:s3
+>>>>>>> origin/master

@@ -54,7 +54,7 @@ Template.rankings.events({
         //var carbonRecord = carbonRecords[0];
         //var totalCarbon = carbonRecord.totalCarbon;
         //var footPrint = totalCarbon - FinalCO2;
-        var footPrint = -100;
+        var footPrint = -10000;
         var createdDate = new Date();
 
         var rankNumber = 0;
@@ -68,6 +68,7 @@ Template.rankings.events({
             'createdDate' : createdDate
         };
         //Rankings.insert(rank);
+        //Rankings.update({"userID" : id}, {footprint: -8888});
         var array = [];
         array = Rankings.find({"userID" : id}, {sort: {createdDate: -1}}).fetch();
         console.log(array[0].footprint);
@@ -118,6 +119,7 @@ Template.rankings.onRendered(function () {
     $('.materialboxed').materialbox();
     $(".add").ready(function(){
         var array = [];
+        var array2 = [];
         var username;
         var distinctArray = [];
         var distinctValues;
@@ -125,7 +127,8 @@ Template.rankings.onRendered(function () {
         //make it sort by unique to have one entry per person
         console.log(array = Rankings.find({}, {sort: {footprint: 1}}).fetch());
         console.log(array.length);
-
+        //console.log(array2 = Rankings.find({}, {sort: {userID: 1}, limit: 1}).fetch());
+        console.log(array2 = Rankings.find({}, {sort: {userID: 1, createdDate: 1}}).fetch());
 
         var distinctEntries = _.uniq(Rankings.find({}, {
             sort: {userID: 1}
