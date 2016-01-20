@@ -51,3 +51,7 @@ clarencel:highcharts-drilldown
 dburles:google-maps
 harrison:papa-parse
 underscore
+cfs:standard-packages
+cfs:gridfs
+raix:ui-dropped-event
+cfs:s3
