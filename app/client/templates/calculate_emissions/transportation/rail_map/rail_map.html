@@ -1,19 +1,12 @@
 <template name="railMap">
-    <div class="map-container">
-        <input id="pac-input" class="controls browser-default" type="text" placeholder="Enter a location">
-        <div id="type-selector" class="controls">
-            <input type="radio" name="type" id="changetype-all" checked="checked">
-            <label for="changetype-all">All</label>
 
-            <input type="radio" name="type" id="changetype-establishment">
-            <label for="changetype-establishment">Establishments</label>
-
-            <input type="radio" name="type" id="changetype-address">
-            <label for="changetype-address">Addresses</label>
-
-            <input type="radio" name="type" id="changetype-geocode">
-            <label for="changetype-geocode">Geocodes</label>
+    <div class="">
+        <div class="map-container">
+            {{> googleMap name="railMap" options=railMapOptions}}
         </div>
-        {{> googleMap name="railMap" options=railMapOptions}}
     </div>
+    <input id="pac-input-origin" class="col s4" type="text" placeholder="Starting point">
+    <input id="pac-input-destination" class="col s4" type="text" placeholder="Destination">
+    <button id="pac-submit" class="btn waves-effect waves-light col s2" type="submit" name="action">Submit</button>
+    <span id="pac-label" class="col s2">Some Text</span>
 </template>

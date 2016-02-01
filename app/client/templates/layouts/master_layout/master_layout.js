@@ -9,7 +9,7 @@ Template.MasterLayout.onCreated(function() {
 });
 
 Template.MasterLayout.onRendered(function(){
-    pageTransitions();
+    //pageTransitions();
 });
 //function pageTransitions() {
 //    var pageWrap = document.getElementById('pagewrap'),

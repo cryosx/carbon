@@ -1,6 +1,11 @@
 <template name="transportation">
     <div id="transportation">
+        <div class="row">
+            <div class="col s12">
+                {{> railMap}}
 
+            </div>
+        </div>
         <div class="row center">
             <h5>How much do you travel per year?</h5>
         </div>
@@ -301,7 +306,7 @@
                                                 <ul class="collapsible no-shadow" id="railMapContainer" data-collapsible="expandable">
                                                     <li>
                                                         <div class="collapsible-body" id="railMapCollapse">
-                                                            {{> railMap}}
+                                                            <!--{{> railMap}}-->
                                                         </div>
                                                     </li>
                                                 </ul>
