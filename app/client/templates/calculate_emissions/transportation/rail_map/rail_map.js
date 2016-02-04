@@ -71,7 +71,7 @@ function init() {
         var inputOrigin = document.getElementById('pac-input-origin');
         var inputDestination = document.getElementById('pac-input-destination');
         var inputSubmit = document.getElementById('pac-submit');
-        var inputLabel = document.getElementById('pac-label');
+        routeDistanceLabel = document.getElementById('route-distance-label');
 
 
 
@@ -80,7 +80,7 @@ function init() {
         map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputOrigin);
         map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputDestination);
         map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputSubmit);
-        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(inputLabel);
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(routeDistanceLabel);
 
 
         //map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
@@ -240,6 +240,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             console.log(response.routes[0]);
             console.log(response.routes[0].legs[0].distance);
             console.log(calculateTotalRouteDistance(response.routes[0]));
+            updateRouteDistanceLabel(response.routes[0]);
 
             for (var i = 0, len = response.routes.length; i < len; i++) {
                 //directionsDisplay.setDirections(response);
@@ -256,12 +257,36 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     });
 }
 
+function updateRouteDistanceLabel(route) {
+    var textLabel;
+    textLabel = calculateTotalRouteDistance(route);
+    var units = (document.getElementById('units').value)
+
+    if (units === 'miles') {
+        textLabel += " mi";
+    }
+    else if (units === "kilometers") {
+        textLabel += " km";
+    }
+    routeDistanceLabel.innerText = textLabel;
+}
+
 function calculateTotalRouteDistance(route) {
     var totalDistance = 0;
     for (var i = 0; i < route.legs.length; i++) {
         totalDistance += route.legs[i].distance.value;
     }
-    return totalDistance;
+    var units = (document.getElementById('units').value)
+    var unitConversion = 1;
+
+    // Google maps returns distance in meters, must convert that to miles or kilometers
+    if (units === 'miles') {
+        unitConversion = 100 / 2.54 / 12 / 5280;
+    }
+    else if (units === "kilometers") {
+        unitConversion = 0.001;
+    }
+    return (totalDistance * unitConversion).toFixed(2);
 }
 
 
