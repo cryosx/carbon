@@ -5,3 +5,4 @@ Meteor.subscribe('TreeCollection');
 Meteor.subscribe('CarEfficiency');
 Meteor.subscribe('CarMakes');
 Meteor.subscribe('Cars');
+Meteor.subscribe('TreeDiameter');

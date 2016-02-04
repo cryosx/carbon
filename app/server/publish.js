@@ -33,3 +33,7 @@ Meteor.publish('TreeCollection', function () {
 Meteor.publish('TreeSpecies', function () {
     return TreeSpecies.find();
 });
+
+Meteor.publish('TreeDiameter', function () {
+    return TreeDiameter.find();
+});

@@ -37,6 +37,10 @@ Template.plantTree.events({
     'click #cancel': function(event, template) {
         console.log('test');
 
+        var treeDiameter = TreeDiameter.find().fetch();
+
+
+
     },
 
     'click #save': function(event, template) {
