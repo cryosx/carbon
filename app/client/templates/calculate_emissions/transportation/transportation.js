@@ -12,7 +12,7 @@ Template.transportation.helpers({
 
     totalTransport: function() {
         return calculateTransport();
-    }
+    },
 });
 
 
@@ -205,6 +205,7 @@ Template.transportation.onCreated(function () {
 
 Template.transportation.onRendered(function () {
 
+    $('ul.tabs').tabs();
     $('select').material_select();
     //$('.modal-trigger').leanModal();
     $('#modal1').openModal();

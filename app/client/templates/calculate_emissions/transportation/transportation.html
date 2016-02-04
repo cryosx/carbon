@@ -1,11 +1,42 @@
 <template name="transportation">
     <div id="transportation">
         <div class="row">
-            <div class="col s12">
-                {{> railMap}}
-
-            </div>
+            <ul class="tabs transportation">
+                <li class="tab col s2">
+                    <a href="#car" class="active">
+                        <span><i class="fa fa-plane"></i> Car</span>
+                    </a>
+                </li>
+                <li class="tab col s2">
+                    <a href="#motorcycle">
+                        <span><i class="fa fa-home"></i> Motorcycle</span>
+                    </a>
+                </li>
+                <li class="tab col s2">
+                    <a href="#bus">
+                        <span><i class="fa fa-cutlery"></i> Bus</span>
+                    </a>
+                </li>
+                <li class="tab col s2">
+                    <a href="#train">
+                        <span><i class="fa fa-shopping-cart"></i> Train</span>
+                    </a>
+                </li>
+                <li class="tab col s2">
+                    <a href="#flying">
+                        <span><i class="fa fa-shopping-cart"></i> Flying</span>
+                    </a>
+                </li>
+                <!--<li class="tab col s2"><a href="#services"><i class="fa fa-wheelchair"></i> Services</a></li>-->
+            </ul>
         </div>
+
+        {{> car}}
+        {{> motorcycle}}
+        {{> bus}}
+        {{> train}}
+        {{> flying}}
+
         <div class="row center">
             <h5>How much do you travel per year?</h5>
         </div>
@@ -27,7 +58,6 @@
         </div>
 
         <form id="transportation-form">
-
             <div class="row padding">
                 <div class="card hoverable center">
                     <div class="card-panel">
@@ -46,343 +76,14 @@
             <br>
 
             <div class="row padding">
-                <div class="col s12 m12 l12">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <img src="images/transportation/car3.png">
-                            <span class="card-title"><h3>Car</h3></span>
-                        </div>
-                        <div class="card-content">
-                            <div class="row valign-wrapper">
-                                <div class="input-field col s8 m8 l6">
-                                    <i class="material-icons prefix">directions_car</i>
-                                    <input type="number" name="carDistanceTraveled" id="carDistanceTraveled" min="0" required>
-                                    <label class="active">Miles per Year</label>
-                                </div>
-                                <div class="col s0 m0 l2 hide-on-med-and-down valign">
-                                    <h6>{{units}}</h6>
-                                </div>
-                                <div class="input-field col s4 m4 l4 valign">
-                                    <input type="checkbox" id="carDistanceTraveledCheckbox"/>
-                                    <label for="carDistanceTraveledCheckbox">Calculate it</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <ul class="collapsible no-shadow" id="carDistanceTraveledCalculate" data-collapsible="expandable">
-                                    <li>
-                                        <div class="collapsible-body" id="carDistanceCollapse">
-                                            <div class="row">
-                                                &nbsp;
-                                            </div>
-                                            <div class="row valign-wrapper">
-                                                <div class="input-field col s7 m5 l5">
-                                                    <i class="material-icons prefix">directions_car</i>
-                                                    <input type="number" name="carMileageLastCheck" id="carMileageLastCheck" min="0" required>
-                                                    <label>Mileage At Last Checkup</label>
-                                                </div>
-                                                <div class="col s0 m2 l2 hide-on-med-and-down valign">
-                                                    <h6>{{units}}</h6>
-                                                </div>
-                                                <div class="input-field col s5 m4 l4">
-                                                    <input type="date" id="carDateLastCheck"/>
-                                                    <label></label>
-                                                </div>
-                                                <div class="col s0 m1 l1 hide-on-med-and-down valign">
-                                                    <h6>Date</h6>
-                                                </div>
-                                            </div>
-                                            <div class="row valign-wrapper">
-                                                <div class="input-field col s7 m5 l5">
-                                                    <i class="material-icons prefix">directions_car</i>
-                                                    <input type="number" name="carCurrentMileage" id="carCurrentMileage" min="0" required>
-                                                    <label>Current Mileage</label>
-                                                </div>
-                                                <div class="col s0 m2 l2 hide-on-med-and-down valign">
-                                                    <h6>{{units}}</h6>
-                                                </div>
-                                                <div class="input-field col s5 m4 l4">
-                                                    <input type="date" id="carCurrentDate"/>
-                                                    <label for="carCurrentDate"></label >
-                                                </div>
-                                                <div class="col s0 m1 l1 hide-on-med-and-down valign">
-                                                    <h6>Date</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <select id="fuelType">
-                                        <option value="gasoline">Gasoline</option>
-                                        <option value="diesel">Diesel</option>
-                                    </select>
-                                    <label class="">What is the Fuel Type of Your Car?</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s8 m8 l8">
-                                    <i class="material-icons prefix">drive_eta</i>
-                                    <input type="number" name="fuelEfficiency" id="fuelEfficiency" min="0" required>
-                                    <label  class="active">Fuel efficiency of your car?</label>
-                                </div>
-                                <div class="input-field col s4 m4 l4">
-                                    <input type="checkbox" id="fuelEfficiencyCheckbox"/>
-                                    <label for="fuelEfficiencyCheckbox">Find it</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <ul class="collapsible no-shadow" id="fuelEfficiencyCarSelection" data-collapsible="expandable">
-                                    <li>
-                                        <div class="collapsible-body" id="fuelEfficiencyCollapse">
-                                            <div class="row">
-                                                &nbsp;
-                                            </div>
-                                            <div class="row">
-                                                <div class="input-field col s4 m4 l4">
-                                                    <select id="carMake" class="">
-                                                        <option value="" disabled selected>Select a Make</option>
-                                                    </select>
-                                                    <label>Make</label>
-                                                </div>
-                                                <div class="input-field col s4 m4 l4">
-                                                    <select id="carModel" class="select">
-                                                        <option value="" disabled selected>Select a Model</option>
-                                                    </select>
-                                                    <label>Model</label>
-                                                </div>
-                                                <div class="input-field col s4 m4 l4">
-                                                    <select id="carYear" class="select">
-                                                        <option value="" disabled selected>Select a Year</option>
-                                                    </select>
-                                                    <label>Year</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="row unit-label">
-                                {{units}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m12 l12">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <img src="images/transportation/motorcycle1.png">
-                            <span class="card-title"><h3>Motorcyle</h3></span>
-                        </div>
-                        <div class="card-content">
-                            <div class="row valign-wrapper">
-                                <div class="input-field col s8 m8 l6">
-                                    <i class="material-icons prefix">directions_bike</i>
-                                    <input type="number" name="motorcycleDistanceTraveled" id="motorcycleDistanceTraveled" class="validate" min="0" required>
-                                    <label  class="active">Miles per Year</label>
-                                </div>
-                                <div class="col s0 m0 l2 hide-on-med-and-down valign">
-                                    <h6>{{units}}</h6>
-                                </div>
-                                <div class="input-field col s4 m4 l4 valign">
-                                    <input type="checkbox" id="motorcycleCheckbox"/>
-                                    <label for="motorcycleCheckbox">Calculate it</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <ul class="collapsible no-shadow" id="motorcycleDistanceTraveledCalculate" data-collapsible="expandable">
-                                    <li>
-                                        <div class="collapsible-body" id="motorcycleDistanceCollapse">
-                                            <div class="row">
-                                                &nbsp;
-                                            </div>
-                                            <div class="row valign-wrapper">
-                                                <div class="input-field col s6 m5 l5">
-                                                    <i class="material-icons prefix">directions_bike</i>
-                                                    <input type="number" name="motorcycleMileageLastCheck" id="motorcycleMileageLastCheck" min="0" required>
-                                                    <label>Mileage At Last Checkup</label>
-                                                </div>
-                                                <div class="col s0 m2 l2 hide-on-med-and-down valign">
-                                                    <h6>{{units}}</h6>
-                                                </div>
-                                                <div class="input-field col s6 m4 l4">
-                                                    <input type="date" id="motorcycleDateLastCheck"/>
-                                                </div>
-                                                <div class="col s0 m1 l1 hide-on-med-and-down valign">
-                                                    <h6>Date</h6>
-                                                </div>
-                                            </div>
-                                            <div class="row valign-wrapper">
-                                                <div class="input-field col s6 m5 l5">
-                                                    <i class="material-icons prefix">directions_bike</i>
-                                                    <input type="number" name="motorcycleCurrentMileage" id="motorcycleCurrentMileage" min="0" required>
-                                                    <label>Current Mileage</label>
-                                                </div>
-                                                <div class="col s0 m2 l2 hide-on-med-and-down valign">
-                                                    <h6>{{units}}</h6>
-                                                </div>
-                                                <div class="input-field col s6 m4 l4">
-                                                    <input type="date" id="motorcycleCurrentDate"/>
-                                                </div>
-                                                <div class="col s0 m1 l1 hide-on-med-and-down valign">
-                                                    <h6>Date</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 valign-wrapper">
-                                    <div class="input-field col s10 m4 l4">
-                                        &nbsp;
-                                        <select id="motorcycleCC" class="">
-                                            <option value="" disabled selected>Select a CC</option>
-                                            <option value="less">less than 125</option>
-                                            <option value="between">between 125 and 500</option>
-                                            <option value="greater">greater than 500</option>
-                                        </select>
-                                        <label>CC Of Your Motorcycle?</label>
-                                    </div>
-                                    <div class="col s1 valign">
-                                        <h5 >cc</h5>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row unit-label">
-                                {{units}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="col s12 m12 l12"></div>
 
+                <div class="col s12 m12 l12"></div>
 
-                <div class="col s12 m12 l12">
-                    <div class="card hoverable">
-                        <div class="card-image">
-                            <img src="images/transportation/rail2.png">
-                            <span class="card-title"><h3>Train - Rail - Subway</h3></span>
-                        </div>
-                        <div class="card-content">
-                            <div class="row valign-wrapper">
-                                <div class="input-field col s6 m8 l6">
-                                    <i class="material-icons prefix">directions_transit</i>
-                                    <input type="number" name="railDistanceTraveled" id="railDistanceTraveled" class="validate" min="0" required>
-                                    <label>Miles per Year</label>
-                                </div>
-                                <div class="col s0 m0 l2 hide-on-med-and-down valign">
-                                    <h6>{{units}}</h6>
-                                </div>
-                                <div class="input-field col s6 m4 l4 valign">
-                                    <input type="checkbox" id="railDistanceTraveledCheckbox"/>
-                                    <label for="railDistanceTraveledCheckbox">Calculate it</label>
-                                </div>
-                            </div>
+                <div class="col s12 m12 l12"></div>
+                <div class="col s12 m12 l12"></div>
 
-                            <div class="row">
-                                <ul class="collapsible no-shadow" id="railDistanceTraveledCalculate" data-collapsible="expandable">
-                                    <li>
-                                        <div class="collapsible-body padding" id="railDistanceCollapse">
-                                            <div class="row">
-                                                &nbsp;
-                                            </div>
-                                            <div class="row valign-wrapper">
-                                                <div class="input-field col s8 m8 l6">
-                                                    <i class="material-icons prefix">directions_rail</i>
-                                                    <input type="number" name="railMileageLastCheck" id="railMileageLastCheck" min="0" required>
-                                                    <label>Mileage At Last Checkup</label>
-                                                </div>
-                                                <div class="col s0 m0 l2 hide-on-med-and-down valign">
-                                                    <h6>{{units}}</h6>
-                                                </div>
-                                                <div class="input-field col s4 m4 l4 ">
-                                                    <input type="checkbox" id="railMapCheckbox"/>
-                                                    <label for="railMapCheckbox">Find Distance</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="row">
-                                                <ul class="collapsible no-shadow" id="railMapContainer" data-collapsible="expandable">
-                                                    <li>
-                                                        <div class="collapsible-body" id="railMapCollapse">
-                                                            <!--{{> railMap}}-->
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            <div class="row valign-wrapper center-align">
-                                                <div class="col s3 offset-m1">
-                                                    <h6>I make this trip</h6>
-                                                </div>
-
-                                                <div class="input-field col s2 center-align">
-                                                    <input type="number" name="railRouteFrequencyInput" id="railRouteFrequencyInput" min="0" required>
-                                                </div>
-                                                <div class="col s3 m2 l2 center-align">
-                                                    <h6>times per</h6>
-                                                </div>
-                                                <div class="input-field col s2">
-                                                    <select id="railRouteFrequency">
-                                                        <option value="week" selected="selected">week</option>
-                                                        <option value="month">month</option>
-                                                        <option value="year">year</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="row unit-label">
-                                {{units}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m12 l12">
-                    <div class="card hoverable medium">
-                        <div class="card-image">
-                            <img src="images/transportation/bus1.jpg">
-                            <span class="card-title"><h3>Bus</h3></span>
-                        </div>
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">directions_bus</i>
-                                    <input type="number" name="busDistanceTraveled" id="busDistanceTraveled"
-                                           class="validate" min="0" max="50000" required>
-                                    <label class="active">Miles per Year</label>
-                                </div>
-                            </div>
-                            <div class="row unit-label">
-                                {{units}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col s12 m12 l12">
-                    <div class="card hoverable medium">
-                        <div class="card-image">
-                            <img src="images/transportation/air1.png">
-                            <span class="card-title"><h3>Air Travel</h3></span>
-                        </div>
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix">airplanemode_active</i>
-                                    <input type="number" name="airDistanceTraveled" id="airDistanceTraveled"
-                                           class="validate" min="0" max="50000" required>
-                                    <label class="active">Miles per Year</label>
-                                </div>
-                            </div>
-                            <div class="row unit-label">
-                                {{units}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="col s12 m12 l12"></div>
             </div>
             <div class="divider"></div>
 
@@ -411,6 +112,7 @@
                 </div>
             </div>
         </form>
+        {{> railMap}}
 
     </div>
 </template>

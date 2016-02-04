@@ -1,8 +1,15 @@
-.carbon-nav.padding {
+.carbon-nav {
     padding-left: 2%;
     padding-right: 2%;
     margin-left: 2%;
     margin-right: 2%;
+    background-color: #ee6e73;
+    height: 160px;
+}
+
+.nav-label {
+    font-size: 0.75em;
+    color: black;
 }
 
 .tabs {
@@ -13,7 +20,7 @@
     display: flex;
     position: relative;
     height: 150px;
-    background-color: #fff;
+    background-color: #EE6E73;
     margin: 0 auto;
     width: 100%;
     white-space: nowrap;
@@ -48,4 +55,12 @@
     text-overflow: ellipsis;
     overflow: hidden;
     transition: color .28s ease;
+}
+
+.tabs .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: #5BB55E;
+    will-change: left, right;
 }

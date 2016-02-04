@@ -1,11 +1,25 @@
 <template name="emissions">
     {{#if currentUser}}
+        <div class="row">
+            <div class="col s12 center">
+                <br>
+                <br>
+                <h2>Calculate Your <strong class="materialize-red-text text-lighten-1" style="">Emissions</strong></h2>
+                <br>
+                <br>
+            </div>
+        </div>
         {{> carbonNav}}
-        {{> transportation}}
-        <!--{{> housing}}-->
-        <!--{{> food}}-->
-        <!--{{> goods}}-->
-        <!--{{> services}}-->
+        <div id="main-content" class="row">
+            <div class="card-panel">
+                {{> transportation}}
+                <!--{{> housing}}-->
+                <!--{{> food}}-->
+                <!--{{> goods}}-->
+                <!--{{> services}}-->
+            </div>
+        </div>
+
     {{else}}
         {{> notLoggedIn}}
     {{/if}}
