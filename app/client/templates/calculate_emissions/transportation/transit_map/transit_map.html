@@ -1,0 +1,34 @@
+<template name="transitMap">
+    <div class="row">
+        <div class="col s12 m7 l8 push-m5 push-l4">
+            <div class="transit-map-container">
+                {{> googleMap name="transitMap" options=transitMapOptions}}
+            </div>
+        </div>
+        <div class="col s12 m5 l4 pull-m7 pull-l8">
+            <div class="row">
+                <h4 class="center-align">Enter Route</h4>
+                <input id="transit-input-origin" class="col s12 m11 l11" type="text" placeholder="Starting point">
+                <input id="transit-input-destination" class="col s12 m11 l11" type="text" placeholder="Destination">
+                <button id="transit-submit" class="btn waves-effect waves-light col s4 offset-s4 m6 offset-m3 tooltipped" data-position="bottom" data-delay="50" data-tooltip="The route displayed does not need to be your exact route." type="submit" name="action">Find Route</button>
+
+            </div>
+            <div class="row rounded-border">
+                <div class="input-field valign-wrapper">
+                    <span class="col s3 offset-s2 m5 offset-m1 l5 offset-l1 valign">I make this trip</span>
+                    <input id="transit-input-frequency" type="number" class="col s3 m3 l3 validate valign" min="0" placeholder="??????????">
+                    <span class="col s3 m3 l3 valign">times.</span>
+                </div>
+            </div>
+            <div class="row">
+                <button id="add-route" class="btn waves-effect waves-light col s4 offset-s4 m6 offset-m3" type="submit" name="action">Add Route</button>
+            </div>
+        </div>
+    </div>
+    <div id="transit-routes" class="row">
+        {{showRoutes}};
+    </div>
+
+
+    <span id="route-distance-label" class="controls col s4 m5 l3">Route Distance</span>
+</template>

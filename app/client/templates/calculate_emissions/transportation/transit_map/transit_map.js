@@ -1,46 +1,92 @@
-Template.railMap.helpers({
-    railMapOptions: function() {
+Template.transitMap.helpers({
+    transitMapOptions: function() {
         if (GoogleMaps.loaded()) {
             return {
                 center: new google.maps.LatLng(21.407751, -157.900071),
                 zoom: 12
             };
         }
+    },
+    showRoutes: function() {
+        var busRoutes = Session.get("busRoutes");
+        return busRoutes;
     }
 });
 
-Template.railMap.events({
-    "click #pac-input-origin": function() {
-        $("#pac-input-origin").select();
+Template.transitMap.events({
+    "click #transit-input-origin": function() {
+        $("#transit-input-origin").select();
     },
-    "click #pac-input-destination": function() {
-        $("#pac-input-destination").select();
+    "click #transit-input-destination": function() {
+        $("#transit-input-destination").select();
     },
-    //"change #pac-input-origin, change #pac-input-destination": function() {
+
+    "change #transit-input-origin, change  #transit-input-destination": function() {
+        console.log(document.getElementById('transit-input-origin').value);
+        console.log(document.getElementById('transit-input-destination').value);
+
+
+        if (document.getElementById('transit-input-origin').value !== "" && document.getElementById('transit-input-destination').value !== "") {
+            console.log("THIS IS A TEST");
+            console.log(document.getElementById('transit-input-origin').value);
+            console.log(document.getElementById('transit-input-destination').value);
+            //calculateAndDisplayRoute(directionsService, directionsDisplay);
+        }
+    },
+    "click #add-route": function() {
+        console.log("ONE");
+        var transitBusRoutes;
+        var busIndex = Session.get("busRouteIndex");
+        var busRoute = {
+            busIndex: busIndex,
+            origin: document.getElementById("transit-input-origin"),
+            destination: document.getElementById("transit-input-destination"),
+            frequency: document.getElementById("transit-input-frequency"),
+            distance: Session.get("currentRouteTotalDistance")
+        };
+        if (busIndex == 0) {
+            transitBusRoutes = [];
+        } else {
+            transitBusRoutes = Session.get("busRoutes");
+        }
+        console.log(busRoute);
+        transitBusRoutes.push(busRoute);
+        console.log(transitBusRoutes);
+        Session.set("busRoutes", transitBusRoutes);
+        console.log("SAFE?");
+        Session.set("busRouteIndex", busIndex + 1);
+    }
+    //"change #transit-input-origin, change #transit-input-destination": function() {
     //
     //}
 });
 
-Template.railMap.onCreated(function () {
+Template.transitMap.onCreated(function () {
     init();
 });
 
-Template.railMap.onRendered(function () {
+Template.transitMap.onRendered(function () {
     GoogleMaps.load({libraries: 'geometry,places'});
+    $('.tooltipped').tooltip({delay: 50});
+    Session.set("busRoutes",[]);
+    Session.set("busRouteIndex", 0);
+
 });
 
-Template.railMap.onDestroyed(function () {
+Template.transitMap.onDestroyed(function () {
     //add your statement here
 });
 
 function init() {
     // We can use the `ready` callback to interact with the map API once the map is ready.
-    GoogleMaps.ready('railMap', function(map) {
+    GoogleMaps.ready('transitMap', function(map) {
 
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
 
-        var map = GoogleMaps.maps.railMap.instance;
+        var currentLocationInfoWindow = new google.maps.InfoWindow();
+
+        var map = GoogleMaps.maps.transitMap.instance;
         //var infoWindow = new google.maps.InfoWindow({map: map});
         directionsDisplay.setMap(map);
 
@@ -51,7 +97,7 @@ function init() {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                marker = new google.maps.Marker({
+                var currentLocationMarker = new google.maps.Marker({
                     map: map,
                     draggable: true,
                     animation: google.maps.Animation.DROP,
@@ -59,6 +105,10 @@ function init() {
                     icon: "http://i.stack.imgur.com/orZ4x.png"
                 });
                 map.setCenter(pos);
+
+                currentLocationInfoWindow.close();
+                currentLocationInfoWindow.setContent('<strong>' + 'Current Location' + '</strong>');
+                currentLocationInfoWindow.open(map, currentLocationMarker);
 
             }, function() {
                 handleLocationError(true, infoWindow, map.getCenter());
@@ -68,18 +118,18 @@ function init() {
             handleLocationError(false, infoWindow, map.getCenter());
         }
 
-        var inputOrigin = document.getElementById('pac-input-origin');
-        var inputDestination = document.getElementById('pac-input-destination');
-        var inputSubmit = document.getElementById('pac-submit');
+        var inputOrigin = document.getElementById('transit-input-origin');
+        var inputDestination = document.getElementById('transit-input-destination');
+        var inputSubmit = document.getElementById('transit-submit');
         routeDistanceLabel = document.getElementById('route-distance-label');
 
 
 
         //var types = document.getElementById('type-selector');
 
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputOrigin);
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputDestination);
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputSubmit);
+        //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputOrigin);
+        //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputDestination);
+        //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputSubmit);
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(routeDistanceLabel);
 
 
@@ -96,6 +146,8 @@ function init() {
 
         autocompleteOrigin.addListener('place_changed', function() {
             infowindowOrigin.close();
+            currentLocationInfoWindow.close();
+
             markerOrigin.setVisible(false);
             var place = autocompleteOrigin.getPlace();
             if (!place.geometry) {
@@ -146,6 +198,8 @@ function init() {
 
         autocompleteDestination.addListener('place_changed', function() {
             infowindowDestination.close();
+            currentLocationInfoWindow.close();
+
             markerDestination.setVisible(false);
             var place = autocompleteDestination.getPlace();
             if (!place.geometry) {
@@ -199,20 +253,22 @@ function init() {
         //setupClickListener('changetype-geocode', ['geocode']);
 
         var onChangeHandler = function() {
-            if (document.getElementById('pac-input-origin').value !== "" && document.getElementById('pac-input-destination').value !== "") {
+            if (document.getElementById('transit-input-origin').value !== "" && document.getElementById('transit-input-destination').value !== "") {
                 console.log("INSIDE");
+                infowindowOrigin.close();
+                infowindowDestination.close();
                 calculateAndDisplayRoute(directionsService, directionsDisplay);
 
             } else {
                 console.log("OUTSIDE");
             }
-            console.log(document.getElementById('pac-input-origin').value);
-            console.log(document.getElementById('pac-input-destination').value);
+            //console.log(document.getElementById('transit-input-origin').value);
+            //console.log(document.getElementById('transit-input-destination').value);
 
         };
-        //document.getElementById('pac-input-origin').addEventListener('change', onChangeHandler);
-        //document.getElementById('pac-input-destination').addEventListener('change', onChangeHandler);
-        document.getElementById('pac-submit').addEventListener('click', onChangeHandler);
+        //document.getElementById('transit-input-origin').addEventListener('change', onChangeHandler);
+        //document.getElementById('transit-input-destination').addEventListener('change', onChangeHandler);
+        document.getElementById('transit-submit').addEventListener('click', onChangeHandler);
 
 
     });
@@ -221,8 +277,8 @@ function init() {
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
     var transitMode = google.maps.TransitMode.BUS;
     directionsService.route({
-        origin: document.getElementById('pac-input-origin').value,
-        destination: document.getElementById('pac-input-destination').value,
+        origin: document.getElementById('transit-input-origin').value,
+        destination: document.getElementById('transit-input-destination').value,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
             //arrivalTime: new Date(),
@@ -243,17 +299,13 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             //console.log(calculateTotalRouteDistance(response.routes[0]));
             updateRouteDistanceLabel(response.routes[0]);
 
-            new google.maps.DirectionsRenderer({
-                map: GoogleMaps.maps.railMap.instance,
-                directions: response,
-                routeIndex: 0
-            });
-
+            directionsDisplay.setDirections(response);
+            //
             //for (var i = 0, len = response.routes.length; i < len; i++) {
             //    //directionsDisplay.setDirections(response);
             //
             //    new google.maps.DirectionsRenderer({
-            //        map: GoogleMaps.maps.railMap.instance,
+            //        map: GoogleMaps.maps.transitMap.instance,
             //        directions: response,
             //        routeIndex: i
             //    });
@@ -293,7 +345,9 @@ function calculateTotalRouteDistance(route) {
     else if (units === "kilometers") {
         unitConversion = 0.001;
     }
-    return (totalDistance * unitConversion).toFixed(2);
+    totalDistance = (totalDistance * unitConversion).toFixed(2);
+    Session.set("currentRouteTotalDistance", totalDistance);
+    return totalDistance;
 }
 
 

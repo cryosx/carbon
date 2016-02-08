@@ -57,3 +57,16 @@ a.nav_active {
     -khtml-user-select: none;
     -ms-user-select: none;
 }
+
+.btn {
+    border: none;
+    border-radius: 15px;
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    outline: 0;
+    padding: 0 2rem;
+    text-transform: uppercase;
+    vertical-align: middle;
+    -webkit-tap-highlight-color: transparent;
+}

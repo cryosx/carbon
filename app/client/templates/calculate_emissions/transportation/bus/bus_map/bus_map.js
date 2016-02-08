@@ -1,5 +1,5 @@
-Template.railMap.helpers({
-    railMapOptions: function() {
+Template.busMap.helpers({
+    busMapOptions: function() {
         if (GoogleMaps.loaded()) {
             return {
                 center: new google.maps.LatLng(21.407751, -157.900071),
@@ -9,7 +9,7 @@ Template.railMap.helpers({
     }
 });
 
-Template.railMap.events({
+Template.busMap.events({
     "click #pac-input-origin": function() {
         $("#pac-input-origin").select();
     },
@@ -21,26 +21,26 @@ Template.railMap.events({
     //}
 });
 
-Template.railMap.onCreated(function () {
+Template.busMap.onCreated(function () {
     init();
 });
 
-Template.railMap.onRendered(function () {
+Template.busMap.onRendered(function () {
     GoogleMaps.load({libraries: 'geometry,places'});
 });
 
-Template.railMap.onDestroyed(function () {
+Template.busMap.onDestroyed(function () {
     //add your statement here
 });
 
 function init() {
     // We can use the `ready` callback to interact with the map API once the map is ready.
-    GoogleMaps.ready('railMap', function(map) {
+    GoogleMaps.ready('busMap', function(map) {
 
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
 
-        var map = GoogleMaps.maps.railMap.instance;
+        var map = GoogleMaps.maps.busMap.instance;
         //var infoWindow = new google.maps.InfoWindow({map: map});
         directionsDisplay.setMap(map);
 
@@ -219,15 +219,14 @@ function init() {
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-    var transitMode = google.maps.TransitMode.BUS;
     directionsService.route({
         origin: document.getElementById('pac-input-origin').value,
         destination: document.getElementById('pac-input-destination').value,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
             //arrivalTime: new Date(),
-            //departureTime: new Date(),
-            modes: [transitMode],
+            departureTime: new Date(),
+            modes: [google.maps.TransitMode.BUS],
             //routingPreference: TransitRoutePreference
         },
         unitSystem: google.maps.UnitSystem.IMPERIAL,
@@ -236,28 +235,22 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         if (status === google.maps.DirectionsStatus.OK) {
             //directionsDisplay.setDirections(response);
             //directionsDisplay.setRouteIndex(2);
-            //console.log(response);
-            //console.log(response.routes);
-            //console.log(response.routes[0]);
-            //console.log(response.routes[0].legs[0].distance);
-            //console.log(calculateTotalRouteDistance(response.routes[0]));
+            console.log(response);
+            console.log(response.routes);
+            console.log(response.routes[0]);
+            console.log(response.routes[0].legs[0].distance);
+            console.log(calculateTotalRouteDistance(response.routes[0]));
             updateRouteDistanceLabel(response.routes[0]);
 
-            new google.maps.DirectionsRenderer({
-                map: GoogleMaps.maps.railMap.instance,
-                directions: response,
-                routeIndex: 0
-            });
+            for (var i = 0, len = response.routes.length; i < len; i++) {
+                //directionsDisplay.setDirections(response);
 
-            //for (var i = 0, len = response.routes.length; i < len; i++) {
-            //    //directionsDisplay.setDirections(response);
-            //
-            //    new google.maps.DirectionsRenderer({
-            //        map: GoogleMaps.maps.railMap.instance,
-            //        directions: response,
-            //        routeIndex: i
-            //    });
-            //}
+                new google.maps.DirectionsRenderer({
+                    map: GoogleMaps.maps.busMap.instance,
+                    directions: response,
+                    routeIndex: i
+                });
+            }
         } else {
             window.alert('Directions request failed due to ' + status);
         }
