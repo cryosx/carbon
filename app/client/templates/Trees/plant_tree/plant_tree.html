@@ -14,8 +14,28 @@
                     <div class="card-content">
                         <div class="row">
                             <div class="col s12 m12 l6 push-l6">
-                                <div class="map-container">
+                                <div id="rightColumn" class="map-container">
                                     {{> googleMap name="exampleMap" options=exampleMapOptions}}
+                                </div>
+                            </div>
+                            <div class="col s12 m12 l6 push-l6">
+                                <div id="rightColumn2" class="map-container">
+                                    <div class="col s12 m3 l3 card">
+                                        <div class="card-content">
+                                            <img src="babyTree.jpg"  style="width:100%;height:100%">
+                                        </div>
+                                    </div>
+
+                                    <div class="col s12 m9 l9 card">
+                                        <div class="card-content">
+                                            <h2 id="species1"> </h2>
+                                            <br>
+                                            <h7>___________________________________________________________</h7>
+                                            <br>
+
+                                            <h2 style="display:inline" id="description1"> </h2>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col s12 m12 l6 pull-l6">
@@ -26,6 +46,16 @@
                                         <label for="species">Species</label>
                                     </div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="input-field col s12 m12 l12">
+                                        <select id="species2" class="select">
+                                            <option value="" disabled selected>Select your tree's species</option>
+                                        </select>
+                                        <label>Species</label>
+                                    </div>
+                                </div>
+
                                 <div class="row">
                                     <div class="input-field col s12 m12 l12">
                                         <i class="material-icons prefix">place</i>
@@ -93,6 +123,7 @@
                     <div class="center">
                         <a id="cancel" href="/pathways" class="btn red">Cancel</a>
                         <a class="waves-effect waves-light btn next" id="save">Save</a>
+                        <a id="test" class="btn red">Test</a>
                     </div>
                 </div>
 
