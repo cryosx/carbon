@@ -11,8 +11,10 @@ Template.car.onCreated(function () {
 });
 
 Template.car.onRendered(function () {
-    //add your statement here
-});
+    $('.datepicker').pickadate({
+        selectMonths: false, // Creates a dropdown to control month
+        selectYears: 10 // Creates a dropdown of 15 years to control year
+    });});
 
 Template.car.onDestroyed(function () {
     //add your statement here

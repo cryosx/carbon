@@ -118,11 +118,11 @@ Template.transportation.events({
 
     },
 
-    "submit": function() {
-        event.preventDefault();
-        $("ul.tabs").tabs("select_tab", "housing");
-        $("html, body").animate({ scrollTop: 0 }, "fast");
-    },
+    //"submit": function() {
+    //    event.preventDefault();
+    //    $("ul.tabs").tabs("select_tab", "housing");
+    //    $("html, body").animate({ scrollTop: 0 }, "fast");
+    //},
 
     "change input": function() {
         updateTransport();
