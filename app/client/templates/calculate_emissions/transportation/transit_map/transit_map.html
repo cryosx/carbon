@@ -1,6 +1,9 @@
 <template name="transitMap">
     <div class="row">
-        <div class="col s12 m7 l8 push-m5 push-l4">
+        You produce
+    </div>
+    <div class="row">
+        <div class="col s12 m7 l8 push-m5 push-l4 z-depth-1 no-padding">
             <div class="transit-map-container">
                 {{> googleMap name="transitMap" options=transitMapOptions}}
             </div>
@@ -26,9 +29,22 @@
         </div>
     </div>
     <div id="transit-routes" class="row">
-        {{showRoutes}};
+        <ul class="collection with-header">
+            {{#each routes}}
+                {{> route}}
+            {{/each}}
+        </ul>
     </div>
 
 
     <span id="route-distance-label" class="controls col s4 m5 l3">Route Distance</span>
+</template>
+
+<template name="route">
+    <li class="collection-item">
+        <div>
+            From {{origin}} to {{destination}}, {{frequency}} times, {{distance}} {{units}}. {{_id}}
+            <i class="secondary-content red-icon material-icons tooltipped remove" data-position="top" data-delay="50" data-tooltip="Remove route">remove</i>
+        </div>
+    </li>
 </template>

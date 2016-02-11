@@ -1,3 +1,5 @@
+var Routes = new Meteor.Collection(null);
+
 Template.transitMap.helpers({
     transitMapOptions: function() {
         if (GoogleMaps.loaded()) {
@@ -7,9 +9,17 @@ Template.transitMap.helpers({
             };
         }
     },
-    showRoutes: function() {
-        var busRoutes = Session.get("busRoutes");
-        return busRoutes;
+    //routes: function() {
+    //    var busRoutes = Session.get("busRoutes");
+    //
+    //    return busRoutes;
+    //},
+    routes: function() {
+        return Routes.find();
+    },
+
+    totalBusCarbon: function() {
+        
     }
 });
 
@@ -38,13 +48,16 @@ Template.transitMap.events({
         var transitBusRoutes;
         var busIndex = Session.get("busRouteIndex");
         var busRoute = {
-            busIndex: busIndex,
-            origin: document.getElementById("transit-input-origin"),
-            destination: document.getElementById("transit-input-destination"),
-            frequency: document.getElementById("transit-input-frequency"),
-            distance: Session.get("currentRouteTotalDistance")
+            //busIndex: busIndex,
+            origin: document.getElementById("transit-input-origin").value.split(",")[0],
+            destination: document.getElementById("transit-input-destination").value.split(",")[0],
+            frequency: document.getElementById("transit-input-frequency").value,
+            distance: Session.get("currentRouteTotalDistance"),
+            units: document.getElementById('units').value
         };
-        if (busIndex == 0) {
+        Routes.insert(busRoute);
+        console.log(Routes.find({}));
+        if (busIndex === 0) {
             transitBusRoutes = [];
         } else {
             transitBusRoutes = Session.get("busRoutes");
@@ -55,6 +68,8 @@ Template.transitMap.events({
         Session.set("busRoutes", transitBusRoutes);
         console.log("SAFE?");
         Session.set("busRouteIndex", busIndex + 1);
+        //$('.tooltipped').tooltip({delay: 50});
+
     }
     //"change #transit-input-origin, change #transit-input-destination": function() {
     //
@@ -75,6 +90,21 @@ Template.transitMap.onRendered(function () {
 
 Template.transitMap.onDestroyed(function () {
     //add your statement here
+});
+
+Template.route.events({
+    "click .remove": function (event, template) {
+        console.log("works");
+        var self = this;
+        $(template.find("li")).fadeOut(500, function () {
+            Routes.remove(self._id);
+        });
+        return false;
+    },
+    "mouseover .remove":function () {
+        console.log("TEST");
+    }
+
 });
 
 function init() {
