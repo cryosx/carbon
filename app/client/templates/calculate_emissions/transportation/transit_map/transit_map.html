@@ -1,6 +1,6 @@
 <template name="transitMap">
     <div class="row">
-        You produce {{totalBusCarbon}}
+        <span class="font-size-x-large">You produce <span class="deep-orange-text">{{totalCarbon}}</span> tons of CO<sub>2</sub> from ??? <span class="deep-orange-text">{{totalDistance}} {{units}}</span> a year.</span>
     </div>
     <div class="row">
         <div id="transit-map-container" class="col s12 m7 l7 push-m5 push-l5 no-padding valign-wrapper">
@@ -32,7 +32,7 @@
                     <div class="row valign-wrapper">
                         <span class="col s9 center no-padding valign">Are you a student and or teacher? </span>
                         <div class="input-field col s3 valign">
-                            <select id="school-year-selection" >
+                            <select id="transit-input-schoolyear" >
                                 <option value="no" selected="selected">No</option>.
                                 <option value="yes">Yes</option>.
                             </select>
