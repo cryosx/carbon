@@ -1,4 +1,7 @@
 Template.carbonNav.helpers({
+    totalTransportationCarbon: function() {
+        return Session.get("totalCarCarbon") + Session.get("totalMotorcycleCarbon") + Session.get("totalBusCarbon") + Session.get("totalRailCarbon") + Session.get("totalFlyingCarbon");
+    }
 });
 
 Template.carbonNav.events({

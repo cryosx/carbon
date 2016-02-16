@@ -26,3 +26,8 @@ ul.no-shadow {
     width: 100%;
     white-space: nowrap;
 }
+
+.modal {
+    font-size:medium;
+    font-weight:300;
+}

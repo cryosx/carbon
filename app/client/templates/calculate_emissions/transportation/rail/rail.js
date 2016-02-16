@@ -1,20 +1,20 @@
-Template.train.helpers({
+Template.rail.helpers({
     //add you helpers here
 });
 
-Template.train.events({
+Template.rail.events({
     //add your events here
 });
 
-Template.train.onCreated(function () {
+Template.rail.onCreated(function () {
     //add your statement here
 });
 
-Template.train.onRendered(function () {
+Template.rail.onRendered(function () {
     //add your statement here
 });
 
-Template.train.onDestroyed(function () {
+Template.rail.onDestroyed(function () {
     //add your statement here
 });
 

@@ -67,3 +67,34 @@ a.nav_active {
     vertical-align: middle;
     -webkit-tap-highlight-color: transparent;
 }
+
+/* MaterializeCSS Customization */
+
+.card {
+    position: relative;
+    /*margin: 0.5rem 0 1rem 0;*/
+    margin: 0 2.5% 2.5% 2.5%;
+    background-color: #fff;
+    transition: box-shadow .25s;
+    border-radius: 2px;
+}
+
+.picker__select--year.browser-default {
+    display: inline;
+    background-color: #FFFFFF;
+    width: 27%;
+}
+
+.picker__box {
+    border-radius: 5px;
+    border-width: 0;
+    overflow: hidden;
+}
+
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+    border-radius: 50%;
+    -webkit-transform: scale(0.9);
+    transform: scale(0.9);
+    background-color: #f44336;
+    color: #ffffff;
+}

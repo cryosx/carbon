@@ -1,11 +1,4 @@
-/**
- *
- * Bus Map
- *
- */
-
 var Routes = new Meteor.Collection(null);
-//var totalBusDistance = 0;
 
 Template.transitMap.helpers({
     transitMapOptions: function() {
@@ -72,6 +65,16 @@ Template.transitMap.events({
     //    }
     //},
 
+    "click": function() {
+        console.log(Template.parentData(1));
+        console.log(Template.parentData(2));
+
+        console.log(Template.instance());
+        console.log(Template.instance().view.parentView.name);
+
+        console.log(Template.currentData());
+
+    },
     "submit": function(event) {
         event.preventDefault();
     },
@@ -101,9 +104,6 @@ Template.transitMap.events({
 
             }
         }
-
-
-
 
         //console.log(Routes.find({}));
         //if (busIndex === 0) {

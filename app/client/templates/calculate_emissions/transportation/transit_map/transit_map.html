@@ -10,13 +10,13 @@
         </div>
         <div class="col s12 m5 l5 pull-m7 pull-l7">
             <form>
-                <div class="row">
+                <div id="transit-input-block-1" class="row">
                     <h4 class="center-align">Enter Route</h4>
                     <input id="transit-input-origin" class="col s10 offset-s1" type="text" placeholder="Starting point" required>
                     <input id="transit-input-destination" class="col s10 offset-s1" type="text" placeholder="Destination" required>
                     <button id="transit-submit" class="btn waves-effect waves-light col s4 offset-s4 tooltipped" data-position="bottom" data-delay="50" data-tooltip="The route displayed does not need to be your exact route." type="submit" name="action">Find Route</button>
                 </div>
-                <div class="row square-border font-size-smaller transit-input-frequency">
+                <div id="transit-input-block-2" class="row square-border transit-input-frequency">
                     <div class="row input-field valign-wrapper">
                         <span class="col s4 valign">I make this trip</span>
                         <input id="transit-input-frequency" type="number" class="col s2 m2 l2 validate valign no-margin" min="1" value="1">

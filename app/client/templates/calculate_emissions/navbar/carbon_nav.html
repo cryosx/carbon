@@ -1,56 +1,26 @@
 <template name="carbonNav">
-    <div class="carbon-nav z-depth-2">
+    <div class="carbon-nav z-depth-1">
         <div class="row">
             <ul class="tabs">
-                <li class="tab col s2">
+                <li class="tab col s3">
                     <a href="#transportation" class="active">
-                        <div class="card-panel">
-                            <div class="row">
-                                <span><i class="fa fa-plane"></i> Transportation</span>
-                                <br>
-                                <span class="nav-label">Tons of CO<sub>2</sub> per Year</span>
-
-                            </div>
-                            <div class="row">
-                            </div>
-                        </div>
+                        <span><i class="fa fa-plane"></i> Transportation</span>
+                        {{totalTransportationCarbon}}
                     </a>
                 </li>
-                <li class="tab col s2">
+                <li class="tab col s3">
                     <a href="#housing">
-                        <div class="card-panel">
-                            <div class="row">
-                                <span><i class="fa fa-home"></i>Housing</span>
-                            </div>
-                            <div class="row">
-                                <span class="nav-label">Tons of CO<sub>2</sub> per Year</span>
-                            </div>
-                        </div>
+                        <span><i class="fa fa-home"></i>Housing</span>
                     </a>
                 </li>
-                <li class="tab col s2">
+                <li class="tab col s3">
                     <a href="#food">
-                        <div class="card-panel">
-                            <div class="row">
-                                <span><i class="fa fa-cutlery"></i> Food</span>
-                            </div>
-                            <div class="row">
-                                <span class="nav-label">Tons of CO<sub>2</sub> per Year</span>
-                            </div>
-                        </div>
+                        <span><i class="fa fa-cutlery"></i> Food</span>
                     </a>
                 </li>
-                <li class="tab col s2">
+                <li class="tab col s3">
                     <a href="#recycling">
-                        <div class="card-panel">
-                            <div class="row">
-                                <span><i class="fa fa-shopping-cart"></i> Recycling</span>
-                            </div>
-                            <div class="row">
-                                <span class="nav-label">Tons of CO<sub>2</sub> per Year</span>
-                            </div>
-                        </div>
-
+                        <span><i class="fa fa-shopping-cart"></i> Recycling</span>
                     </a>
                 </li>
                 <!--<li class="tab col s2"><a href="#services"><i class="fa fa-wheelchair"></i> Services</a></li>-->

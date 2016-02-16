@@ -1,3 +1,11 @@
+/**
+ *
+ * Bus Map
+ *
+ */
+
+var BusRoutes = new Meteor.Collection(null);
+
 Template.busMap.helpers({
     busMapOptions: function() {
         if (GoogleMaps.loaded()) {
@@ -6,17 +14,120 @@ Template.busMap.helpers({
                 zoom: 12
             };
         }
+    },
+
+    units: function() {
+        return Session.get("units");
+    },
+
+    busRoutes: function() {
+        return BusRoutes.find();
+    },
+
+    totalDistance: function() {
+
+        return totalDistance().toFixed(2);
+    },
+    totalCarbon: function() {
+        var totalBusCarbon = totalDistance() * 1.26 * 300 * 0.000001;
+        Session.set("totalBusCarbon", totalBusCarbon);
+        return totalBusCarbon.toFixed(2);
     }
+
 });
 
+function totalDistance() {
+    var totalDistance = 0;
+    BusRoutes.find({}).fetch().forEach(function(item, index) {
+        if (item.timespan === "week") {
+            if (item.schoolYear === "yes") {
+                totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency) * 40;
+            } else if (item.schoolYear === "no") {
+                totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency) * 52;
+            }
+        } else if (item.timespan === "month") {
+            if (item.schoolYear === "yes") {
+                totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency) * 8;
+            } else if (item.schoolYear === "no") {
+                totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency) * 12;
+            }
+        } else if (item.timespan === "year") {
+            totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency);
+        }
+    });
+    return totalDistance;
+}
+
 Template.busMap.events({
-    "click #pac-input-origin": function() {
-        $("#pac-input-origin").select();
+    "click #bus-input-origin": function() {
+        $("#bus-input-origin").select();
     },
-    "click #pac-input-destination": function() {
-        $("#pac-input-destination").select();
+    "click #bus-input-destination": function() {
+        $("#bus-input-destination").select();
     },
-    //"change #pac-input-origin, change #pac-input-destination": function() {
+
+    //"change #bus-input-origin, change  #bus-input-destination": function() {
+    //
+    //    if (document.getElementById('bus-input-origin').value !== "" && document.getElementById('bus-input-destination').value !== "") {
+    //        //calculateAndDisplayRoute(directionsService, directionsDisplay);
+    //    }
+    //},
+
+    "click": function() {
+
+    },
+    "submit": function(event) {
+        event.preventDefault();
+    },
+    "click #add-bus-route": function(event,template) {
+        //var busBusRoutes;
+        //var busIndex = Session.get("busRouteIndex");
+
+        if (document.getElementById("bus-input-origin").value === "" || document.getElementById("bus-input-destination").value === "") {
+            console.log("?");
+        } else {
+            event.preventDefault();
+            var frequencyText = "times";
+            var once = false;
+            if (parseInt(document.getElementById("bus-input-frequency").value) === 1) {
+                frequencyText = "once"
+                once = true;
+            }
+            var busRoute = {
+                //busIndex: busIndex,
+                origin: document.getElementById("bus-input-origin").value.split(",")[0],
+                destination: document.getElementById("bus-input-destination").value.split(",")[0],
+                frequency: document.getElementById("bus-input-frequency").value,
+                frequencyText: frequencyText,
+                once: once,
+                timespan: document.getElementById("bus-input-timespan").value,
+                schoolYear: document.getElementById("bus-input-schoolyear").value,
+                distance: Session.get("currentRouteTotalDistance"),
+                shortDistance: Session.get("currentRouteTotalDistance").toFixed(2),
+                units: document.getElementById('units').value
+            };
+            if (BusRoutes.find({origin: busRoute.origin, destination: busRoute.destination}).fetch().length === 0 && BusRoutes.find({origin: busRoute.destination, destination: busRoute.origin}).fetch().length === 0) {
+                BusRoutes.insert(busRoute);
+                document.getElementById("bus-input-origin").value = "";
+                document.getElementById("bus-input-destination").value = "";
+            } else {
+
+            }
+        }
+
+        //console.log(Routes.find({}));
+        //if (busIndex === 0) {
+        //    busBusRoutes = [];
+        //} else {
+        //    busBusRoutes = Session.get("busRoutes");
+        //}
+        //busBusRoutes.push(busRoute);
+        //Session.set("busRoutes", busBusRoutes);
+        //Session.set("busRouteIndex", busIndex + 1);
+        //$('.tooltipped').tooltip({delay: 50});
+
+    }
+    //"change #bus-input-origin, change #bus-input-destination": function() {
     //
     //}
 });
@@ -27,10 +138,31 @@ Template.busMap.onCreated(function () {
 
 Template.busMap.onRendered(function () {
     GoogleMaps.load({libraries: 'geometry,places'});
+    $('.tooltipped').tooltip({delay: 50});
+    $('select').material_select();
+
+    Session.set("currentRouteTotalDistance", 0);
+    Session.set("totalBusCarbon", 0);
+
+    //Session.set("busRoutes",[]);
+    //Session.set("busRouteIndex", 0);
 });
 
 Template.busMap.onDestroyed(function () {
     //add your statement here
+});
+
+Template.busRoute.events({
+    "click .remove": function (event, template) {
+        var self = this;
+        $(template.find("li")).fadeOut(500, function () {
+            BusRoutes.remove(self._id);
+        });
+        return false;
+    }
+    //"mouseover .remove":function () {
+    //}
+
 });
 
 function init() {
@@ -39,6 +171,8 @@ function init() {
 
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
+
+        var currentLocationInfoWindow = new google.maps.InfoWindow();
 
         var map = GoogleMaps.maps.busMap.instance;
         //var infoWindow = new google.maps.InfoWindow({map: map});
@@ -51,7 +185,7 @@ function init() {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                marker = new google.maps.Marker({
+                var currentLocationMarker = new google.maps.Marker({
                     map: map,
                     draggable: true,
                     animation: google.maps.Animation.DROP,
@@ -59,6 +193,10 @@ function init() {
                     icon: "http://i.stack.imgur.com/orZ4x.png"
                 });
                 map.setCenter(pos);
+
+                currentLocationInfoWindow.close();
+                currentLocationInfoWindow.setContent('<strong>' + 'Current Location' + '</strong>');
+                currentLocationInfoWindow.open(map, currentLocationMarker);
 
             }, function() {
                 handleLocationError(true, infoWindow, map.getCenter());
@@ -68,18 +206,18 @@ function init() {
             handleLocationError(false, infoWindow, map.getCenter());
         }
 
-        var inputOrigin = document.getElementById('pac-input-origin');
-        var inputDestination = document.getElementById('pac-input-destination');
-        var inputSubmit = document.getElementById('pac-submit');
-        routeDistanceLabel = document.getElementById('route-distance-label');
+        var inputOrigin = document.getElementById('bus-input-origin');
+        var inputDestination = document.getElementById('bus-input-destination');
+        var inputSubmit = document.getElementById('bus-submit');
+        routeDistanceLabel = document.getElementById('bus-route-distance-label');
 
 
 
         //var types = document.getElementById('type-selector');
 
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputOrigin);
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputDestination);
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputSubmit);
+        //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputOrigin);
+        //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputDestination);
+        //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputSubmit);
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(routeDistanceLabel);
 
 
@@ -96,6 +234,8 @@ function init() {
 
         autocompleteOrigin.addListener('place_changed', function() {
             infowindowOrigin.close();
+            currentLocationInfoWindow.close();
+
             markerOrigin.setVisible(false);
             var place = autocompleteOrigin.getPlace();
             if (!place.geometry) {
@@ -108,7 +248,7 @@ function init() {
                 map.fitBounds(place.geometry.viewport);
             } else {
                 map.setCenter(place.geometry.location);
-                map.setZoom(8);  // Why 17? Because it looks good.
+                map.setZoom(17);  // Why 17? Because it looks good.
             }
             markerOrigin.setIcon(/** @type {google.maps.Icon} */({
                 url: place.icon,
@@ -121,16 +261,23 @@ function init() {
             markerOrigin.setVisible(true);
             markerOrigin.setDraggable(false);
             var address = '';
+
             if (place.address_components) {
+                //var componenets = [];
+                //place.address_components.forEach(function(item, index) {
+                //    componenets.push(item.short_name);
+                //});
+                //
+                //address = componenets.join(', ');
+                //console.log(address);
                 address = [
                     (place.address_components[0] && place.address_components[0].short_name || ''),
                     (place.address_components[1] && place.address_components[1].short_name || ''),
                     (place.address_components[2] && place.address_components[2].short_name || '')
-                ].join(' ');
+                ].join(', ');
             }
 
-            inputOrigin.value = address;
-
+            //= address;
             infowindowOrigin.setContent('<div><strong>' + place.name + '</strong><br>' + address);
             infowindowOrigin.open(map, markerOrigin);
         });
@@ -146,6 +293,8 @@ function init() {
 
         autocompleteDestination.addListener('place_changed', function() {
             infowindowDestination.close();
+            currentLocationInfoWindow.close();
+
             markerDestination.setVisible(false);
             var place = autocompleteDestination.getPlace();
             if (!place.geometry) {
@@ -158,7 +307,7 @@ function init() {
                 map.fitBounds(place.geometry.viewport);
             } else {
                 map.setCenter(place.geometry.location);
-                map.setZoom(8);  // Why 17? Because it looks good.
+                map.setZoom(17);  // Why 17? Because it looks good.
             }
             markerDestination.setIcon(/** @type {google.maps.Icon} */({
                 url: place.icon,
@@ -171,14 +320,20 @@ function init() {
             markerDestination.setVisible(true);
             markerDestination.setDraggable(false);
             var address = '';
+
             if (place.address_components) {
+                //var componenets = [];
+                //place.address_components.forEach(function(item, index) {
+                //    componenets.push(item.short_name);
+                //});
+                //
+                //address = componenets.join(', ');
                 address = [
                     (place.address_components[0] && place.address_components[0].short_name || ''),
                     (place.address_components[1] && place.address_components[1].short_name || ''),
                     (place.address_components[2] && place.address_components[2].short_name || '')
-                ].join(' ');
+                ].join(', ');
             }
-
 
             infowindowDestination.setContent('<div><strong>' + place.name + '</strong><br>' + address);
             infowindowDestination.open(map, markerDestination);
@@ -199,67 +354,70 @@ function init() {
         //setupClickListener('changetype-geocode', ['geocode']);
 
         var onChangeHandler = function() {
-            if (document.getElementById('pac-input-origin').value !== "" && document.getElementById('pac-input-destination').value !== "") {
-                console.log("INSIDE");
+            if (document.getElementById('bus-input-origin').value !== "" && document.getElementById('bus-input-destination').value !== "") {
+                infowindowOrigin.close();
+                infowindowDestination.close();
                 calculateAndDisplayRoute(directionsService, directionsDisplay);
 
             } else {
-                console.log("OUTSIDE");
             }
-            console.log(document.getElementById('pac-input-origin').value);
-            console.log(document.getElementById('pac-input-destination').value);
+            //console.log(document.getElementById('bus-input-origin').value);
+            //console.log(document.getElementById('bus-input-destination').value);
 
         };
-        //document.getElementById('pac-input-origin').addEventListener('change', onChangeHandler);
-        //document.getElementById('pac-input-destination').addEventListener('change', onChangeHandler);
-        document.getElementById('pac-submit').addEventListener('click', onChangeHandler);
+        //document.getElementById('bus-input-origin').addEventListener('change', onChangeHandler);
+        //document.getElementById('bus-input-destination').addEventListener('change', onChangeHandler);
+        document.getElementById('bus-submit').addEventListener('click', onChangeHandler);
 
 
     });
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+    var transitMode = google.maps.TransitMode.BUS;
     directionsService.route({
-        origin: document.getElementById('pac-input-origin').value,
-        destination: document.getElementById('pac-input-destination').value,
+        origin: document.getElementById('bus-input-origin').value,
+        destination: document.getElementById('bus-input-destination').value,
+        //origin: originAddress,
+        //destination: destinationAddress,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
             //arrivalTime: new Date(),
-            departureTime: new Date(),
-            modes: [google.maps.TransitMode.BUS],
-            //routingPreference: TransitRoutePreference
+            //departureTime: new Date(),
+            modes: [transitMode],
+            //routingPreference: busRoutePreference
         },
         unitSystem: google.maps.UnitSystem.IMPERIAL,
         provideRouteAlternatives: true
     }, function(response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
-            //directionsDisplay.setDirections(response);
-            //directionsDisplay.setRouteIndex(2);
-            console.log(response);
-            console.log(response.routes);
-            console.log(response.routes[0]);
-            console.log(response.routes[0].legs[0].distance);
-            console.log(calculateTotalRouteDistance(response.routes[0]));
             updateRouteDistanceLabel(response.routes[0]);
-
-            for (var i = 0, len = response.routes.length; i < len; i++) {
-                //directionsDisplay.setDirections(response);
-
-                new google.maps.DirectionsRenderer({
-                    map: GoogleMaps.maps.busMap.instance,
-                    directions: response,
-                    routeIndex: i
-                });
-            }
+            directionsDisplay.setDirections(response);
+            //
+            //for (var i = 0, len = response.routes.length; i < len; i++) {
+            //    //directionsDisplay.setDirections(response);
+            //
+            //    new google.maps.DirectionsRenderer({
+            //        map: GoogleMaps.maps.busMap.instance,
+            //        directions: response,
+            //        routeIndex: i
+            //    });
+            //}
         } else {
-            window.alert('Directions request failed due to ' + status);
+            var infowindowRoute = new google.maps.InfoWindow();
+            infowindowRoute.close();
+            infowindowRoute.setContent('<div><strong>' +'Directions request failed due to ' + status + '</strong><br>');
+            infowindowRoute.setPosition(GoogleMaps.maps.busMap.instance.getCenter());
+            infowindowRoute.open(GoogleMaps.maps.busMap.instance);
+            document.getElementById("bus-input-origin").value = "";
+            document.getElementById("bus-input-destination").value = "";
         }
     });
 }
 
 function updateRouteDistanceLabel(route) {
     var textLabel;
-    textLabel = calculateTotalRouteDistance(route);
+    textLabel = calculateTotalRouteDistance(route).toFixed(2);
     var units = (document.getElementById('units').value)
 
     if (units === 'miles') {
@@ -273,11 +431,16 @@ function updateRouteDistanceLabel(route) {
 
 function calculateTotalRouteDistance(route) {
     var totalDistance = 0;
-    for (var i = 0; i < route.legs.length; i++) {
-        totalDistance += route.legs[i].distance.value;
-    }
-    var units = (document.getElementById('units').value)
     var unitConversion = 1;
+
+    //for (var i = 0; i < route.legs.length; i++) {
+    //    totalDistance += route.legs[i].distance.value;
+    //}
+    route.legs.forEach(function(leg, index) {
+        totalDistance += leg.distance.value;
+    });
+
+    var units = (document.getElementById('units').value)
 
     // Google maps returns distance in meters, must convert that to miles or kilometers
     if (units === 'miles') {
@@ -286,32 +449,10 @@ function calculateTotalRouteDistance(route) {
     else if (units === "kilometers") {
         unitConversion = 0.001;
     }
-    return (totalDistance * unitConversion).toFixed(2);
-}
 
-
-function alertCoords(){
-    console.log("Marker: " + marker.getPosition().lat());
-}
-
-function setMarker() {
-    var lat = parseFloat($("#latitude").val());
-    var lng = parseFloat($("#longitude").val());
-    console.log("Lat: " + lat);
-    console.log("Lng: " + lng);
-
-    if (!isNaN(lat) || !isNaN(lng)) {
-        if (lat > -90 && lat < 90 && lng > -180 && lat < 90) {
-            marker.setPosition({lat: lat, lng: lng});
-            marker.getMap().setCenter({lat: lat, lng: lng});
-        }
-
-    }
-}
-
-function updateLatLng() {
-    $("#latitude").val(marker.getPosition().lat());
-    $("#longitude").val(marker.getPosition().lng());
+    totalDistance = totalDistance * unitConversion;
+    Session.set("currentRouteTotalDistance", totalDistance);
+    return totalDistance;
 }
 
 function toggleBounce() {

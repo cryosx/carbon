@@ -18,8 +18,8 @@
                     </a>
                 </li>
                 <li class="tab col s2">
-                    <a href="#train">
-                        <span><i class="fa fa-shopping-cart"></i> Train</span>
+                    <a href="#rail">
+                        <span><i class="fa fa-shopping-cart"></i> Rail</span>
                     </a>
                 </li>
                 <li class="tab col s2">
@@ -34,23 +34,35 @@
         {{> car}}
         {{> motorcycle}}
         {{> bus}}
-        {{> train}}
+        {{> rail}}
         {{> flying}}
-
-        <div class="row center">
-            <h5>How much do you travel per year?</h5>
-        </div>
 
         <!-- Modal Trigger -->
         <!--<a class="modal-trigger waves-effect waves-light btn" href="#modal1">Modal</a>-->
 
         <!-- Modal Structure -->
         <div id="modal1" class="modal">
+            <!--<div class="modal-header">-->
+                <!--<h4>Before you begin</h4>-->
+            <!--</div>-->
             <div class="modal-content">
                 <h4>Before you begin</h4>
-                <p>
-                    Please gather copies of an electricity, gas, and water bill. You will also need a copy of your latest vehicle inspection or oil change.
-                </p>
+
+                <div class="divider"></div>
+                <ol>
+                    <li>Please gather copies of an electricity, gas, and water bill.</li>
+                    <br>
+                    <li>You will also need a copy of your latest vehicle inspection and/or oil change.</li>
+                    <br>
+                    <li>Select the units you will be using</li>
+                </ol>
+                <div class="row input-field">
+                    <select id="units" class="col s6 offset-s3">
+                        <option value="miles" selected="selected">Miles</option>
+                        <option value="kilometers">Kilometers</option>
+                    </select>
+                    <!--<label>Select Your Units</label>-->
+                </div>
             </div>
             <div class="modal-footer">
                 <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Start</a>
@@ -58,51 +70,6 @@
         </div>
 
         <form id="transportation-form">
-            <div class="row padding">
-                <div class="card hoverable center">
-                    <div class="card-panel">
-                        <div class="input-field">
-                            <select id="units">
-                                <option value="miles" selected="selected">Miles</option>
-                                <option value="kilometers">Kilometers</option>
-                            </select>
-                            <label>Select Your Units</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-            <br>
-
-            <div class="row padding">
-                <div class="col s12 m12 l12"></div>
-
-                <div class="col s12 m12 l12"></div>
-
-                <div class="col s12 m12 l12"></div>
-                <div class="col s12 m12 l12"></div>
-
-                <div class="col s12 m12 l12"></div>
-            </div>
-            <div class="divider"></div>
-
-            <div class="row">
-                <div class="card">
-                    <div class="col s12 m6 offset-m3 l4 offset-l4" id="totalCarbonCard">
-                        <div class="card-panel">
-                            <div class="row center">
-                                <h5 class="">Total Transport</h5>
-                            </div>
-                            <div class="divider"></div>
-                            <div class="row valign-wrapper" style="position:relative">
-                                <h2 class="col s7 m7 l7 center" id="totalTransportEmissions">{{totalTransport}}</h2>
-                                <h6 class="col s5 m5 l5 center valign" >tons of CO<sub>2</sub>/Year</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="row">
                 <div class="col s12 m12 l12 center">
                     <div class="btn-block">
@@ -112,8 +79,5 @@
                 </div>
             </div>
         </form>
-        {{> transitMap}}
-
-
     </div>
 </template>

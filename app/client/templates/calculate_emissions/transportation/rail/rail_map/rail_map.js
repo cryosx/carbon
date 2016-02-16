@@ -1,3 +1,11 @@
+/**
+ *
+ * Rail Map
+ *
+ */
+
+var RailRoutes = new Meteor.Collection(null);
+
 Template.railMap.helpers({
     railMapOptions: function() {
         if (GoogleMaps.loaded()) {
@@ -6,17 +14,121 @@ Template.railMap.helpers({
                 zoom: 12
             };
         }
+    },
+
+    units: function() {
+        return Session.get("units");
+    },
+
+    railRoutes: function() {
+        return RailRoutes.find();
+    },
+
+    totalDistance: function() {
+
+        return totalDistance().toFixed(2);
+    },
+    totalCarbon: function() {
+        var totalRailCarbon = (totalDistance() * 185 * 1.26) * 0.000001;
+        Session.set("totalRailCarbon", totalRailCarbon);
+        return totalRailCarbon.toFixed(2);
+        return totalRailCarbon.toFixed(2);
     }
+
 });
 
+function totalDistance() {
+    var totalDistance = 0;
+    RailRoutes.find({}).fetch().forEach(function(item, index) {
+        if (item.timespan === "week") {
+            if (item.schoolYear === "yes") {
+                totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency) * 40;
+            } else if (item.schoolYear === "no") {
+                totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency) * 52;
+            }
+        } else if (item.timespan === "month") {
+            if (item.schoolYear === "yes") {
+                totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency) * 8;
+            } else if (item.schoolYear === "no") {
+                totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency) * 12;
+            }
+        } else if (item.timespan === "year") {
+            totalDistance = totalDistance + parseFloat(item.distance) * parseInt(item.frequency);
+        }
+    });
+    return totalDistance;
+}
+
 Template.railMap.events({
-    "click #pac-input-origin": function() {
-        $("#pac-input-origin").select();
+    "click #rail-input-origin": function() {
+        $("#rail-input-origin").select();
     },
-    "click #pac-input-destination": function() {
-        $("#pac-input-destination").select();
+    "click #rail-input-destination": function() {
+        $("#rail-input-destination").select();
     },
-    //"change #pac-input-origin, change #pac-input-destination": function() {
+
+    //"change #rail-input-origin, change  #rail-input-destination": function() {
+    //
+    //    if (document.getElementById('rail-input-origin').value !== "" && document.getElementById('rail-input-destination').value !== "") {
+    //        //calculateAndDisplayRoute(directionsService, directionsDisplay);
+    //    }
+    //},
+
+    "click": function() {
+
+    },
+    "submit": function(event) {
+        event.preventDefault();
+    },
+    "click #add-rail-route": function(event,template) {
+        //var railRailRoutes;
+        //var railIndex = Session.get("railRouteIndex");
+
+        if (document.getElementById("rail-input-origin").value === "" || document.getElementById("rail-input-destination").value === "") {
+            console.log("?");
+        } else {
+            event.preventDefault();
+            var frequencyText = "times";
+            var once = false;
+            if (parseInt(document.getElementById("rail-input-frequency").value) === 1) {
+                frequencyText = "once"
+                once = true;
+            }
+            var railRoute = {
+                //railIndex: railIndex,
+                origin: document.getElementById("rail-input-origin").value.split(",")[0],
+                destination: document.getElementById("rail-input-destination").value.split(",")[0],
+                frequency: document.getElementById("rail-input-frequency").value,
+                frequencyText: frequencyText,
+                once: once,
+                timespan: document.getElementById("rail-input-timespan").value,
+                schoolYear: document.getElementById("rail-input-schoolyear").value,
+                distance: Session.get("currentRouteTotalDistance"),
+                shortDistance: Session.get("currentRouteTotalDistance").toFixed(2),
+                units: document.getElementById('units').value
+            };
+            if (RailRoutes.find({origin: railRoute.origin, destination: railRoute.destination}).fetch().length === 0 && RailRoutes.find({origin: railRoute.destination, destination: railRoute.origin}).fetch().length === 0) {
+                RailRoutes.insert(railRoute);
+                document.getElementById("rail-input-origin").value = "";
+                document.getElementById("rail-input-destination").value = "";
+            } else {
+
+            }
+        }
+
+        //console.log(Routes.find({}));
+        //if (railIndex === 0) {
+        //    railRailRoutes = [];
+        //} else {
+        //    railRailRoutes = Session.get("railRoutes");
+        //}
+        //railRailRoutes.push(railRoute);
+        //Session.set("railRoutes", railRailRoutes);
+        //Session.set("railRouteIndex", railIndex + 1);
+        //$('.tooltipped').tooltip({delay: 50});
+
+    }
+    //"change #rail-input-origin, change #rail-input-destination": function() {
     //
     //}
 });
@@ -27,10 +139,31 @@ Template.railMap.onCreated(function () {
 
 Template.railMap.onRendered(function () {
     GoogleMaps.load({libraries: 'geometry,places'});
+    $('.tooltipped').tooltip({delay: 50});
+    $('select').material_select();
+
+    Session.set("currentRouteTotalDistance", 0);
+    Session.set("totalRailCarbon", 0);
+
+    //Session.set("railRoutes",[]);
+    //Session.set("railRouteIndex", 0);
 });
 
 Template.railMap.onDestroyed(function () {
     //add your statement here
+});
+
+Template.railRoute.events({
+    "click .remove": function (event, template) {
+        var self = this;
+        $(template.find("li")).fadeOut(500, function () {
+            RailRoutes.remove(self._id);
+        });
+        return false;
+    }
+    //"mouseover .remove":function () {
+    //}
+
 });
 
 function init() {
@@ -39,6 +172,8 @@ function init() {
 
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
+
+        var currentLocationInfoWindow = new google.maps.InfoWindow();
 
         var map = GoogleMaps.maps.railMap.instance;
         //var infoWindow = new google.maps.InfoWindow({map: map});
@@ -51,7 +186,7 @@ function init() {
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 };
-                marker = new google.maps.Marker({
+                var currentLocationMarker = new google.maps.Marker({
                     map: map,
                     draggable: true,
                     animation: google.maps.Animation.DROP,
@@ -59,6 +194,10 @@ function init() {
                     icon: "http://i.stack.imgur.com/orZ4x.png"
                 });
                 map.setCenter(pos);
+
+                currentLocationInfoWindow.close();
+                currentLocationInfoWindow.setContent('<strong>' + 'Current Location' + '</strong>');
+                currentLocationInfoWindow.open(map, currentLocationMarker);
 
             }, function() {
                 handleLocationError(true, infoWindow, map.getCenter());
@@ -68,18 +207,18 @@ function init() {
             handleLocationError(false, infoWindow, map.getCenter());
         }
 
-        var inputOrigin = document.getElementById('pac-input-origin');
-        var inputDestination = document.getElementById('pac-input-destination');
-        var inputSubmit = document.getElementById('pac-submit');
-        routeDistanceLabel = document.getElementById('route-distance-label');
+        var inputOrigin = document.getElementById('rail-input-origin');
+        var inputDestination = document.getElementById('rail-input-destination');
+        var inputSubmit = document.getElementById('rail-submit');
+        routeDistanceLabel = document.getElementById('rail-route-distance-label');
 
 
 
         //var types = document.getElementById('type-selector');
 
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputOrigin);
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputDestination);
-        map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputSubmit);
+        //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputOrigin);
+        //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputDestination);
+        //map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(inputSubmit);
         map.controls[google.maps.ControlPosition.TOP_RIGHT].push(routeDistanceLabel);
 
 
@@ -96,6 +235,8 @@ function init() {
 
         autocompleteOrigin.addListener('place_changed', function() {
             infowindowOrigin.close();
+            currentLocationInfoWindow.close();
+
             markerOrigin.setVisible(false);
             var place = autocompleteOrigin.getPlace();
             if (!place.geometry) {
@@ -108,7 +249,7 @@ function init() {
                 map.fitBounds(place.geometry.viewport);
             } else {
                 map.setCenter(place.geometry.location);
-                map.setZoom(8);  // Why 17? Because it looks good.
+                map.setZoom(17);  // Why 17? Because it looks good.
             }
             markerOrigin.setIcon(/** @type {google.maps.Icon} */({
                 url: place.icon,
@@ -121,16 +262,23 @@ function init() {
             markerOrigin.setVisible(true);
             markerOrigin.setDraggable(false);
             var address = '';
+
             if (place.address_components) {
+                //var componenets = [];
+                //place.address_components.forEach(function(item, index) {
+                //    componenets.push(item.short_name);
+                //});
+                //
+                //address = componenets.join(', ');
+                //console.log(address);
                 address = [
                     (place.address_components[0] && place.address_components[0].short_name || ''),
                     (place.address_components[1] && place.address_components[1].short_name || ''),
                     (place.address_components[2] && place.address_components[2].short_name || '')
-                ].join(' ');
+                ].join(', ');
             }
 
-            inputOrigin.value = address;
-
+            //= address;
             infowindowOrigin.setContent('<div><strong>' + place.name + '</strong><br>' + address);
             infowindowOrigin.open(map, markerOrigin);
         });
@@ -146,6 +294,8 @@ function init() {
 
         autocompleteDestination.addListener('place_changed', function() {
             infowindowDestination.close();
+            currentLocationInfoWindow.close();
+
             markerDestination.setVisible(false);
             var place = autocompleteDestination.getPlace();
             if (!place.geometry) {
@@ -158,7 +308,7 @@ function init() {
                 map.fitBounds(place.geometry.viewport);
             } else {
                 map.setCenter(place.geometry.location);
-                map.setZoom(8);  // Why 17? Because it looks good.
+                map.setZoom(17);  // Why 17? Because it looks good.
             }
             markerDestination.setIcon(/** @type {google.maps.Icon} */({
                 url: place.icon,
@@ -171,14 +321,20 @@ function init() {
             markerDestination.setVisible(true);
             markerDestination.setDraggable(false);
             var address = '';
+
             if (place.address_components) {
+                //var componenets = [];
+                //place.address_components.forEach(function(item, index) {
+                //    componenets.push(item.short_name);
+                //});
+                //
+                //address = componenets.join(', ');
                 address = [
                     (place.address_components[0] && place.address_components[0].short_name || ''),
                     (place.address_components[1] && place.address_components[1].short_name || ''),
                     (place.address_components[2] && place.address_components[2].short_name || '')
-                ].join(' ');
+                ].join(', ');
             }
-
 
             infowindowDestination.setContent('<div><strong>' + place.name + '</strong><br>' + address);
             infowindowDestination.open(map, markerDestination);
@@ -199,56 +355,48 @@ function init() {
         //setupClickListener('changetype-geocode', ['geocode']);
 
         var onChangeHandler = function() {
-            if (document.getElementById('pac-input-origin').value !== "" && document.getElementById('pac-input-destination').value !== "") {
-                console.log("INSIDE");
+            if (document.getElementById('rail-input-origin').value !== "" && document.getElementById('rail-input-destination').value !== "") {
+                infowindowOrigin.close();
+                infowindowDestination.close();
                 calculateAndDisplayRoute(directionsService, directionsDisplay);
 
             } else {
-                console.log("OUTSIDE");
             }
-            console.log(document.getElementById('pac-input-origin').value);
-            console.log(document.getElementById('pac-input-destination').value);
+            //console.log(document.getElementById('rail-input-origin').value);
+            //console.log(document.getElementById('rail-input-destination').value);
 
         };
-        //document.getElementById('pac-input-origin').addEventListener('change', onChangeHandler);
-        //document.getElementById('pac-input-destination').addEventListener('change', onChangeHandler);
-        document.getElementById('pac-submit').addEventListener('click', onChangeHandler);
+        //document.getElementById('rail-input-origin').addEventListener('change', onChangeHandler);
+        //document.getElementById('rail-input-destination').addEventListener('change', onChangeHandler);
+        document.getElementById('rail-submit').addEventListener('click', onChangeHandler);
 
 
     });
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-    var transitMode = google.maps.TransitMode.BUS;
+    var transitModes = [google.maps.TransitMode.BUS,google.maps.TransitMode.RAIL,google.maps.TransitMode.SUBWAY,google.maps.TransitMode.TRAIN,google.maps.TransitMode.TRAM];
+    var infowindowRoute = new google.maps.InfoWindow();
+
     directionsService.route({
-        origin: document.getElementById('pac-input-origin').value,
-        destination: document.getElementById('pac-input-destination').value,
+        origin: document.getElementById('rail-input-origin').value,
+        destination: document.getElementById('rail-input-destination').value,
+        //origin: originAddress,
+        //destination: destinationAddress,
         travelMode: google.maps.TravelMode.TRANSIT,
         transitOptions: {
             //arrivalTime: new Date(),
             //departureTime: new Date(),
-            modes: [transitMode],
-            //routingPreference: TransitRoutePreference
+            modes: [google.maps.TransitMode.RAIL,google.maps.TransitMode.TRAIN,google.maps.TransitMode.SUBWAY],
+            //routingPreference: railRoutePreference
         },
         unitSystem: google.maps.UnitSystem.IMPERIAL,
         provideRouteAlternatives: true
     }, function(response, status) {
         if (status === google.maps.DirectionsStatus.OK) {
-            //directionsDisplay.setDirections(response);
-            //directionsDisplay.setRouteIndex(2);
-            //console.log(response);
-            //console.log(response.routes);
-            //console.log(response.routes[0]);
-            //console.log(response.routes[0].legs[0].distance);
-            //console.log(calculateTotalRouteDistance(response.routes[0]));
             updateRouteDistanceLabel(response.routes[0]);
-
-            new google.maps.DirectionsRenderer({
-                map: GoogleMaps.maps.railMap.instance,
-                directions: response,
-                routeIndex: 0
-            });
-
+            directionsDisplay.setDirections(response);
+            //
             //for (var i = 0, len = response.routes.length; i < len; i++) {
             //    //directionsDisplay.setDirections(response);
             //
@@ -259,14 +407,19 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
             //    });
             //}
         } else {
-            window.alert('Directions request failed due to ' + status);
+            infowindowRoute.close();
+            infowindowRoute.setContent('<div><strong>' +'Directions request failed due to ' + status + '</strong><br>');
+            infowindowRoute.setPosition(GoogleMaps.maps.railMap.instance.getCenter());
+            infowindowRoute.open(GoogleMaps.maps.railMap.instance);
+            document.getElementById("rail-input-origin").value = "";
+            document.getElementById("rail-input-destination").value = "";
         }
     });
 }
 
 function updateRouteDistanceLabel(route) {
     var textLabel;
-    textLabel = calculateTotalRouteDistance(route);
+    textLabel = calculateTotalRouteDistance(route).toFixed(2);
     var units = (document.getElementById('units').value)
 
     if (units === 'miles') {
@@ -280,11 +433,16 @@ function updateRouteDistanceLabel(route) {
 
 function calculateTotalRouteDistance(route) {
     var totalDistance = 0;
-    for (var i = 0; i < route.legs.length; i++) {
-        totalDistance += route.legs[i].distance.value;
-    }
-    var units = (document.getElementById('units').value)
     var unitConversion = 1;
+
+    //for (var i = 0; i < route.legs.length; i++) {
+    //    totalDistance += route.legs[i].distance.value;
+    //}
+
+    route.legs.forEach(function(leg, index) {
+        totalDistance += leg.distance.value;
+    });
+    var units = (document.getElementById('units').value)
 
     // Google maps returns distance in meters, must convert that to miles or kilometers
     if (units === 'miles') {
@@ -293,7 +451,10 @@ function calculateTotalRouteDistance(route) {
     else if (units === "kilometers") {
         unitConversion = 0.001;
     }
-    return (totalDistance * unitConversion).toFixed(2);
+
+    totalDistance = totalDistance * unitConversion;
+    Session.set("currentRouteTotalDistance", totalDistance);
+    return totalDistance;
 }
 
 
@@ -304,9 +465,6 @@ function alertCoords(){
 function setMarker() {
     var lat = parseFloat($("#latitude").val());
     var lng = parseFloat($("#longitude").val());
-    console.log("Lat: " + lat);
-    console.log("Lng: " + lng);
-
     if (!isNaN(lat) || !isNaN(lng)) {
         if (lat > -90 && lat < 90 && lng > -180 && lat < 90) {
             marker.setPosition({lat: lat, lng: lng});
