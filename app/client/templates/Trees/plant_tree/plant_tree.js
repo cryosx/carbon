@@ -28,73 +28,6 @@ Template.plantTree.helpers({
             },
         }
     },
-
-
-    "click #species2": function() {
-    alert("hello");
-    /*    var make = document.getElementById("carMake").value.split(" : ")[1];
-        var select = document.getElementById("carModel");
-        var option;
-        var temp = Cars.find({make: make}).fetch();
-
-        document.getElementById("carYear").innerHTML = "<option disabled selected>Select a Year</option>";
-        select.innerHTML = "<option disabled selected>Select a Model</option>";
-
-        temp = temp[0].models;
-
-        // Using " : " (space, colon, space) as a delimiter.
-        temp.forEach(function(current, index) {
-            option = document.createElement("option");
-            option.value = index + " : " + current.model;
-            option.text = current.model;
-            select.add(option);
-        })
-
-        // NEED to call material_seelct() again to update <options>
-        $('select').material_select();
-
-    */
-        var showData = [ {
-            "draw_date" : "2015-01-17T00:00:00",
-            "winning_numbers" : "15 16 23 27 36 09",
-            "multiplier" : "2"
-        }
-            , {
-                "draw_date" : "2015-01-14T00:00:00",
-                "winning_numbers" : "02 04 10 41 53 22",
-                "multiplier" : "5"
-            }
-            , {
-                "draw_date" : "2015-01-10T00:00:00",
-                "winning_numbers" : "02 09 19 28 29 19",
-                "multiplier" : "5"
-            }];
-
-//set a default option to the select.
-        var html = "<option value='' disabled default>Select a date</option>";
-
-//iterate over each lottery drawing and add it to the select.
-//The date will be displayed, the index of the array element will be the value.
-        showData.forEach(function(element, index){
-            var date = new Date(element.draw_date);
-            html += "<option value='"+index+"'>"+ date.getDate() + "/" + (parseInt(date.getMonth())+1) + "/" + date.getFullYear()+ "</option>";
-
-        });
-
-//insert the option into the select.
-        document.getElementById("selectDate").insertAdjacentHTML("beforeend", html);
-//add an onchange event handler to the select.
-        document.getElementById("selectDate").addEventListener("change", displayWinningNumbers, false);
-
-        function displayWinningNumbers(e)
-        {
-            //when a option is selected, test the value. If 0 or higher return the array entry with the winning numbers.
-            if(e.target.value >= 0)
-            {
-                alert(showData[e.target.value].winning_numbers);
-            }
-        }
-    },
 });
 
 Template.plantTree.events({
@@ -107,26 +40,35 @@ Template.plantTree.events({
     'click #test': function(event, template) {
         console.log('test');
 
-        /*
-        var treeDiameter = [];
-        treeDiameter = TreeDiameter.find().fetch();//
-        // TreeDiameter.find().fetch();
-        console.log(treeDiameter);
-        console.log(TreeDiameter.find().fetch());
-        console.log(TreeCollection.find().fetch());
-        */
-
-        //$('#species1').html(treeRecord[treeRecord.length -1].species);
         var treeDiameter = [];
         treeDiameter = TreeDiameter.find().fetch();
         console.log(treeDiameter);
 
+
+        $("#rightColumn").show();
+        $("#rightColumn2").hide();
+
+        console.log(treeDiameter[0].commonName);
+
+    },
+
+    /*'change #species': function (event, template) {
+        console.log('test');
+        var selection = template.find("#species").value; //grab the value selected
+        console.log(selection);
+    },
+
+    'blur #species': function (event, template) {
+        console.log('test');
+        var selection = template.find("#species").value; //grab the value selected
+        console.log(selection);
+    }, */
+
+    'click #species': function(event, template) {
         $('#species1').html("Insert Species");
         $('#description1').html("Insert Description");
         $("#rightColumn").hide();
         $("#rightColumn2").show();
-
-        console.log(treeDiameter[0].commonName);
 
     },
 
@@ -137,17 +79,23 @@ Template.plantTree.events({
 
     },
 
+    'click #latitude': function(event, template) {
+
+        $("#rightColumn2").hide();
+        $("#rightColumn").show();
+
+    },
+
+    'click #longitude': function(event, template) {
+
+        $("#rightColumn2").hide();
+        $("#rightColumn").show();
+
+    },
+
 
     'click #cancel': function(event, template) {
         console.log('test');
-
-        var treeDiameter = [];
-        treeDiameter = TreeDiameter.find().fetch();//
-        // TreeDiameter.find().fetch();
-        console.log(treeDiameter);
-        console.log(TreeDiameter.find().fetch());
-        console.log(TreeCollection.find().fetch());
-
 
     },
 
@@ -319,12 +267,9 @@ Template.plantTree.onCreated(function () {
 });
 
 Template.plantTree.onRendered(function () {
-
     $("#info").hide();
     $("#info2").hide();
     $("#rightColumn2").hide();
-
-
 
     $('select').material_select();
     GoogleMaps.load();
@@ -337,6 +282,7 @@ Template.plantTree.onRendered(function () {
 Template.plantTree.onDestroyed(function () {
     //add your statement here
 });
+
 function init() {
     // We can use the `ready` callback to interact with the map API once the map is ready.
     GoogleMaps.ready('exampleMap', function(map) {
@@ -352,7 +298,6 @@ function init() {
 
     });
 }
-
 
 function alertCoords(){
     console.log("Marker: " + marker.getPosition().lat());
@@ -385,7 +330,6 @@ function toggleBounce() {
         marker.setAnimation(google.maps.Animation.BOUNCE);
     }
 }
-
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);

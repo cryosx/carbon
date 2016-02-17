@@ -40,19 +40,13 @@
                             </div>
                             <div class="col s12 m12 l6 pull-l6">
                                 <div class="row">
-                                    <div class="input-field col s12 m12 l12">
-                                        <i class="material-icons prefix">local_florist</i>
-                                        <input id="species" type="text" class="validate" required>
-                                        <label for="species">Species</label>
-                                    </div>
+                                    {{>autoComplete}}
                                 </div>
-
                                 <div class="row">
                                     <div class="input-field col s12 m12 l12">
-                                        <select id="species2" class="select">
-                                            <option value="" disabled selected>Select your tree's species</option>
-                                        </select>
-                                        <label>Species</label>
+                                        <i class="material-icons prefix">local_florist</i>
+                                        <input id="species1" type="text" class="validate" required>
+                                        <label for="species">Species</label>
                                     </div>
                                 </div>
 
