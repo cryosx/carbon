@@ -65,10 +65,10 @@ Template.plantTree.events({
     }, */
 
     'click #species': function(event, template) {
-        $('#species1').html("Insert Species");
-        $('#description1').html("Insert Description");
-        $("#rightColumn").hide();
-        $("#rightColumn2").show();
+        //$('#species1').html("Insert Species");
+        //$('#description1').html("Insert Description");
+        //$("#rightColumn").hide();
+        //$("#rightColumn2").show();
 
     },
 
