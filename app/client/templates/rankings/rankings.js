@@ -3,6 +3,69 @@ Template.rankings.helpers({
 });
 
 Template.rankings.events({
+    'click #render':function(event,template) {
+        var owl = $(".owl-carousel").owlCarousel({
+
+            autoPlay: 5000, //Set AutoPlay to 3 seconds
+            items : 4,
+            itemsDesktop : [1199,3],
+            itemsDesktopSmall : [979,3]
+
+        });
+
+        $(".next").click(function(){
+            owl.trigger('owl.next');
+        });
+        $(".prev").click(function(){
+            owl.trigger('owl.prev');
+        });
+        $(".play").click(function(){
+            owl.trigger('owl.play',5000); //owl.play event accept autoPlay speed as second parameter
+        });
+        $(".stop").click(function(){
+            owl.trigger('owl.stop');
+        });
+        $("body").keydown(function(e) {
+            if(e.keyCode == 37) {
+                // left
+                owl.trigger('owl.prev');
+
+            }
+            else if(e.keyCode == 39) {
+                // right
+                owl.trigger('owl.next');
+            }
+        });
+        $('.materialboxed').materialbox();
+        $(".add").ready(function(){
+            var array = [];
+            var array2 = [];
+            var username;
+            var distinctArray = [];
+            var distinctValues;
+
+            //make it sort by unique to have one entry per person
+            console.log(array = Rankings.find({}, {sort: {footprint: 1}}).fetch());
+            console.log(array.length);
+            //console.log(array2 = Rankings.find({}, {sort: {userID: 1}, limit: 1}).fetch());
+            console.log(array2 = Rankings.find({}, {sort: {userID: 1, createdDate: 1}}).fetch());
+
+            var distinctEntries = _.uniq(Rankings.find({}, {
+                sort: {userID: 1}
+            }).fetch().map(function(x) {
+                return x.footprint;
+            }), true);
+
+            console.log(distinctEntries);
+
+            for(var i = 0; i < array.length; i++) {
+                username = array[i].userID;
+                var content = "<div id=\"rank" + (i+1) + "\" class=\"item\"><img src=\"/parallax/tree" + (i+1) +".jpg\" alt=\"/parallax/treeSample.jpg\"> <p>" + username + ": " + array[i].footprint + "</p></div>";
+                owl.data('owl-carousel').addItem(content);
+            }
+        });
+    },
+
     'click #test':function(event,template) {
         console.log('Saving Rankings');
 
@@ -54,7 +117,7 @@ Template.rankings.events({
         //var carbonRecord = carbonRecords[0];
         //var totalCarbon = carbonRecord.totalCarbon;
         //var footPrint = totalCarbon - FinalCO2;
-        var footPrint = -10000;
+        var footPrint = -7357;
         var createdDate = new Date();
 
         var rankNumber = 0;
@@ -68,11 +131,12 @@ Template.rankings.events({
             'createdDate' : createdDate
         };
         //Rankings.insert(rank);
-        //Rankings.update({"userID" : id}, {footprint: -8888});
         var array = [];
         array = Rankings.find({"userID" : id}, {sort: {createdDate: -1}}).fetch();
-        console.log(array[0].footprint);
-
+        console.log(array[0]);
+        updateID = array[0]._id;
+        Rankings.update({_id : updateID}, {userID: Meteor.userId(), footprint: -8888, rank: rankNumber});
+        console.log(array[0]);
 
 
     },
