@@ -366,55 +366,57 @@ function init() {
             //console.log(document.getElementById('rail-input-destination').value);
 
         };
-        //document.getElementById('rail-input-origin').addEventListener('change', onChangeHandler);
-        //document.getElementById('rail-input-destination').addEventListener('change', onChangeHandler);
-        document.getElementById('rail-submit').addEventListener('click', onChangeHandler);
+        document.getElementById('rail-input-origin').addEventListener('change', onChangeHandler);
+        document.getElementById('rail-input-destination').addEventListener('change', onChangeHandler);
+        //document.getElementById('rail-submit').addEventListener('click', onChangeHandler);
 
 
     });
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-    var transitModes = [google.maps.TransitMode.BUS,google.maps.TransitMode.RAIL,google.maps.TransitMode.SUBWAY,google.maps.TransitMode.TRAIN,google.maps.TransitMode.TRAM];
-    var infowindowRoute = new google.maps.InfoWindow();
+    _.delay(function() {
+        var transitModes = [google.maps.TransitMode.BUS,google.maps.TransitMode.RAIL,google.maps.TransitMode.SUBWAY,google.maps.TransitMode.TRAIN,google.maps.TransitMode.TRAM];
+        var infowindowRoute = new google.maps.InfoWindow();
 
-    directionsService.route({
-        origin: document.getElementById('rail-input-origin').value,
-        destination: document.getElementById('rail-input-destination').value,
-        //origin: originAddress,
-        //destination: destinationAddress,
-        travelMode: google.maps.TravelMode.TRANSIT,
-        transitOptions: {
-            //arrivalTime: new Date(),
-            //departureTime: new Date(),
-            modes: [google.maps.TransitMode.RAIL,google.maps.TransitMode.TRAIN,google.maps.TransitMode.SUBWAY],
-            //routingPreference: railRoutePreference
-        },
-        unitSystem: google.maps.UnitSystem.IMPERIAL,
-        provideRouteAlternatives: true
-    }, function(response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-            updateRouteDistanceLabel(response.routes[0]);
-            directionsDisplay.setDirections(response);
-            //
-            //for (var i = 0, len = response.routes.length; i < len; i++) {
-            //    //directionsDisplay.setDirections(response);
-            //
-            //    new google.maps.DirectionsRenderer({
-            //        map: GoogleMaps.maps.railMap.instance,
-            //        directions: response,
-            //        routeIndex: i
-            //    });
-            //}
-        } else {
-            infowindowRoute.close();
-            infowindowRoute.setContent('<div><strong>' +'Directions request failed due to ' + status + '</strong><br>');
-            infowindowRoute.setPosition(GoogleMaps.maps.railMap.instance.getCenter());
-            infowindowRoute.open(GoogleMaps.maps.railMap.instance);
-            document.getElementById("rail-input-origin").value = "";
-            document.getElementById("rail-input-destination").value = "";
-        }
-    });
+        directionsService.route({
+            origin: document.getElementById('rail-input-origin').value,
+            destination: document.getElementById('rail-input-destination').value,
+            //origin: originAddress,
+            //destination: destinationAddress,
+            travelMode: google.maps.TravelMode.TRANSIT,
+            transitOptions: {
+                //arrivalTime: new Date(),
+                //departureTime: new Date(),
+                modes: [google.maps.TransitMode.RAIL,google.maps.TransitMode.TRAIN,google.maps.TransitMode.SUBWAY],
+                //routingPreference: railRoutePreference
+            },
+            unitSystem: google.maps.UnitSystem.IMPERIAL,
+            provideRouteAlternatives: true
+        }, function(response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                updateRouteDistanceLabel(response.routes[0]);
+                directionsDisplay.setDirections(response);
+                //
+                //for (var i = 0, len = response.routes.length; i < len; i++) {
+                //    //directionsDisplay.setDirections(response);
+                //
+                //    new google.maps.DirectionsRenderer({
+                //        map: GoogleMaps.maps.railMap.instance,
+                //        directions: response,
+                //        routeIndex: i
+                //    });
+                //}
+            } else {
+                infowindowRoute.close();
+                infowindowRoute.setContent('<div><strong>' +'Directions request failed due to ' + status + '</strong><br>');
+                infowindowRoute.setPosition(GoogleMaps.maps.railMap.instance.getCenter());
+                infowindowRoute.open(GoogleMaps.maps.railMap.instance);
+                document.getElementById("rail-input-origin").value = "";
+                document.getElementById("rail-input-destination").value = "";
+            }
+        });
+    },300);
 }
 
 function updateRouteDistanceLabel(route) {

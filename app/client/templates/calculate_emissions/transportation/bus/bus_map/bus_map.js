@@ -365,54 +365,56 @@ function init() {
             //console.log(document.getElementById('bus-input-destination').value);
 
         };
-        //document.getElementById('bus-input-origin').addEventListener('change', onChangeHandler);
-        //document.getElementById('bus-input-destination').addEventListener('change', onChangeHandler);
-        document.getElementById('bus-submit').addEventListener('click', onChangeHandler);
+        document.getElementById('bus-input-origin').addEventListener('change', onChangeHandler);
+        document.getElementById('bus-input-destination').addEventListener('change', onChangeHandler);
+        //document.getElementById('bus-submit').addEventListener('click', onChangeHandler);
 
 
     });
 }
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-    var transitMode = google.maps.TransitMode.BUS;
-    directionsService.route({
-        origin: document.getElementById('bus-input-origin').value,
-        destination: document.getElementById('bus-input-destination').value,
-        //origin: originAddress,
-        //destination: destinationAddress,
-        travelMode: google.maps.TravelMode.TRANSIT,
-        transitOptions: {
-            //arrivalTime: new Date(),
-            //departureTime: new Date(),
-            modes: [transitMode],
-            //routingPreference: busRoutePreference
-        },
-        unitSystem: google.maps.UnitSystem.IMPERIAL,
-        provideRouteAlternatives: true
-    }, function(response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-            updateRouteDistanceLabel(response.routes[0]);
-            directionsDisplay.setDirections(response);
-            //
-            //for (var i = 0, len = response.routes.length; i < len; i++) {
-            //    //directionsDisplay.setDirections(response);
-            //
-            //    new google.maps.DirectionsRenderer({
-            //        map: GoogleMaps.maps.busMap.instance,
-            //        directions: response,
-            //        routeIndex: i
-            //    });
-            //}
-        } else {
-            var infowindowRoute = new google.maps.InfoWindow();
-            infowindowRoute.close();
-            infowindowRoute.setContent('<div><strong>' +'Directions request failed due to ' + status + '</strong><br>');
-            infowindowRoute.setPosition(GoogleMaps.maps.busMap.instance.getCenter());
-            infowindowRoute.open(GoogleMaps.maps.busMap.instance);
-            document.getElementById("bus-input-origin").value = "";
-            document.getElementById("bus-input-destination").value = "";
-        }
-    });
+    _.delay(function() {
+        var transitMode = google.maps.TransitMode.BUS;
+        directionsService.route({
+            origin: document.getElementById('bus-input-origin').value,
+            destination: document.getElementById('bus-input-destination').value,
+            //origin: originAddress,
+            //destination: destinationAddress,
+            travelMode: google.maps.TravelMode.TRANSIT,
+            transitOptions: {
+                //arrivalTime: new Date(),
+                //departureTime: new Date(),
+                modes: [transitMode],
+                //routingPreference: busRoutePreference
+            },
+            unitSystem: google.maps.UnitSystem.IMPERIAL,
+            provideRouteAlternatives: true
+        }, function(response, status) {
+            if (status === google.maps.DirectionsStatus.OK) {
+                updateRouteDistanceLabel(response.routes[0]);
+                directionsDisplay.setDirections(response);
+                //
+                //for (var i = 0, len = response.routes.length; i < len; i++) {
+                //    //directionsDisplay.setDirections(response);
+                //
+                //    new google.maps.DirectionsRenderer({
+                //        map: GoogleMaps.maps.busMap.instance,
+                //        directions: response,
+                //        routeIndex: i
+                //    });
+                //}
+            } else {
+                var infowindowRoute = new google.maps.InfoWindow();
+                infowindowRoute.close();
+                infowindowRoute.setContent('<div><strong>' +'Directions request failed due to ' + status + '</strong><br>');
+                infowindowRoute.setPosition(GoogleMaps.maps.busMap.instance.getCenter());
+                infowindowRoute.open(GoogleMaps.maps.busMap.instance);
+                document.getElementById("bus-input-origin").value = "";
+                document.getElementById("bus-input-destination").value = "";
+            }
+        });
+    },300);
 }
 
 function updateRouteDistanceLabel(route) {

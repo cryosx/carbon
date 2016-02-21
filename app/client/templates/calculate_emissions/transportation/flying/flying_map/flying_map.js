@@ -228,7 +228,7 @@ function init() {
         });
 
         autocompleteOrigin.addListener('place_changed', function() {
-            infowindowOrigin.close();
+            //infowindowOrigin.close();
             currentLocationInfoWindow.close();
             markerOrigin.setVisible(false);
 
@@ -290,7 +290,7 @@ function init() {
         });
 
         autocompleteDestination.addListener('place_changed', function() {
-            infowindowDestination.close();
+            //infowindowDestination.close();
             currentLocationInfoWindow.close();
 
             markerDestination.setVisible(false);
@@ -355,9 +355,12 @@ function init() {
 
         var onChangeHandler = function() {
             if (document.getElementById('flying-input-origin').value !== "" && document.getElementById('flying-input-destination').value !== "") {
+                //console.log(polylineOrigin);
+                //console.log(polylineDestination);
+
                 infowindowOrigin.close();
                 infowindowDestination.close();
-
+                currentLocationInfoWindow.close();
                 calculateAndDisplayRoute(polylineOrigin, polylineDestination);
             }
         };
@@ -369,10 +372,12 @@ function init() {
 
 function calculateAndDisplayRoute(origin, destination) {
 
+    //console.log(origin);
+    //console.log(destination);
     var map = GoogleMaps.maps.flyingMap.instance;
 
     if (flightPath !== null) {
-        flightPath.setPath([origin,destination]);
+        flightPath.setPath([origin, destination]);
     } else {
         flightPath = new google.maps.Polyline({
             geodesic: true,
@@ -395,48 +400,6 @@ function calculateAndDisplayRoute(origin, destination) {
     bounds.extend(destination);
 
     map.fitBounds(bounds);
-
-    //flightPath.setMap(map);
-
-    //var transitMode = google.maps.TransitMode.BUS;
-    //directionsService.route({
-    //    origin: document.getElementById('flying-input-origin').value,
-    //    destination: document.getElementById('flying-input-destination').value,
-    //    //origin: originAddress,
-    //    //destination: destinationAddress,
-    //    travelMode: google.maps.TravelMode.TRANSIT,
-    //    transitOptions: {
-    //        //arrivalTime: new Date(),
-    //        //departureTime: new Date(),
-    //        modes: [transitMode],
-    //        //routingPreference: flyingRoutePreference
-    //    },
-    //    unitSystem: google.maps.UnitSystem.IMPERIAL,
-    //    provideRouteAlternatives: true
-    //}, function(response, status) {
-    //    if (status === google.maps.DirectionsStatus.OK) {
-    //        updateRouteDistanceLabel(response.routes[0]);
-    //        directionsDisplay.setDirections(response);
-    //        //
-    //        //for (var i = 0, len = response.routes.length; i < len; i++) {
-    //        //    //directionsDisplay.setDirections(response);
-    //        //
-    //        //    new google.maps.DirectionsRenderer({
-    //        //        map: GoogleMaps.maps.flyingMap.instance,
-    //        //        directions: response,
-    //        //        routeIndex: i
-    //        //    });
-    //        //}
-    //    } else {
-    //        var infowindowRoute = new google.maps.InfoWindow();
-    //        infowindowRoute.close();
-    //        infowindowRoute.setContent('<div><strong>' +'Directions request failed due to ' + status + '</strong><br>');
-    //        infowindowRoute.setPosition(GoogleMaps.maps.flyingMap.instance.getCenter());
-    //        infowindowRoute.open(GoogleMaps.maps.flyingMap.instance);
-    //        document.getElementById("flying-input-origin").value = "";
-    //        document.getElementById("flying-input-destination").value = "";
-    //    }
-    //});
 }
 
 function updateRouteDistanceLabel(distance) {
