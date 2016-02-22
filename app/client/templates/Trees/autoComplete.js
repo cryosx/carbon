@@ -38,7 +38,7 @@ Template.autoComplete.events({
         $('#diameter1').html("Diameter: " + selected.diameter + " | ");
         document.getElementById('diameter').value=selected.diameter;
 
-        function myFunction() {
+        //function myFunction() {
             var AccumulatedCO2=0;
 
             var treeRecord = TreeCollection.find({userID: Meteor.userId()}, {sort : ['createdDate', 'dsc']}).fetch();
@@ -134,8 +134,8 @@ Template.autoComplete.events({
             else{
                 document.getElementById("sequester").innerHTML = "!Diameter = 0 or null!  This tree will sequester ??? Kg of CO2 over its life time";
             }
-            window.onload = myFunction();
-        }
+            //window.onload = myFunction();
+        //}
 
         $("#rightColumn").hide();
         $("#rightColumn2").show();
