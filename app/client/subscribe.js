@@ -1,5 +1,6 @@
 Meteor.subscribe('UserProfiles');
 Meteor.subscribe('Rankings');
+Meteor.subscribe('Images');
 
 Meteor.subscribe('CarbonStats');
 

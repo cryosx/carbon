@@ -13,6 +13,10 @@ Meteor.publish('Rankings', function () {
     return Rankings.find();
 });
 
+Meteor.publish('Images', function () {
+    return Images.find();
+});
+
 
 Meteor.publish('CarbonStats', function () {
     return CarbonStats.find();

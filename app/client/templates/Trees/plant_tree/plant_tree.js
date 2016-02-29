@@ -32,7 +32,7 @@ Template.plantTree.helpers({
 
 Template.plantTree.events({
 
-    'dropped #dropzone': function(e) {
+    'dropped #dropzone': function() {
         console.log('dropped a file');
     },
 
@@ -102,12 +102,15 @@ Template.plantTree.events({
     'click #save': function(event, template) {
         console.log('Saving a tree');
         var species = template.find("#species").value;
+        console.log(species);
         var location = template.find("#location").value;
         var latitude = template.find("#latitude").value;
         var longitude = template.find("#longitude").value;
         var datePlanted = template.find("#datePlanted").value;
         var diameter = template.find("#diameter").value;
-        var diameterUnits = template.find("#diameterUnits").value;
+        console.log(diameter);
+        // Centimeters assumed because of current TreeDiameter Database 2/29/16
+        var diameterUnits = "Centimeters"; //template.find("#diameterUnits").value;
         var createdDate = new Date();
 
         var tree = {'userID':Meteor.userId(),
@@ -125,7 +128,10 @@ Template.plantTree.events({
             window.alert("Please fill out all of the fields");
         }
         else{
+            console.log(tree);
             TreeCollection.insert(tree);
+
+            /* DONE IN autoComplete.js NOW!!
 
             var treeRecord;
             //fix this, sort isn't working properly.  I had to brute force find the last entry by doing length -1
@@ -137,7 +143,6 @@ Template.plantTree.events({
             $('#datePlanted1').html(treeRecord[treeRecord.length -1].datePlanted);
             //$('#diameter1').html(treeRecord[treeRecord.length -1].diameter);
 
-            //<script>
             function myFunction() {
                 var AccumulatedCO2=0;
 
@@ -247,10 +252,10 @@ Template.plantTree.events({
 
             }
             window.onload = myFunction();
-            //</script>
 
             $("#info").show();
             $("#info2").show();
+            */
         }
 
     },
@@ -277,6 +282,33 @@ Template.plantTree.onRendered(function () {
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 15 // Creates a dropdown of 15 years to control year
     });
+
+    if (Meteor.isClient){
+
+        var arrayOfImageIds = [];
+
+        Dropzone.autoDiscover = false;
+
+        // Adds file uploading and adds the imageID of the file uploaded
+        // to the arrayOfImageIds object.
+
+        var dropzone = new Dropzone("form#dropzone2", {
+            accept: function(file, done){
+
+                Images.insert(file, function(err, fileObj){
+                    if(err){
+                        alert("Error");
+                    } else {
+                        // gets the ID of the image that was uploaded
+                        var imageId = fileObj._id;
+                        // do something with this image ID, like save it somewhere
+                        arrayOfImageIds.push(imageId);
+                        console.log(imageId);
+                    };
+                });
+            }
+        });
+    };
 });
 
 Template.plantTree.onDestroyed(function () {

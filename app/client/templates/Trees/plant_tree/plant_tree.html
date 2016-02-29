@@ -28,15 +28,15 @@
 
                                     <div class="col s12 m9 l9 card">
                                         <div class="card-content">
-                                            <h5 id="species1"> </h5>
+                                            <h5 id="species"> </h5>
                                             <br>
                                             <h7>___________________________________________________________</h7>
                                             <br>
-                                            <h7 style="display:inline" id="diameter1"> </h7>
+                                            <h7 style="display:inline" id="diameter"> </h7>
                                             <h7 id="sequester">This tree will sequester 270877 Kg of CO2 over its life time</h7>
 
                                             <br>
-                                            <a style="display:inline" id="description1"> </a>
+                                            <a style="display:inline" id="description"> </a>
                                             <br>
 
                                             {{>treeChart}}
@@ -77,7 +77,7 @@
                                         <label for="datePlanted" class="active">Date Planted</label>
                                     </div>
                                 </div>
-                                <div class="row">
+<!--                                <div class="row">
                                     <div class="input-field col s8 m8 l8">
                                         <i class="fa fa-tree prefix"></i>
                                         <input id="diameter" type="number" class="validate" required>
@@ -90,7 +90,7 @@
                                             <label class="active" for="diameterUnits"><h5>Select Your Units</h5></label>
                                         </select>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                     </div>
@@ -99,19 +99,25 @@
                 <div class="row">
                     <div class="col s12 m12 l12 card">
 
-
+<!--
                         <div id="dropzone" class="dropzone">
                             <div class="well well-drop-zone">
                                 Drop file(s) here to upload
                             </div>
                         </div>
+-->
 
+                        <form action="/file-upload" class="dropzone" id="dropzone2"></form>
 
-                        <!--<div id="upload" class="card-content">
-                            &lt;!&ndash;{{> upload_bootstrap contentType='images' fileTypes='.jpg' multiple=true}}&ndash;&gt;
-                        </div>-->
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col s12 m12 l12 card">
+                        <a id="picture">test</a>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="center">
                         <a id="cancel" href="/pathways" class="btn red">Cancel</a>

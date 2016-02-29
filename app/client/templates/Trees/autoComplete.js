@@ -33,9 +33,12 @@ Template.autoComplete.helpers({
 Template.autoComplete.events({
     "autocompleteselect input": function(event, template, doc) {
         var selected = doc;
-        $('#species1').html(selected.commonName);
-        $('#description1').html(selected.info);
-        $('#diameter1').html("Diameter: " + selected.diameter + " | ");
+        $('#species').html(selected.commonName);
+        $('#description').html(selected.info);
+        $('#diameter').html("Diameter: " + selected.diameter + " | ");
+
+        // Set the value of the elements with id = species and diameter for Insert(tree) process
+        document.getElementById('species').value=selected.commonName;
         document.getElementById('diameter').value=selected.diameter;
 
         //function myFunction() {
@@ -132,7 +135,7 @@ Template.autoComplete.events({
 
             }
             else{
-                document.getElementById("sequester").innerHTML = "!Diameter = 0 or null!  This tree will sequester ??? Kg of CO2 over its life time";
+                document.getElementById("sequester").innerHTML = "Diameter = 0 or null!  This tree will sequester ??? Kg of CO2 over its life time";
             }
             //window.onload = myFunction();
         //}
