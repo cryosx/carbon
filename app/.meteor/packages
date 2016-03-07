@@ -58,3 +58,4 @@ raix:ui-dropped-event
 cfs:s3
 mizzao:autocomplete
 cfs:filesystem
+cfs:ui

@@ -98,23 +98,16 @@
 
                 <div class="row">
                     <div class="col s12 m12 l12 card">
-
-<!--
-                        <div id="dropzone" class="dropzone">
-                            <div class="well well-drop-zone">
-                                Drop file(s) here to upload
-                            </div>
-                        </div>
--->
-
-                        <form action="/file-upload" class="dropzone" id="dropzone2"></form>
-
+                        <form action="/file-upload" class="dropzone" id="dropzone"></form>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col s12 m12 l12 card">
                         <a id="picture">test</a>
+                        {{#with FS.GetFile "Images" "JAiyrSEDwDiFnyN3T"}}
+                            <img src="{{this.url store='thumbnails'}}" alt="">
+                        {{/with}}
                     </div>
                 </div>
 

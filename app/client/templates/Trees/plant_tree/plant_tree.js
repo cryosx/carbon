@@ -1,7 +1,6 @@
+var imageID = "";
+
 Template.plantTree.helpers({
-
-
-
     exampleMapOptions: function() {
         // Make sure the maps API has loaded
         if (GoogleMaps.loaded()) {
@@ -32,43 +31,23 @@ Template.plantTree.helpers({
 
 Template.plantTree.events({
 
-    'dropped #dropzone': function() {
-        console.log('dropped a file');
-    },
-
-
     'click #test': function(event, template) {
         console.log('test');
 
-        var treeDiameter = [];
-        treeDiameter = TreeDiameter.find().fetch();
-        console.log(treeDiameter);
+        var trees = [];
+        var pics = [];
 
+        //correct sort function listed below
+        trees = TreeCollection.find({userID: Meteor.userId()}, {sort : {createdDate: -1}}).fetch();
+
+        var pictureID = trees[0].imageID;
+        pics = Images.find({_id: pictureID}).fetch();
+        console.log(pics);
 
         $("#rightColumn").show();
         $("#rightColumn2").hide();
 
         console.log(treeDiameter[0].commonName);
-
-    },
-
-    /*'change #species': function (event, template) {
-        console.log('test');
-        var selection = template.find("#species").value; //grab the value selected
-        console.log(selection);
-    },
-
-    'blur #species': function (event, template) {
-        console.log('test');
-        var selection = template.find("#species").value; //grab the value selected
-        console.log(selection);
-    }, */
-
-    'click #species': function(event, template) {
-        //$('#species1').html("Insert Species");
-        //$('#description1').html("Insert Description");
-        //$("#rightColumn").hide();
-        //$("#rightColumn2").show();
 
     },
 
@@ -121,7 +100,8 @@ Template.plantTree.events({
             'datePlanted':datePlanted,
             'diameter':diameter,
             'diameterUnits':diameterUnits,
-            'createdDate':createdDate
+            'createdDate':createdDate,
+            'imageID':imageID,
         };
         if(species == "" || location == "" || latitude == "" || longitude == "" || datePlanted == "" ||
             diameter == "" || diameterUnits == "" || createdDate == "" ){
@@ -272,6 +252,7 @@ Template.plantTree.onCreated(function () {
 });
 
 Template.plantTree.onRendered(function () {
+
     $("#info").hide();
     $("#info2").hide();
     $("#rightColumn2").hide();
@@ -283,16 +264,16 @@ Template.plantTree.onRendered(function () {
         selectYears: 15 // Creates a dropdown of 15 years to control year
     });
 
-    if (Meteor.isClient){
+    //maybe this is the problem
+    //if (Meteor.isClient){
 
-        var arrayOfImageIds = [];
 
         Dropzone.autoDiscover = false;
 
         // Adds file uploading and adds the imageID of the file uploaded
         // to the arrayOfImageIds object.
 
-        var dropzone = new Dropzone("form#dropzone2", {
+        var dropzone = new Dropzone("form#dropzone", {
             accept: function(file, done){
 
                 Images.insert(file, function(err, fileObj){
@@ -300,15 +281,13 @@ Template.plantTree.onRendered(function () {
                         alert("Error");
                     } else {
                         // gets the ID of the image that was uploaded
-                        var imageId = fileObj._id;
-                        // do something with this image ID, like save it somewhere
-                        arrayOfImageIds.push(imageId);
-                        console.log(imageId);
+                        imageID = fileObj._id;
+                        console.log(imageID);
                     };
                 });
             }
         });
-    };
+    //};
 });
 
 Template.plantTree.onDestroyed(function () {

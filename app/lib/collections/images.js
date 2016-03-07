@@ -1,5 +1,5 @@
 var imageStore = new FS.Store.FileSystem("images", {
-    //path: "~/app-files/images", //optional, default is "/cfs/files" path within app container
+    path: "/Users/Sy/Documents/GitHub/carbon/app/public/images/trees", //optional, default is "/cfs/files" path within app container
     //transformWrite: myTransformWriteFunction, //optional
     //transformRead: myTransformReadFunction, //optional
     maxTries: 1 //optional, default 5
